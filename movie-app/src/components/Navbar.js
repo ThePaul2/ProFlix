@@ -35,7 +35,7 @@ const Navbar = () => {
                         </li>
                     ))}
                     <li className='md:ml-8 md:my-0 my-7 font-semibold'>
-                        <Link to="/signup" className='btn bg-red-600 text-white font-semibold px-3 py-1 rounded hover:text-black-400 duration-500'>Login</Link>
+                        <Link to="/login" className='btn bg-red-600 text-white font-semibold px-3 py-1 rounded hover:text-black-400 duration-500'>Login</Link>
                     </li>
                 </ul>
                 {/* button */}
