@@ -8,6 +8,7 @@ import Events from "./pages/events";
 import Rewards from "./pages/rewards";
 import Tickets from "./pages/tickets";
 import Login from "./pages/login";
+import TicketPage from "./components/TicketPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/rewards" element={<Rewards />} />
         <Route path="/tickets" element={<Tickets />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/ticket-page" element={<TicketPage />} />
       </Routes>
     </Router>
   );
