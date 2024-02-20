@@ -8,6 +8,10 @@ import Events from "./pages/events";
 import Rewards from "./pages/rewards";
 import Tickets from "./pages/tickets";
 import Login from "./pages/login";
+import Admin from "./pages/adminHome";
+import AdminMovies from "./pages/adminMovies";
+import AdminPromo from "./pages/adminPromo";
+import AdminUsers from "./pages/adminUsers";
 import TicketPage from "./components/TicketPage";
 
 function App() {
@@ -16,6 +20,11 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/movies" element={<Movies />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/adminMovies" element={<AdminMovies />} />
+        <Route path="/adminUsers" element={<AdminUsers />} />
+        <Route path="/adminPromo" element={<AdminPromo />} />
+        <Route path="/admin" element={<Admin />} />
         <Route path="/events" element={<Events />} />
         <Route path="/rewards" element={<Rewards />} />
         <Route path="/tickets" element={<Tickets />} />
