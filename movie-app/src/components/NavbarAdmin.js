@@ -14,12 +14,14 @@ const Navbar = () => {
         <div className='shadow-md w-full fixed top-0 left-0 z-10'>
             <div className='md:flex items-center justify-between bg-black py-4 md:px-10 px-7'>
                 {/* logo section */}
-                <Link to='/'>
+                <Link to='/admin'>
                     <div className='font-bold text-2xl text-red-600 cursor-pointer flex items-center gap-1'>
                         <FilmIcon className='w-7 h-7 text-red-600'/>
                         <span>ProFlix</span>
                     </div>
                 </Link> 
+                {/* Admin view text */}
+                <div className='hidden md:block text-white font-semibold'>ADMIN VIEW</div>
                 {/* Menu icon */}
                 <div onClick={() => setOpen(!open)} className='absolute right-8 top-6 cursor-pointer md:hidden w-7 h-7'>
                     {

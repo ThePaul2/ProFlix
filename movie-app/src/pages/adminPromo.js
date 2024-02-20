@@ -1,50 +1,40 @@
-// Filename - pages/Catalog.js
-
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../components/NavbarAdmin';
-import MovieSlider from '../components/MovieSlider';
-import SearchBar from '../components/SearchBar'; // Import the SearchBar component
+import PromoList from '../components/PromoList'; // Import the PromoList component
 
-const Catalog = () => {
-  // Dummy data for movie lists
-  const movieLists = [
-    { title: 'Action Movies', movies: [/* Add movie objects here */] },
-    { title: 'Comedy Movies', movies: [/* Add movie objects here */] },
-    { title: 'Drama Movies', movies: [/* Add movie objects here */] },
-    { title: 'Horror Movies', movies: [/* Add movie objects here */] },
-    { title: 'Sci-Fi Movies', movies: [/* Add movie objects here */] },
-    { title: 'Thriller Movies', movies: [/* Add movie objects here */] },
-    { title: 'Animated Movies', movies: [/* Add movie objects here */] },
-  ];
+const Promo = () => {
+  // State to hold the promo list
+  const [promoList, setPromoList] = useState([]);
 
-  // Handler for searching movies
-  const handleSearch = (searchTerm) => {
-    // Logic for searching movies based on searchTerm
-    console.log('Searching for:', searchTerm);
-  };
+  // Dummy data for promo list (replace with actual data fetched from backend)
+  useEffect(() => {
+    // Fetch promo list from backend or any other data source
+    const fetchPromoList = async () => {
+      try {
+        // Example fetch request
+        const response = await fetch('/promos');
+        const data = await response.json();
+        setPromoList(data);
+      } catch (error) {
+        console.error('Error fetching promo list:', error);
+      }
+    };
 
-  // Handler for filtering movies
-  const handleFilter = (filter) => {
-    // Logic for filtering movies based on selected filter
-    console.log('Filtering by:', filter);
-  };
+    fetchPromoList();
+  }, []); // Empty dependency array to run effect only once on component mount
 
   return (
     <div className="bg-gray-800 min-h-screen pt-20"> {/* Gray background */}
       <Navbar />
-      {/* Search bar and filters */}
+      {/* Render promo list */}
       <div className="container mx-auto px-4 py-10">
-        <SearchBar onSearch={handleSearch} onFilter={handleFilter} />
-        {/* Render each movie list */}
-        {movieLists.map((list, index) => (
-          <div key={index} className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4 py-10">{list.title}</h2>
-            <MovieSlider movies={list.movies} />
-          </div>
-        ))}
+        <div className="mb-8">
+          <h2 className="text-2xl font-semibold mb-4 py-10">Promo List</h2>
+          <PromoList promos={promoList} />
+        </div>
       </div>
     </div>
   );
 };
 
-export default Catalog;
+export default Promo;
