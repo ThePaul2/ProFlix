@@ -8,6 +8,7 @@ import Events from "./pages/events";
 import Rewards from "./pages/rewards";
 import Tickets from "./pages/tickets";
 import Login from "./pages/login";
+import SignUp from "./pages/signup";
 import Admin from "./pages/adminHome";
 import AdminMovies from "./pages/adminMovies";
 import AdminPromo from "./pages/adminPromo";
@@ -29,6 +30,7 @@ function App() {
         <Route path="/rewards" element={<Rewards />} />
         <Route path="/tickets" element={<Tickets />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/ticket-page" element={<TicketPage />} />
       </Routes>
     </Router>
