@@ -14,6 +14,8 @@ import AdminMovies from "./pages/adminMovies";
 import AdminPromo from "./pages/adminPromo";
 import AdminUsers from "./pages/adminUsers";
 import TicketPage from "./components/TicketPage";
+import Profile from "./pages/profile";
+import EditProfile from "./pages/editProfile";
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/ticket-page" element={<TicketPage />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/edit-profile" element={<EditProfile />} />
       </Routes>
     </Router>
   );
