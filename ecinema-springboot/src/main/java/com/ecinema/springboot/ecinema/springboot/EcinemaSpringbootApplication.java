@@ -1,13 +1,13 @@
-package com.movie.MovieApplication;
+package com.ecinema.springboot.ecinema.springboot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MovieApplication {
+public class EcinemaSpringbootApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MovieApplication.class, args);
+		SpringApplication.run(EcinemaSpringbootApplication.class, args);
 	}
 
 }
