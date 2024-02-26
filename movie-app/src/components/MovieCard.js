@@ -14,10 +14,7 @@ const MovieCard = ({ imageUrl, title, rating, date, description }) => {
   return (
     <div>
       <Link
-        to={{
-          pathname: '/ticket-page',
-          state: { imageUrl, title, rating, date, description }
-        }}
+        to={`/info/${encodeURIComponent(imageUrl)}/${encodeURIComponent(title)}/${rating}/${encodeURIComponent(date)}/${encodeURIComponent(description)}`}
       >
         <div className="relative w-64 bg-gray-900 rounded-lg shadow-md m-4 cursor-pointer transition-transform duration-300 hover:scale-105">
           <img src={imageUrl} alt={title} className="w-full h-48 object-cover rounded-t-lg" />

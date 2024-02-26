@@ -1,6 +1,5 @@
 import React from "react";
 import Navbar from "../components/Navbar";
-import HeroImage from "../components/HeroImage";
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import TextInput from "../components/TextInput";
@@ -13,7 +12,7 @@ const Login = () => {
 		>
 			<Navbar />
 			<div className="h-screen flex flex-col items-center justify-center">
-				<img src={logo} className="mb-4 ml-4 h-20"></img>
+				<img src={logo} className="mb-4 ml-4 h-20" alt="logo"></img>
 				<div className="w-1/3 justify-center rounded-3xl border-neutral-200 border-4 backdrop-blur text-white px-16 py-16 leading-loose">
 					<div>
 						<h1 className="text-4xl font-bold mb-4 text-center">LOGIN</h1>
