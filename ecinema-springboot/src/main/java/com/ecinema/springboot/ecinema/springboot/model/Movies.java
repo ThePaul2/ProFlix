@@ -27,7 +27,7 @@ public class Movies {
     private boolean comingSoon; 
     private boolean currentlyRunning; 
 
-    @Data // For nested classes, Lombok annotations can also be applied
+    @Data 
     public static class Review {
         private String reviewer;
         private String comment;
