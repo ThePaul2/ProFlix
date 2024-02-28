@@ -20,13 +20,13 @@ const MovieSlider = ({ header, movies }) => {
   return (
     <div className='relative my-14'>
       <h2 className="text-3xl font-bold text-white mb-4">{header}</h2>
-      <div className='flex items-center space-x-4 overflow-x-scroll scrollbar-hide'>
+      <div className='flex items-center space-x-4'>
         <MdChevronLeft className='opacity-50 cursor-pointer hover:opacity-100 text-white' onClick={slideLeft} size={40} />
         <div ref={sliderRef} className='flex flex-nowrap'>
           {movies.map((item, index) => (
             <MovieCard
               key={index}
-              imageUrl={item.img}
+              imageUrl={item.imageUrl}
               title={item.title} 
               rating={item.rating}
               date={item.date}

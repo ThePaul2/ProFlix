@@ -16,6 +16,8 @@ import AdminUsers from "./pages/adminUsers";
 import TicketPage from "./components/TicketPage";
 import Profile from "./pages/profile";
 import EditProfile from "./pages/editProfile";
+import Info from "./pages/info";
+import Confirmation from "./pages/confirmation";
 
 function App() {
   return (
@@ -36,6 +38,8 @@ function App() {
         <Route path="/ticket-page" element={<TicketPage />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/edit-profile" element={<EditProfile />} />
+        <Route path="/info/:imageUrl/:title/:rating/:date/:description" element={<Info />} />
+        <Route path="/confirmation" element={<Confirmation />} />
       </Routes>
     </Router>
   );
