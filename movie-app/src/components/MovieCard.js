@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa'; // Import the arrow icons
 
-const MovieCard = ({ imageUrl, title, rating, date, description }) => {
+const MovieCard = ({ imageUrl, title, rating, date, trailer, description }) => {
   const [isExpanded, setIsExpanded] = useState(false); // State to track whether the dropdown is expanded
 
   // Function to toggle the dropdown
@@ -14,7 +14,7 @@ const MovieCard = ({ imageUrl, title, rating, date, description }) => {
   return (
     <div>
       <Link
-        to={`/info/${encodeURIComponent(imageUrl)}/${encodeURIComponent(title)}/${rating}/${encodeURIComponent(date)}/${encodeURIComponent(description)}`}
+        to={`/info/${encodeURIComponent(imageUrl)}/${encodeURIComponent(title)}/${rating}/${encodeURIComponent(date)}/${encodeURIComponent(trailer)}/${encodeURIComponent(description)}`}
       >
         <div className="relative w-64 bg-gray-900 rounded-lg shadow-md m-4 cursor-pointer transition-transform duration-300 hover:scale-105">
           <img src={imageUrl} alt={title} className="w-full h-48 object-cover rounded-t-lg" />

@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar";
 import { Route, useParams } from "react-router-dom";
 
 const Info = () => {
-	let { imageUrl, title, rating, date, description } = useParams();
+	let { imageUrl, title, rating, date, trailer, description } = useParams();
 	// console.log('Params:', imageUrl, title, rating, date, description);
 
 	return (
@@ -30,7 +30,7 @@ const Info = () => {
 					<div>
 						<h1>Trailer</h1>
 						<iframe width={700} height={400}
-							src="https://www.youtube.com/embed/tgbNymZ7vqY"
+							src={trailer} alt={trailer}
 						/>
 					</div>
 					<div>

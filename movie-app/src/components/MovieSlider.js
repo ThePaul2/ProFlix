@@ -30,6 +30,7 @@ const MovieSlider = ({ header, movies }) => {
               title={item.title} 
               rating={item.rating}
               date={item.date}
+              trailer={item.trailer}
               description={item.description}
               style={{ marginRight: '1rem' }}
             />
