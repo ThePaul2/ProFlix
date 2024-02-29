@@ -1,0 +1,340 @@
+{
+    "movies": [
+        {
+            "id": "j4jc7enb9qmf7d6h",
+            "name": "The Lego Movie",
+            "genre": "Comedy",
+            "mpaa": "PG",
+            "date": "2014",
+            "rating": 10,
+            "description":
+                "An ordinary LEGO construction worker, thought to be the prophesied as \"special\", is recruited to join a quest to stop an evil tyrant from gluing the LEGO universe into eternal stasis.",
+            "image": "https://upload.wikimedia.org/wikipedia/en/1/10/The_Lego_Movie_poster.jpg",
+            "trailer": "https://www.youtube.com/embed/fZ_JOBCLF-I",
+            "director": "Phil Lord",
+            "producer": "Mr Producer",
+            "cast": [
+                "Chris Pratt",
+                "Will Ferrell",
+                "Elizabeth banks"
+            ],
+            "reviews": [
+                "Omg this was life changing",
+                "This has the guy from the mario movie",
+                "Lego movie 2 was bad"
+            ]
+        },
+        {
+            "id": "jf74ndhsi6ma9qng",
+            "name": "Oppenheimer",
+            "genre": "Drama",
+            "mpaa": "R",
+            "date": "2023",
+            "rating": 8.4,
+            "description":
+                "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
+            "image": "https://upload.wikimedia.org/wikipedia/en/thumb/4/4a/Oppenheimer_%28film%29.jpg/220px-Oppenheimer_%28film%29.jpg",
+            "trailer": "https://www.youtube.com/embed/uYPbbksJxIg",
+            "director": "Christopher Nolan",
+            "producer": "Mr Producer",
+            "cast": [
+                "Cillian Murphy",
+                "Emily Blunt",
+                "Matt Damon"
+            ],
+            "reviews": [
+                "I was there when that happened.",
+                "This movie is the bomb.",
+                "Inspirational. I aspire to do what he did."
+            ]
+        },
+        {
+            "id": "fj5d84nc7djgl4dw",
+            "name": "The Shawshank Redemption",
+            "genre": "Drama",
+            "mpaa": "R",
+            "date": "1994",
+            "rating": 9.3,
+            "description":
+                "Over the course of several years, two convicts form a friendship, seeking consolation and, eventually, redemption through basic compassion.",
+            "image": "https://upload.wikimedia.org/wikipedia/en/8/81/ShawshankRedemptionMoviePoster.jpg",
+            "trailer": "https://www.youtube.com/embed/NmzuHjWmXOc",
+            "director": "Frank Darabont",
+            "producer": "Mr Producer",
+            "cast": [
+                "Tim Robbins",
+                "Morgan Freeman",
+                "Bob Gunton"
+            ],
+            "reviews": [
+                "500 stars",
+                "Shimshaw",
+                "Why was Morgan Freeman playing the Irish guy?"
+            ]
+        },
+        {
+            "id": "dj68dmcnv6352hdf",
+            "name": "The Godfather",
+            "genre": "Drama",
+            "mpaa": "R",
+            "date": "1972",
+            "rating": 0.1,
+            "description":
+                "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
+            "image": "https://upload.wikimedia.org/wikipedia/en/1/1c/Godfather_ver1.jpg",
+            "trailer": "https://www.youtube.com/embed/UaVTIH8mujA",
+            "director": "Francis Ford Coppola",
+            "producer": "Mr Producer",
+            "cast": [
+                "Marlon Brando",
+                "Al Paccino",
+                "James Caan"
+            ],
+            "reviews": [
+                "I did not care for The Godfather",
+                "Waste of 3 hours of my life",
+                "Best movie for boring people"
+            ]
+        },
+        {
+            "id": "dk68v9fne4xk5nd7",
+            "name": "The Thing",
+            "genre": "Horror",
+            "mpaa": "R",
+            "date": "1982",
+            "rating": 8.2,
+            "description":
+                "A research team in Antarctica is hunted by a shape-shifting alien that assumes the appearance of its victims.",
+            "image": "https://upload.wikimedia.org/wikipedia/en/thumb/e/e3/The_Thing_%281982_film%29.png/220px-The_Thing_%281982_film%29.png",
+            "trailer": "https://www.youtube.com/embed/5ftmr17M-a4",
+            "director": "John Carpenter",
+            "producer": "Mr Producer",
+            "cast": [
+                "Kurt Russell",
+                "Wilford Brimley",
+                "Keith David"
+            ],
+            "reviews": [
+                "It's clobbering time",
+                "This is amongus",
+                "Good movie i guess"
+            ]
+        },
+        {
+            "id": "dm48chrnt7ahgmdi",
+            "name": "Speed",
+            "genre": "Action",
+            "mpaa": "R",
+            "date": "1994",
+            "rating": 7.3,
+            "description":
+                "A young police officer must prevent a bomb exploding aboard a city bus by keeping its speed above 50 mph.",
+            "image": "https://upload.wikimedia.org/wikipedia/en/4/45/Speed_movie_poster.jpg",
+            "trailer": "https://www.youtube.com/embed/8piqd2BWeGI",
+            "director": "Jan de Bont",
+            "producer": "Mr Producer",
+            "cast": [
+                "Keanu Reeves",
+                "Dennis Hopper",
+                "Sandra Bullock"
+            ],
+            "reviews": [
+                "Good movie",
+                "I watched this at 2x speed",
+                "I personally would've slowed down."
+            ]
+        },
+        {
+            "id": "4mf8chd6sje743hd",
+            "name": "Jurassic Park",
+            "genre": "Thriller",
+            "mpaa": "PG-13",
+            "date": "1993",
+            "rating": 8.2,
+            "description":
+                "A pragmatic paleontologist touring an almost complete theme park on an island in Central America is tasked with protecting a couple of kids after a power failure causes the park's cloned dinosaurs to run loose.",
+            "image": "https://upload.wikimedia.org/wikipedia/en/e/e7/Jurassic_Park_poster.jpg",
+            "trailer": "https://www.youtube.com/embed/_jKEqDKpJLw",
+            "director": "Steven Speilberg",
+            "producer": "Mr Producer",
+            "cast": [
+                "Sam Neill",
+                "Laura Dern",
+                "Jeff Goldblum"
+            ],
+            "reviews": [
+                "The book was worse",
+                "OMG! This has the guy from the mario movie",
+                "I'm getting tired of making these fake reviews"
+            ]
+        },
+        {
+            "id": "dmfjc84nfhdjtlif",
+            "name": "Primer",
+            "genre": "Sci-Fi",
+            "mpaa": "PG-13",
+            "date": "2004",
+            "rating": 6.7,
+            "description":
+                "Four friends/fledgling entrepreneurs, knowing that there's something bigger and more innovative than the different error-checking devices they've built, wrestle over their new invention.",
+            "image": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f7/Primer_%282004_film_poster%29.jpg/220px-Primer_%282004_film_poster%29.jpg",
+            "trailer": "https://www.youtube.com/embed/-vD-yj9o664",
+            "director": "Shane Carruth",
+            "producer": "Mr Producer",
+            "cast": [
+                "Shane Carruth",
+                "David Sullivan",
+                "Casey Gooden"
+            ],
+            "reviews": [
+                "I wish I could go back in time and watch that again",
+                "Almost as realistic as HotTub Time Machine 2",
+                "10/10 does exist"
+            ]
+        },
+        {
+            "id": "idmr7fhej4kslodc",
+            "name": "Playmobil: The Movie",
+            "genre": "Animated",
+            "mpaa": "PG",
+            "date": "2019",
+            "rating": 4.9,
+            "description":
+                "When her younger brother Charlie unexpectedly disappears into the magical, animated universe of PLAYMOBIL®, unprepared Marla must go on a quest of a lifetime to bring him home, setting off on a fantastic journey across stunning new worlds.",
+            "image": "https://upload.wikimedia.org/wikipedia/en/thumb/3/31/Playmobil_The_Movie_final_poster.jpg/220px-Playmobil_The_Movie_final_poster.jpg",
+            "trailer": "https://www.youtube.com/embed/Tb-E-WUJl44",
+            "director": "Lino DiSalvo",
+            "producer": "Mr Producer",
+            "cast": [
+                "Anya Taylor-Joy",
+                "Jim Gaffigan",
+                "Gabriel Bateman"
+            ],
+            "reviews": [
+                "Glorified advert",
+                "Who says advert? Like, why?",
+                "Loved the Tako Tuesday joke"
+            ]
+        },
+        {
+            "id": "dmfiejtudnctiondl",
+            "name": "The Naked Gun: From the Files of Police Squad!",
+            "genre": "Comedy",
+            "mpaa": "PG-13",
+            "date": "1988",
+            "rating": 7.6,
+            "description":
+                "Incompetent police Detective Frank Drebin must foil an attempt to assassinate Queen Elizabeth II.",
+            "image": "https://upload.wikimedia.org/wikipedia/en/thumb/5/5f/The_Naked_Gun_Poster.jpg/220px-The_Naked_Gun_Poster.jpg",
+            "trailer": "https://www.youtube.com/embed/du4zCR3xNxQ",
+            "director": "David Zucker",
+            "producer": "Mr Producer",
+            "cast": [
+                "Leslie Nielsen",
+                "Priscilla Presley",
+                "O.J. Simpson"
+            ],
+            "reviews": [
+                "That gun had no clothes on",
+                "Wow the title is so long",
+                "Pew pew pew. Its a gun"
+            ]
+        },
+        {
+            "id": "itmeslftwantydsf",
+            "name": "The Ring",
+            "genre": "Horror",
+            "mpaa": "PG-13",
+            "date": "2002",
+            "rating": 7.1,
+            "description":
+                "A journalist must investigate a mysterious videotape which seems to cause the death of anyone one week to the day after they view it.",
+            "image": "https://upload.wikimedia.org/wikipedia/en/thumb/3/37/Theringpostere.jpg/220px-Theringpostere.jpg",
+            "trailer": "https://www.youtube.com/embed/yybjV3U68wc",
+            "director": "Gore Verbinski",
+            "producer": "Mr Producer",
+            "cast": [
+                "Naomi Watts",
+                "Martin Henderson",
+                "Brian Cox"
+            ],
+            "reviews": [
+                "I haven't seen it",
+                "Quite spooky",
+                "Rawr"
+            ]
+        },
+        {
+            "id": "84jfnc72jdmfkc8a",
+            "name": "Star Wars: Episode II - Attack of the Clones",
+            "genre": "Sci-Fi",
+            "mpaa": "PG",
+            "date": "2002",
+            "rating": 6.6,
+            "description":
+                "Ten years after initially meeting, Anakin Skywalker shares a forbidden romance with Padmé Amidala, while Obi-Wan Kenobi discovers a secret clone army crafted for the Jedi.",
+            "image": "https://upload.wikimedia.org/wikipedia/en/thumb/3/32/Star_Wars_-_Episode_II_Attack_of_the_Clones_%28movie_poster%29.jpg/220px-Star_Wars_-_Episode_II_Attack_of_the_Clones_%28movie_poster%29.jpg",
+            "trailer": "https://www.youtube.com/embed/gYbW1F_c9eM",
+            "director": "George Lucas",
+            "producer": "Mr Producer",
+            "cast": [
+                "Hayden Christensen",
+                "Natalie Portman",
+                "Ewan McGregor"
+            ],
+            "reviews": [
+                "Best Star War",
+                "Great ending to the series",
+                "I lost my legs in Vietnam. Great movie."
+            ]
+        },
+        {
+            "id": "dj5mfyctwamf83jd",
+            "name": "Saltburn",
+            "genre": "Thriller",
+            "mpaa": "R",
+            "date": "2023",
+            "rating": 7,
+            "description":
+                "A student at Oxford University finds himself drawn into the world of a charming and aristocratic classmate, who invites him to his eccentric family's sprawling estate for a summer never to be forgotten.",
+            "image": "https://upload.wikimedia.org/wikipedia/en/thumb/5/52/Saltburn_Film_Poster.jpg/220px-Saltburn_Film_Poster.jpg",
+            "trailer": "https://www.youtube.com/embed/lALMdJf6UUE",
+            "director": "Emerald Fennell",
+            "producer": "Mr Producer",
+            "cast": [
+                "Barry Keoghan",
+                "Jacob Elordi",
+                "Rosamund Pike"
+            ],
+            "reviews": [
+                "You should watch this",
+                "How did you trick me into watching this?!",
+                "I can't really say that I liked this because then you'd think I was weird."
+            ]
+        },
+        {
+            "id": "dmf83jdncghal92j",
+            "name": "Teen Titans GO! To the Movies",
+            "genre": "Animated",
+            "mpaa": "PG",
+            "date": "2018",
+            "rating": 6.7,
+            "description":
+                "A villain's maniacal plan for world domination sidetracks five teenage superheroes who dream of Hollywood stardom.",
+            "image": "https://upload.wikimedia.org/wikipedia/en/thumb/c/ca/TTG_Movie_Poster_5.jpg/220px-TTG_Movie_Poster_5.jpg",
+            "trailer": "https://www.youtube.com/embed/r9WhJyyTtqo",
+            "director": "Aaron Horvath",
+            "producer": "Mr Producer",
+            "cast": [
+                "Greg Cipes",
+                "Scott Menville",
+                "Khary Payton"
+            ],
+            "reviews": [
+                "Best joke at the end",
+                "Best Teen Titans incarnation",
+                "Teen Titans Go to the poles"
+            ]
+        }
+    ]
+}

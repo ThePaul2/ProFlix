@@ -38,7 +38,7 @@ function App() {
         <Route path="/ticket-page" element={<TicketPage />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/edit-profile" element={<EditProfile />} />
-        <Route path="/info/:imageUrl/:title/:rating/:date/:trailer/:description" element={<Info />} />
+        <Route path="/info/:id" element={<Info />} />
         <Route path="/confirmation" element={<Confirmation />} />
       </Routes>
     </Router>

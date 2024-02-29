@@ -26,12 +26,7 @@ const MovieSlider = ({ header, movies }) => {
           {movies.map((item, index) => (
             <MovieCard
               key={index}
-              imageUrl={item.imageUrl}
-              title={item.title} 
-              rating={item.rating}
-              date={item.date}
-              trailer={item.trailer}
-              description={item.description}
+              movie={item}
               style={{ marginRight: '1rem' }}
             />
           ))}
