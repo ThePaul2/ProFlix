@@ -57,7 +57,7 @@ const Home = () => {
       title: "Kung Fu Panda 4", 
       rating: "-", 
       date: "2024-03-8", // Example release date
-      trailer: "https://www.youtube.com/embed/tgbNymZ7vqY",
+      trailer: "https://www.youtube.com/embed/_inKs4eeHiI?si=4iwys0ue_43g4Atj",
       description: "Po must train a new warrior when he's chosen to become the spiritual leader of the Valley of Peace. However, when a powerful shape-shifting sorceress sets her eyes on his Staff of Wisdom, he suddenly realizes he's going to need some help. Teaming up with a quick-witted corsac fox, Po soon discovers that heroes can be found in the most unexpected places." // Example description
     },
     { 
@@ -65,7 +65,7 @@ const Home = () => {
       title: "Deadpool & Wolverine", 
       rating: "-", 
       date: "2024-07-20", // Example release date
-      trailer: "https://www.youtube.com/embed/tgbNymZ7vqY",
+      trailer: "https://www.youtube.com/embed/Iqr3XIhSnUQ?si=hTbXbM-RwvLLYjY-",
       description: "Wolverine is recovering from his injuries when he crosses paths with the loudmouth, Deadpool. They team up to defeat a common enemy." // Example description
     }
   ];
