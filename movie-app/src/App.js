@@ -18,6 +18,7 @@ import Profile from "./pages/profile";
 import EditProfile from "./pages/editProfile";
 import Info from "./pages/info";
 import Confirmation from "./pages/confirmation";
+import User from "./pages/user";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/edit-profile" element={<EditProfile />} />
         <Route path="/info/:id" element={<Info />} />
+        <Route path="/user" element={<User />} />
         <Route path="/confirmation" element={<Confirmation />} />
       </Routes>
     </Router>

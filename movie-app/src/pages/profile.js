@@ -1,9 +1,6 @@
 import React from "react";
 import Navbar from "../components/Navbar";
-import HeroImage from "../components/HeroImage";
 import { Link } from 'react-router-dom';
-import logo from '../assets/logo.png';
-import TextInput from "../components/TextInput";
 
 const Profile = () => {
 	return (

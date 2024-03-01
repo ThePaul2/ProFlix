@@ -28,8 +28,8 @@ export default function Login({
           </label>
           <Link className="text-red-600 hover:text-red-700 hover:underline hover:underline-offset-4" to="/forgot-password">Forgot Password?</Link>
         </div>
-        <div className="text-center md:text-left">
-          <button className="mt-4 bg-red-600 hover:bg-red-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider" type="submit">Login</button>
+        <div className="text-center mt-4 md:text-left">
+          <Link className="mt-4 bg-red-600 hover:bg-red-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider" to="/user">Login</Link>
         </div>
         <div className="mt-4 font-semibold text-sm text-slate-500 text-center md:text-left">
           Don't have an account? <Link className="text-red-600 hover:underline hover:underline-offset-4" to="/signup">Register</Link>

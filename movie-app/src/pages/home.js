@@ -2,7 +2,6 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import MovieSlider from "../components/MovieSlider";
-import HeroImage from "../components/HeroImage";
 import data from "../assets/sampleData.json";
 import PromotionSlider from "../components/PromotionSlider";
 
