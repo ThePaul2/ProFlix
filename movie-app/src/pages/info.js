@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../components/Navbar";
-import { Route, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import data from "../assets/sampleData.json";
 
 const Info = () => {
