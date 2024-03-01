@@ -20,7 +20,7 @@ const Home = () => {
   }
 
   return (
-    <div className="bg-gray-800 min-h-screen"> {/* Changed h-screen to min-h-screen */}
+    <div className="bg-gray-800 min-h-screen"> 
       <Navbar />
       <HeroImage />
       <div className="bg-black flex flex-col items-center justify-center rounded-3xl py-16"> {/* Adjusted styles */}

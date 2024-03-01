@@ -1,42 +1,40 @@
-import React from "react";
-import Navbar from "../components/Navbar";
+import * as React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
-import TextInput from "../components/TextInput";
 
-const Login = () => {
-	return (
-		<div className="h-screen bg-cover bg-center">
-			<div
-				className="w-screen h-screen bg-cover bg-center fixed z-0"
-				style={{ backgroundImage: 'url("/static/media/hero.jpg")' }}
-			></div>
-			<Navbar />
-			<div className="h-max flex flex-col items-center justify-center py-16 z-10">
-				<img src={logo} className="mb-4 ml-4 h-20 z-0"></img>
-				<div className="w-1/3 justify-center rounded-3xl border-neutral-200 border-4 backdrop-blur text-white px-16 py-16 leading-loose">
-					<div>
-						<h1 className="text-4xl font-bold mb-4 text-center">LOGIN</h1>
-
-						<TextInput name="USERNAME" placeholder="username@gmail.com" />
-						<br />
-						<TextInput name="PASSWORD" placeholder="Password" />
-						<Link to='/'>
-							<p className="text-xs text-slate-300">Forgot password?</p>
-						</Link>
-						<br />
-						<button className="text-center rounded-xl border-neutral-200 border-2 px-4 py-4 w-full bg-red-400 text-xl font-semibold">Sign in</button>
-						<br />
-						<br />
-						<div className="text-center text-l">
-							<text>Don't have an account yet? </text>
-							<Link to='/signup' className="text-center text-xl font-semibold">Register for free</Link>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	);
-};
-
-export default Login;
+export default function Login({
+    setUser,
+    setAuthState
+}) {
+    return (
+      <section className="bg-black h-screen flex flex-col md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center my-2 mx-5 md:mx-0 md:my-0">
+      <div className="md:w-1/3 max-w-sm">
+      <Link to="/"> 
+          <img
+            src={logo}
+            alt="Logo" />
+        </Link>
+      </div>
+      <div className="md:w-1/3 max-w-sm">
+      <h1 className="text-3xl font-bold text-white mb-6">Login here</h1>
+        <div className="text-center md:text-left">
+        </div>
+        <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded" type="text" placeholder="Email Address" />
+        <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="password" placeholder="Password" />
+        <div className="mt-4 flex justify-between font-semibold text-sm">
+          <label className="flex text-slate-500 hover:text-slate-600 cursor-pointer">
+            <input className="mr-1" type="checkbox" />
+            <span>Remember Me</span>
+          </label>
+          <Link className="text-red-600 hover:text-red-700 hover:underline hover:underline-offset-4" to="/forgot-password">Forgot Password?</Link>
+        </div>
+        <div className="text-center md:text-left">
+          <button className="mt-4 bg-red-600 hover:bg-red-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider" type="submit">Login</button>
+        </div>
+        <div className="mt-4 font-semibold text-sm text-slate-500 text-center md:text-left">
+          Don't have an account? <Link className="text-red-600 hover:underline hover:underline-offset-4" to="/signup">Register</Link>
+        </div>
+      </div>
+    </section>
+    )
+}

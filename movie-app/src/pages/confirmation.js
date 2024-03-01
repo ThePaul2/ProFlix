@@ -1,25 +1,28 @@
-import React from "react";
-import Navbar from "../components/Navbar";
+import * as React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
 
-const Confirmation = () => {
-	return (
-		<div className="h-screen bg-cover bg-center">
-			<div
-				className="w-screen h-screen bg-cover bg-center fixed z-0"
-				style={{ backgroundImage: 'url("/static/media/hero.jpg")' }}
-			></div>
-			<Navbar />
-			<div className="h-max flex flex-col items-center justify-center py-16 z-10">
-                <div className="z-0 m-32 p-10 rounded-3xl border-neutral-200 border-4 bg-zinc-300 text-zinc-900 text-center">
-                    <h1 className="font-bold text-7xl">Account Created</h1>
-                    <br />
-                    <p className="text-3xl">You can now book movies.</p>
+export default function Confirmation({
+    setUser,
+    setAuthState
+}) {
+    return (
+        <section className="bg-black h-screen flex flex-col md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center my-2 mx-5 md:mx-0 md:my-0">
+            <div className="md:w-1/3 max-w-sm">
+				<Link to="/"> 
+					<img
+					src={logo}
+					alt="Logo" />
+				</Link>
+            </div>
+            <div className="md:w-1/3 max-w-sm">
+                <h1 className="text-3xl font-bold text-white mb-6">Account Created! </h1>
+                <div className="text-center md:text-left">
+                    <Link to="/">
+                        <button className="ml-14 bg-red-600 hover:bg-red-700 text-white py-3 px-6 rounded-md mb-4">Start viewing</button>
+                    </Link>
                 </div>
-			</div>
-		</div>
-	);
-};
-
-export default Confirmation;
+            </div>
+        </section>
+    )
+}
