@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../components/Navbar";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import data from "../assets/sampleData.json";
 
 const Info = () => {
@@ -18,38 +18,34 @@ const Info = () => {
         backgroundImage: `url(${movie.image})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
+        backgroundRepeat: 'no-repeat',
     };
 
     return (
-        <div style={containerStyle}>
+        <div style={containerStyle} className="relative overflow-hidden">
             <Navbar />
             <div className="h-max flex flex-col py-16 z-10 bg-black bg-opacity-50">
-                <div className="p-6">
-                    <div className="flex flex-row">
-                        <div>
-                            <h1 className="p-1 font-bold text-3xl text-white">{movie.name}</h1>
-                            <div className="flex flex-row p-1">
-                                <p className="mr-4 text-white">Genre: {movie.genre}</p>
-                                <p className="mr-4 text-white">MPAA-US film rating: {movie.rating}</p>
-                                <p className="mr-4 text-white">Release Date: {movie.date}</p>
-                                <p className="mr-4 text-white">Rating: {movie.rating}</p>
-                            </div>
-                            <p className="p-1 text-white">{movie.description}</p>
-                        </div>
+                <div className="container mx-auto p-6 text-white">
+                    <h1 className="font-bold text-4xl mb-4">{movie.name}</h1>
+                    <div className="flex flex-wrap mb-4">
+                        <p className="mr-4">Genre: {movie.genre}</p>
+                        <p className="mr-4">MPAA-US film rating: {movie.rating}</p>
+                        <p className="mr-4">Release Date: {movie.date}</p>
+                        <p className="mr-4">Rating: {movie.rating}</p>
                     </div>
-                    {/* Add more space between description and trailer */}
-                    <div style={{ height: '40px' }}></div>
-                    <div>
-                        <h1 className="text-2xl font-bold text-white">Trailer</h1>
-                        <iframe width={700} height={400} src={movie.trailer} title="Trailer" />
-                    </div>
+                    <p className="mb-4">{movie.description}</p>
+                    <h2 className="font-bold text-2xl mb-4">Trailer</h2>
+                    <iframe width={700} height={400} src={movie.trailer} title="Trailer" className="mb-4" />
+                    <Link className="bg-red-400 text-white px-6 py-2 rounded-lg hover:bg-red-600 inline-block mb-4" 
+                    to={{pathname: `/tickets/${encodeURIComponent(movie.id)}`, state: { movieData: movie}}}>Buy Tickets!</Link>
                     <div className="text-white">
-                        <ul>
+                        <ul className="mb-4">
                             <li>Cast</li>
                         </ul>
                         <p>Director</p>
                         <p>Producer</p>
-                        <ul>
+                        <ul className="mb-4">
                             <li>Reviews</li>
                         </ul>
                         <p>SHOW DATES AND TIMES</p>

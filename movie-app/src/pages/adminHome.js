@@ -1,111 +1,75 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import NavbarAdmin from '../components/NavbarAdmin';
 
 const AdminDashboard = () => {
+  const [revenue, setRevenue] = useState(0);
+
+  useEffect(() => {
+    // Generate a random revenue between 1000 and 5000
+    const randomRevenue = Math.floor(Math.random() * (5000 - 1000 + 1)) + 1000;
+    setRevenue(randomRevenue);
+  }, []);
+
   return (
-    <div style={styles.background}>
+    <div className="bg-black min-h-screen">
       <NavbarAdmin />
-      <div style={styles.dashboard}>
-        <h2 style={styles.heading}>Welcome to Admin Dashboard</h2>
-        <div style={styles.bottomBoxes}>
-          <div style={{ ...styles.box, marginRight: '20px' }}>
-            <h4 style={styles.boxHeading}>Active Users</h4>
-            <p style={styles.boxContent}>25</p>
+      <div className="bg-black p-6 rounded-lg shadow-md font-sans max-w-screen-md mx-auto">
+        <h2 className="text-2xl font-bold mb-4 text-gray-800">Welcome to Admin Dashboard</h2>
+        <div className="flex justify-between mb-4">
+          <div className="flex-1 mr-4 bg-white rounded-lg p-4 text-center transition duration-300 ease-in-out hover:bg-red-600">
+            <h4 className="text-lg font-bold mb-2 text-gray-800">Active Users</h4>
+            <p className="text-xl text-gray-800">25</p>
           </div>
-          <div style={{ ...styles.box, marginRight: '20px' }}>
-            <h4 style={styles.boxHeading}>Active Movies</h4>
-            <p style={styles.boxContent}>50</p>
+          <div className="flex-1 mr-4 bg-white rounded-lg p-4 text-center transition duration-300 ease-in-out hover:bg-red-600">
+            <h4 className="text-lg font-bold mb-2 text-gray-800">Active Movies</h4>
+            <p className="text-xl text-gray-800">50</p>
           </div>
-          <div style={styles.box}>
-            <h4 style={styles.boxHeading}>Revenue</h4>
-            <p style={styles.boxContent}>$1000</p>
+          <div className="flex-1 bg-white rounded-lg p-4 text-center transition duration-300 ease-in-out hover:bg-red-600">
+            <h4 className="text-lg font-bold mb-2 text-gray-800">Revenue</h4>
+            <p className="text-xl text-gray-800">${revenue}</p>
           </div>
         </div>
-        <div style={styles.content}>
-          <h3 style={styles.subHeading}>Recent User Activity</h3>
-          <ul style={styles.userList}>
-            <li style={styles.userItem}>User 34863 - edited payment</li>
-            <li style={styles.userItem}>User 10134 - created an account</li>
-            <li style={styles.userItem}>User 2342 - booked Barbie</li>
-            <li style={styles.userItem}>User 232341 - changed their password</li>
-            <li style={styles.userItem}>User 09863 - edited payment</li>
-            <li style={styles.userItem}>User 102343 - added an avatar</li>
-            <li style={styles.userItem}>User 132485 - logged in</li>
-            <li style={styles.userItem}>User 23975- deleted their account</li>
-            <li style={styles.userItem}>User 382308 - changed their password</li>
-            <li style={styles.userItem}>User 967230 - changed their username</li>
-            <li style={styles.userItem}>User 286323 - edited payment</li>
+        <div>
+          <h3 className="text-xl font-bold mb-2 text-gray-100">Recent User Activity</h3>
+          <ul className="list-none">
+            <li className="mb-2 p-4 bg-white rounded-md shadow-md flex justify-between items-center transition duration-300 ease-in-out hover:bg-red-600 cursor-pointer">
+              <span>User 34863 - edited payment</span>
+            </li>
+            <li className="mb-2 p-4 bg-white rounded-md shadow-md flex justify-between items-center transition duration-300 ease-in-out hover:bg-red-600 cursor-pointer">
+              <span>User 10134 - created an account</span>
+            </li>
+            <li className="mb-2 p-4 bg-white rounded-md shadow-md flex justify-between items-center transition duration-300 ease-in-out hover:bg-red-600 cursor-pointer">
+              <span>User 2342 - booked Barbie</span>
+            </li>
+            <li className="mb-2 p-4 bg-white rounded-md shadow-md flex justify-between items-center transition duration-300 ease-in-out hover:bg-red-600 cursor-pointer">
+              <span>User 232341 - changed their password</span>
+            </li>
+            <li className="mb-2 p-4 bg-white rounded-md shadow-md flex justify-between items-center transition duration-300 ease-in-out hover:bg-red-600 cursor-pointer">
+              <span>User 09863 - edited payment</span>
+            </li>
+            <li className="mb-2 p-4 bg-white rounded-md shadow-md flex justify-between items-center transition duration-300 ease-in-out hover:bg-red-600 cursor-pointer">
+              <span>User 102343 - added an avatar</span>
+            </li>
+            <li className="mb-2 p-4 bg-white rounded-md shadow-md flex justify-between items-center transition duration-300 ease-in-out hover:bg-red-600 cursor-pointer">
+              <span>User 132485 - logged in</span>
+            </li>
+            <li className="mb-2 p-4 bg-white rounded-md shadow-md flex justify-between items-center transition duration-300 ease-in-out hover:bg-red-600 cursor-pointer">
+              <span>User 23975- deleted their account</span>
+            </li>
+            <li className="mb-2 p-4 bg-white rounded-md shadow-md flex justify-between items-center transition duration-300 ease-in-out hover:bg-red-600 cursor-pointer">
+              <span>User 382308 - changed their password</span>
+            </li>
+            <li className="mb-2 p-4 bg-white rounded-md shadow-md flex justify-between items-center transition duration-300 ease-in-out hover:bg-red-600 cursor-pointer">
+              <span>User 967230 - changed their username</span>
+            </li>
+            <li className="mb-2 p-4 bg-white rounded-md shadow-md flex justify-between items-center transition duration-300 ease-in-out hover:bg-red-600 cursor-pointer">
+              <span>User 286323 - edited payment</span>
+            </li>
           </ul>
         </div>
       </div>
     </div>
   );
-};
-
-const styles = {
-  background: {
-    backgroundColor: '#000',
-    minHeight: '100vh',
-  },
-  dashboard: {
-    backgroundColor: '#000',
-    padding: '20px',
-    borderRadius: '10px',
-    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-    fontFamily: 'Arial, sans-serif',
-    maxWidth: '800px',
-    margin: '0 auto',
-  },
-  heading: {
-    fontSize: '24px',
-    fontWeight: 'bold',
-    marginBottom: '20px',
-    color: '#333',
-  },
-  bottomBoxes: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    marginBottom: '20px',
-  },
-  box: {
-    flex: '1',
-    padding: '20px',
-    backgroundColor: '#fff',
-    borderRadius: '10px',
-    boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
-    textAlign: 'center',
-  },
-  boxHeading: {
-    fontSize: '18px',
-    fontWeight: 'bold',
-    marginBottom: '10px',
-    color: '#333',
-  },
-  boxContent: {
-    fontSize: '24px',
-    color: '#333',
-  },
-  content: {},
-  subHeading: {
-    fontSize: '20px',
-    fontWeight: 'bold',
-    marginBottom: '10px',
-    color: '#f4f4f4',
-  },
-  userList: {
-    listStyle: 'none',
-    padding: 0,
-  },
-  userItem: {
-    marginBottom: '10px',
-    padding: '10px',
-    backgroundColor: '#fff',
-    borderRadius: '5px',
-    boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
 };
 
 export default AdminDashboard;

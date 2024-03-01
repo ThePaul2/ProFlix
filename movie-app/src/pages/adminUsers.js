@@ -25,8 +25,6 @@ const AdminDashboard = () => {
     { id: 67126, name: 'Amelia King', email: 'amelia@gmail.com', action: 'Since: 2019' },
     { id: 70317, name: 'Logan Scott', email: 'loganisfunny@gmail.com', action: 'Since: 2020' },
     { id: 80128, name: 'Abigail Hall', email: 'abigail@gmail.com', action: 'Since: 2018' }
-
-    // Add more user activities here
   ];
 
   const handleDeleteUser = (userId) => {
@@ -35,21 +33,21 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div style={styles.background}>
+    <div className="bg-black min-h-screen">
       <NavbarAdmin />
-      <div style={styles.dashboard}>
-        <h2 style={styles.heading}>Welcome to Admin Dashboard</h2>
-        <div style={styles.content}>
-          <h3 style={styles.subHeading}>Users</h3>
-          <ul style={styles.userList}>
+      <div className="bg-black p-4 rounded-lg shadow-md font-sans max-w-4xl mx-auto">
+        <h2 className="text-2xl font-bold mb-4 text-gray-800">Welcome to Admin Dashboard</h2>
+        <div>
+          <h3 className="text-xl font-bold mb-2 text-gray-100">Users</h3>
+          <ul className="list-none ">
             {recentUserActivity.map((user) => (
-              <li key={user.id} style={styles.userItem}>
+              <li key={user.id} className="mb-4 bg-white rounded-lg shadow-md p-4 flex justify-between items-center hover:bg-red-300">
                 <div>
                   <span>{`User ${user.id} (${user.name}) - ${user.action}`}</span>
                   <br />
                   <span>{user.email}</span>
                 </div>
-                <button onClick={() => handleDeleteUser(user.id)} style={styles.deleteButton}>Delete User</button>
+                <button onClick={() => handleDeleteUser(user.id)} className="px-4 py-2 bg-red-500 rounded text-white cursor-pointer transition duration-300 hover:bg-red-600">Delete User</button>
               </li>
             ))}
           </ul>
@@ -57,59 +55,6 @@ const AdminDashboard = () => {
       </div>
     </div>
   );
-};
-
-const styles = {
-  background: {
-    backgroundColor: '#000',
-    minHeight: '100vh',
-  },
-  dashboard: {
-    backgroundColor: '#000',
-    padding: '20px',
-    borderRadius: '10px',
-    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-    fontFamily: 'Arial, sans-serif',
-    maxWidth: '800px',
-    margin: '0 auto',
-  },
-  heading: {
-    fontSize: '24px',
-    fontWeight: 'bold',
-    marginBottom: '20px',
-    color: '#333',
-  },
-  content: {},
-  subHeading: {
-    fontSize: '20px',
-    fontWeight: 'bold',
-    marginBottom: '10px',
-    color: '#f4f4f4',
-  },
-  userList: {
-    listStyle: 'none',
-    padding: 0,
-  },
-  userItem: {
-    marginBottom: '10px',
-    padding: '10px',
-    backgroundColor: '#fff',
-    borderRadius: '5px',
-    boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  deleteButton: {
-    padding: '5px 10px',
-    backgroundColor: '#ff5050',
-    border: '1px solid red', // Add red border here
-    borderRadius: '5px',
-    color: '#fff',
-    cursor: 'pointer',
-    transition: 'background-color 0.3s ease',
-    textDecoration: 'none', // Add this to remove underline
-  },
 };
 
 export default AdminDashboard;

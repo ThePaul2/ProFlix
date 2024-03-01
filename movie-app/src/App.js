@@ -13,13 +13,12 @@ import Admin from "./pages/adminHome";
 import AdminMovies from "./pages/adminMovies";
 import AdminPromo from "./pages/adminPromo";
 import AdminUsers from "./pages/adminUsers";
-import TicketPage from "./components/TicketPage";
-import Profile from "./pages/profile";
 import EditProfile from "./pages/editProfile";
 import EditMovie from "./pages/adminEditMovie";
 import Info from "./pages/info";
 import Confirmation from "./pages/confirmation";
 import User from "./pages/user";
+import TicketConfirmation from "./pages/ticketConfirmation";
 
 function App() {
   return (
@@ -35,15 +34,14 @@ function App() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/events" element={<Events />} />
         <Route path="/rewards" element={<Rewards />} />
-        <Route path="/tickets" element={<Tickets />} />
+        <Route path="/tickets/:id" element={<Tickets />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/ticket-page" element={<TicketPage />} />
-        <Route path="/profile" element={<Profile />} />
         <Route path="/edit-profile" element={<EditProfile />} />
         <Route path="/info/:id" element={<Info />} />
         <Route path="/user" element={<User />} />
         <Route path="/confirmation" element={<Confirmation />} />
+        <Route path="/ticketconfirmation" element={<TicketConfirmation />} />
       </Routes>
     </Router>
   );

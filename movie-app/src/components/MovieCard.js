@@ -5,9 +5,8 @@ import { FaAngleDown, FaAngleUp } from 'react-icons/fa'; // Import the arrow ico
 const MovieCard = ({ movie }) => {
   const [isExpanded, setIsExpanded] = useState(false); // State to track whether the dropdown is expanded
 
-  // Function to toggle the dropdown
   const toggleDropdown = (e) => {
-    e.preventDefault(); // Prevent the default link behavior
+    e.preventDefault(); 
     setIsExpanded(!isExpanded);
   };
 

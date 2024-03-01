@@ -36,35 +36,32 @@ const AdminDashboard = () => {
     { id: 89012, name: 'Anniversary Sale', length: 'Since: 1 year' },
     { id: 34567, name: 'Grand Opening Offer', length: 'Since: 1 week' },
     { id: 87654, name: 'Early Access', length: 'Since: 1 day' }
-
   ];
 
   const handleDeleteUser = (userId) => {
-    // Implement your delete user logic here
     console.log(`Deleting user with ID: ${userId}`);
   };
 
   const handleEditPromotion = (userId) => {
-    // Implement your edit promotion logic here
     console.log(`Editing promotion for user with ID: ${userId}`);
   };
 
   return (
-    <div style={styles.background}>
+    <div className="bg-black min-h-screen">
       <NavbarAdmin />
-      <div style={styles.dashboard}>
-        <h2 style={styles.heading}>Welcome to Admin Dashboard</h2>
-        <div style={styles.content}>
-          <h3 style={styles.subHeading}>Promotions</h3>
-          <ul style={styles.userList}>
+      <div className="bg-black p-6 rounded-lg shadow-md font-sans max-w-screen-md mx-auto">
+        <h2 className="text-2xl font-bold mb-4 text-gray-800">Welcome to Admin Dashboard</h2>
+        <div>
+          <h3 className="text-xl font-bold mb-2 text-gray-100">Promotions</h3>
+          <ul className="list-none">
             {recentUserActivity.map((promotion) => (
-              <li key={promotion.id} style={styles.userItem}>
-                <div>
+              <li key={promotion.id} className="mb-2 p-4 bg-white rounded-md shadow-md flex justify-between items-center hover:bg-red-300">
+                <div className="flex-1">
                   <span>{`Promotion ${promotion.id} (${promotion.name}) - ${promotion.length}`}</span>
                 </div>
                 <div>
-                  <button onClick={() => handleEditPromotion(promotion.id)} style={styles.editButton}>Edit Promotion</button>
-                  <button onClick={() => handleDeleteUser(promotion.id)} style={styles.deleteButton}>Delete Promotion</button>
+                  <button onClick={() => handleEditPromotion(promotion.id)} className="mr-2 px-4 py-2 bg-green-500 rounded-md text-white hover:bg-green-600 transition duration-300 ease-in-out">Edit Promotion</button>
+                  <button onClick={() => handleDeleteUser(promotion.id)} className="px-4 py-2 bg-red-500 rounded-md text-white hover:bg-red-600 transition duration-300 ease-in-out">Delete Promotion</button>
                 </div>
               </li>
             ))}
@@ -73,69 +70,6 @@ const AdminDashboard = () => {
       </div>
     </div>
   );
-};
-
-const styles = {
-  background: {
-    backgroundColor: '#000',
-    minHeight: '100vh',
-  },
-  dashboard: {
-    backgroundColor: '#000',
-    padding: '20px',
-    borderRadius: '10px',
-    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-    fontFamily: 'Arial, sans-serif',
-    maxWidth: '800px',
-    margin: '0 auto',
-  },
-  heading: {
-    fontSize: '24px',
-    fontWeight: 'bold',
-    marginBottom: '20px',
-    color: '#333',
-  },
-  content: {},
-  subHeading: {
-    fontSize: '20px',
-    fontWeight: 'bold',
-    marginBottom: '10px',
-    color: '#f4f4f4',
-  },
-  userList: {
-    listStyle: 'none',
-    padding: 0,
-  },
-  userItem: {
-    marginBottom: '10px',
-    padding: '10px',
-    backgroundColor: '#fff',
-    borderRadius: '5px',
-    boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  editButton: {
-    marginRight: '10px',
-    padding: '5px 10px',
-    backgroundColor: '#4CAF50',
-    borderRadius: '5px',
-    color: '#fff',
-    cursor: 'pointer',
-    transition: 'background-color 0.3s ease',
-    textDecoration: 'none', // Add this to remove underline
-  },
-  deleteButton: {
-    padding: '5px 10px',
-    backgroundColor: '#ff5050',
-    border: '1px solid red', // Add red border here
-    borderRadius: '5px',
-    color: '#fff',
-    cursor: 'pointer',
-    transition: 'background-color 0.3s ease',
-    textDecoration: 'none', // Add this to remove underline
-  },
 };
 
 export default AdminDashboard;

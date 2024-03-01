@@ -24,7 +24,7 @@ const Navbar = () => {
                 {/* Menu icon */}
                 <div onClick={() => setOpen(!open)} className='absolute right-8 top-6 cursor-pointer md:hidden w-7 h-7'>
                     {
-                        open ? <XMarkIcon/> : <Bars3BottomRightIcon />
+                        open ? <XMarkIcon className="text-red-600"/> : <Bars3BottomRightIcon className="text-red-600"/>
                     }
                 </div>
                 {/* link items */}
