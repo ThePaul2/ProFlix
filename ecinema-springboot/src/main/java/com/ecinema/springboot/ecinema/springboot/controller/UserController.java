@@ -4,9 +4,9 @@ import com.ecinema.springboot.ecinema.springboot.model.User;
 import com.ecinema.springboot.ecinema.springboot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/users")
 public class UserController {

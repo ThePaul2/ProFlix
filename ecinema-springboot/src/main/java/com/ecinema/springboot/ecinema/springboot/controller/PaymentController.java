@@ -4,9 +4,9 @@ import com.ecinema.springboot.ecinema.springboot.model.Payment;
 import com.ecinema.springboot.ecinema.springboot.repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/payments")
 public class PaymentController {
