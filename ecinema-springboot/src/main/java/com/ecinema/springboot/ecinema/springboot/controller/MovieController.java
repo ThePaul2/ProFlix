@@ -4,9 +4,9 @@ import com.ecinema.springboot.ecinema.springboot.model.Movie;
 import com.ecinema.springboot.ecinema.springboot.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/movies")
 public class MovieController {
@@ -38,5 +38,15 @@ public class MovieController {
     @DeleteMapping("/{id}")
     public void deleteMovie(@PathVariable String id) {
         movieRepository.deleteById(id);
+    }
+
+    @GetMapping("/search")
+    public List<Movie> searchMoviesByTitle(@RequestParam String title) {
+        return movieRepository.findByTitle(title);
+    }
+
+    @GetMapping("/category")
+    public List<Movie> getMoviesByCategory(@RequestParam String category) {
+        return movieRepository.findByCategory(category);
     }
 }
