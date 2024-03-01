@@ -1,50 +1,82 @@
-// Filename - pages/Catalog.js
-
 import React from 'react';
-import Navbar from '../components/NavbarAdmin';
-import MovieSlider from '../components/MovieSlider';
-import SearchBar from '../components/SearchBar'; // Import the SearchBar component
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import NavbarAdmin from '../components/NavbarAdmin';
+import data from "../assets/sampleData.json"; // Importing the sample data
 
-const Catalog = () => {
-  // Dummy data for movie lists
-  const movieLists = [
-    { title: 'Action Movies', movies: [/* Add movie objects here */] },
-    { title: 'Comedy Movies', movies: [/* Add movie objects here */] },
-    { title: 'Drama Movies', movies: [/* Add movie objects here */] },
-    { title: 'Horror Movies', movies: [/* Add movie objects here */] },
-    { title: 'Sci-Fi Movies', movies: [/* Add movie objects here */] },
-    { title: 'Thriller Movies', movies: [/* Add movie objects here */] },
-    { title: 'Animated Movies', movies: [/* Add movie objects here */] },
-  ];
-
-  // Handler for searching movies
-  const handleSearch = (searchTerm) => {
-    // Logic for searching movies based on searchTerm
-    console.log('Searching for:', searchTerm);
-  };
-
-  // Handler for filtering movies
-  const handleFilter = (filter) => {
-    // Logic for filtering movies based on selected filter
-    console.log('Filtering by:', filter);
-  };
-
+const AdminMovies = () => {
   return (
-    <div className="bg-gray-800 min-h-screen pt-20"> {/* Gray background */}
-      <Navbar />
-      {/* Search bar and filters */}
-      <div className="container mx-auto px-4 py-10">
-        <SearchBar onSearch={handleSearch} onFilter={handleFilter} />
-        {/* Render each movie list */}
-        {movieLists.map((list, index) => (
-          <div key={index} className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4 py-10">{list.title}</h2>
-            <MovieSlider movies={list.movies} />
-          </div>
-        ))}
+    <div style={styles.background}>
+      <NavbarAdmin />
+      <div style={styles.dashboard}>
+        <h2 style={styles.heading}>Welcome to Admin Dashboard</h2>
+        <div style={styles.content}>
+          <h3 style={styles.subHeading}>Edit Movies</h3>
+          {/* Mapping through the movies array */}
+          {data.movies.map(movie => (
+            <div key={movie.id} style={styles.movieItem}>
+              <p style={styles.movieInfo}>id: {movie.id} - {movie.name}</p>
+              {/* Link to the edit page */}
+              <Link to={`/edit-movie`} style={styles.editButton}>Edit</Link>
+              {/*<Link to={`/edit-movie/${movie.id}`} style={styles.editButton}>Edit</Link>*/}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
 };
 
-export default Catalog;
+const styles = {
+  background: {
+    backgroundColor: '#000',
+    minHeight: '100vh',
+  },
+  dashboard: {
+    backgroundColor: '#000',
+    padding: '20px',
+    borderRadius: '10px',
+    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+    fontFamily: 'Arial, sans-serif',
+    maxWidth: '800px',
+    margin: '0 auto',
+  },
+  heading: {
+    fontSize: '24px',
+    fontWeight: 'bold',
+    marginBottom: '20px',
+    color: '#333',
+  },
+  content: {},
+  subHeading: {
+    fontSize: '20px',
+    fontWeight: 'bold',
+    marginBottom: '10px',
+    color: '#f4f4f4',
+  },
+  movieItem: {
+    marginBottom: '10px',
+    padding: '10px',
+    backgroundColor: '#fff',
+    borderRadius: '5px',
+    boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  movieInfo: {
+    flex: '1',
+    marginRight: '10px',
+  },
+  editButton: {
+    padding: '5px 10px',
+    backgroundColor: '#ff5050',
+    border: 'none',
+    borderRadius: '5px',
+    color: '#fff',
+    cursor: 'pointer',
+    transition: 'background-color 0.3s ease',
+    textDecoration: 'none', // Add this to remove underline
+  },
+};
+
+export default AdminMovies;

@@ -16,6 +16,7 @@ import AdminUsers from "./pages/adminUsers";
 import TicketPage from "./components/TicketPage";
 import Profile from "./pages/profile";
 import EditProfile from "./pages/editProfile";
+import EditMovie from "./pages/adminEditMovie";
 import Info from "./pages/info";
 import Confirmation from "./pages/confirmation";
 import User from "./pages/user";
@@ -30,6 +31,7 @@ function App() {
         <Route path="/adminMovies" element={<AdminMovies />} />
         <Route path="/adminUsers" element={<AdminUsers />} />
         <Route path="/adminPromo" element={<AdminPromo />} />
+        <Route path="/edit-movie" element={<EditMovie />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/events" element={<Events />} />
         <Route path="/rewards" element={<Rewards />} />
