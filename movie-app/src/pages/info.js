@@ -9,7 +9,7 @@ const Info = () => {
 
     let movie;
     for (let i = 0; i < movies.length; i++) {
-        if (id == movies[i].id) {
+        if (id === movies[i].id) {
             movie = movies[i];
         }
     }
