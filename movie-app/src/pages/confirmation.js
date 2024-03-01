@@ -18,7 +18,7 @@ export default function Confirmation({
             <div className="md:w-1/3 max-w-sm">
                 <h1 className="text-3xl font-bold text-white mb-6">Account Created! </h1>
                 <div className="text-center md:text-left">
-                    <Link to="/">
+                    <Link to="/user">
                         <button className="ml-14 bg-red-600 hover:bg-red-700 text-white py-3 px-6 rounded-md mb-4">Go to Account</button>
                     </Link>
                 </div>
