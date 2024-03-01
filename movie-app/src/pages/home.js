@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import MovieSlider from "../components/MovieSlider";
 import HeroImage from "../components/HeroImage";
 import data from "../assets/sampleData.json";
+import PromotionSlider from "../components/PromotionSlider";
 
 const Home = () => {
   let movies = data.movies;
@@ -22,7 +23,7 @@ const Home = () => {
   return (
     <div className="bg-gray-800 min-h-screen"> 
       <Navbar />
-      <HeroImage />
+      <PromotionSlider />
       <div className="bg-black flex flex-col items-center justify-center rounded-3xl py-16"> {/* Adjusted styles */}
         <MovieSlider header="Now Playing" movies={nowPlayingMovies} />
         <MovieSlider header="Coming Soon" movies={comingSoonMovies} />
