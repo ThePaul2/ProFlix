@@ -10,7 +10,10 @@ const AdminMovies = () => {
       <div style={styles.dashboard}>
         <h2 style={styles.heading}>Welcome to Admin Dashboard</h2>
         <div style={styles.content}>
-          <h3 style={styles.subHeading}>Edit Movies</h3>
+          <h3 style={styles.subHeading}>
+            Edit Movies
+            <Link to={`/edit-movie`} style={styles.addButton}>Add Movie</Link>
+          </h3>
           {/* Mapping through the movies array */}
           {data.movies.map(movie => (
             <div key={movie.id} style={styles.movieItem}>
@@ -52,6 +55,19 @@ const styles = {
     fontWeight: 'bold',
     marginBottom: '10px',
     color: '#f4f4f4',
+    display: 'flex',
+    alignItems: 'center',
+  },
+  addButton: {
+    marginLeft: '20px',
+    padding: '5px 10px',
+    backgroundColor: '#007bff',
+    border: 'none',
+    borderRadius: '5px',
+    color: '#fff',
+    cursor: 'pointer',
+    transition: 'background-color 0.3s ease',
+    textDecoration: 'none', // Add this to remove underline
   },
   movieItem: {
     marginBottom: '10px',
