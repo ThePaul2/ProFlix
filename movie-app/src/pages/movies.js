@@ -1,35 +1,34 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import MovieSlider from '../components/MovieSlider';
-import SearchBar from '../components/SearchBar'; // Import the SearchBar component
-import data from "../assets/sampleData.json";
+import SearchBar from '../components/SearchBar';
+import movieServices from '../services/movieServices';
 
 const Catalog = () => {
-  let movies = data.movies;
-  // Example movie data
-  let moviesItem = [];
-  // Dummy data for movie lists
-  const movieLists = [
-    { title: 'Action Movies', moviesItem },
-    { title: 'Comedy Movies', moviesItem},
-    { title: 'Drama Movies', moviesItem },
-    { title: 'Horror Movies', moviesItem },
-    { title: 'Sci-Fi Movies', moviesItem },
-    { title: 'Thriller Movies', moviesItem},
-    { title: 'Animated Movies', moviesItem },
-  ];
+  const [movies, setMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState([]);
 
+  useEffect(() => {
+    fetchMovies();
+  }, []);
 
-  console.log(movies)
-  for (let i = 0; i < 5; i++) {
-    moviesItem.push(movies[Math.floor(movies.length*Math.random())])
-  }
-
-
+  const fetchMovies = async () => {
+    try {
+      const moviesData = await movieServices.getAll();
+      setMovies(moviesData);
+      setFilteredMovies(moviesData); // Initialize filteredMovies with all movies
+    } catch (error) {
+      console.error('Error fetching movies:', error);
+      // You might want to show an error message to the user
+    }
+  };
 
   // Handler for searching movies
   const handleSearch = (searchTerm) => {
-    // Logic for searching movies based on searchTerm
+    const filteredMovies = movies.filter(movie =>
+      movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredMovies(filteredMovies);
     console.log('Searching for:', searchTerm);
   };
 
@@ -40,16 +39,20 @@ const Catalog = () => {
   };
 
   return (
-    <div className="bg-gray-800 min-h-screen pt-20"> {/* Gray background */}
+    <div className="bg-gray-800 min-h-screen pt-20">
+      {/* Gray background */}
       <Navbar />
       {/* Search bar and filters */}
       <div className="container mx-auto px-4 py-10">
         <SearchBar onSearch={handleSearch} onFilter={handleFilter} />
         {/* Render each movie list */}
-        {movieLists.map((list, index) => (
-          <div key={index} className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4 py-10">{list.title}</h2>
-            <MovieSlider movies={list.moviesItem} />
+        {filteredMovies.map(movie => (
+          <div key={movie.id} className="movie">
+            <img src={movie.poster} alt={movie.title} style={{ width: '200px', height: '300px' }} />
+            <div>
+              <h2>{movie.title}</h2>
+              <p>MPAA Rating: {movie.mpaaRating}</p>
+            </div>
           </div>
         ))}
       </div>
