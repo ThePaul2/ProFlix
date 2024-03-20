@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import MovieSlider from "../components/MovieSlider";
 import data from "../assets/sampleData.json";
-import PromotionSlider from "../components/PromotionSlider";
+import PromotionSlider from "../components/PromotionSlider"; 
 
 const Home = () => {
   let movies = data.movies;
