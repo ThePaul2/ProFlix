@@ -6,5 +6,4 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface MovieRepository extends MongoRepository<Movie, String> {
     List<Movie> findByTitle(String title);
-    List<Movie> findByCategory(String category);
 }

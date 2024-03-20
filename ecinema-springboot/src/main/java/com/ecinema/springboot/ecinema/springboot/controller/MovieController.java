@@ -44,9 +44,4 @@ public class MovieController {
     public List<Movie> searchMoviesByTitle(@RequestParam String title) {
         return movieRepository.findByTitle(title);
     }
-
-    @GetMapping("/category")
-    public List<Movie> getMoviesByCategory(@RequestParam String category) {
-        return movieRepository.findByCategory(category);
-    }
 }
