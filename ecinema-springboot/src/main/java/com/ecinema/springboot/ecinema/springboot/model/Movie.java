@@ -18,7 +18,8 @@ public class Movie {
     private String producer;
     private String synopsis;
     private List<Review> reviews;
-    private Trailer trailer;
+    private String trailer;
+    private String poster;
     private String mpaaRating;
     private List<ShowDate> showDatesTimes;
     private boolean comingSoon;
@@ -30,12 +31,6 @@ class Review {
     private String reviewer;
     private String comment;
     private int rating;
-}
-
-@Data
-class Trailer {
-    private String picture;
-    private String video;
 }
 
 @Data
