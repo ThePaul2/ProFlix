@@ -19,6 +19,7 @@ import Info from "./pages/info";
 import Confirmation from "./pages/confirmation";
 import User from "./pages/user";
 import TicketConfirmation from "./pages/ticketConfirmation";
+import Showtimes from "./pages/showtimes";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
         <Route path="/user" element={<User />} />
         <Route path="/confirmation" element={<Confirmation />} />
         <Route path="/ticketconfirmation" element={<TicketConfirmation />} />
+        <Route path="/showtimes" element={<Showtimes />} />
       </Routes>
     </Router>
   );

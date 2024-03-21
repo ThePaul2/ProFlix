@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-const SearchBar = ({ onSearch }) => {
+const HomeSearchBar = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearchChange = (event) => {
@@ -9,8 +10,13 @@ const SearchBar = ({ onSearch }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('Calling onSearch with searchTerm:', searchTerm); // Log the searchTerm before calling onSearch
-    onSearch(searchTerm);
+    alert("Pressing Enter doesn't work for search. Please use the search button.");
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      handleSubmit(event);
+    }
   };
 
   return (
@@ -21,10 +27,11 @@ const SearchBar = ({ onSearch }) => {
           placeholder="Search..."
           value={searchTerm}
           onChange={handleSearchChange}
+          onKeyDown={handleKeyPress}
           className="bg-gray-200 border border-gray-300 rounded-md py-4 px-16 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
         />
-        <button
-          type="submit"
+        <Link
+          to={`/movies?search=${encodeURIComponent(searchTerm)}`}
           className="absolute inset-y-0 right-0 flex items-center px-4 text-red-500"
         >
           <svg
@@ -41,10 +48,10 @@ const SearchBar = ({ onSearch }) => {
               d="M15 15l5-5m0 0l-5-5m5 5h-13"
             />
           </svg>
-        </button>
+        </Link>
       </div>
     </form>
   );
 };
 
-export default SearchBar;
+export default HomeSearchBar;
