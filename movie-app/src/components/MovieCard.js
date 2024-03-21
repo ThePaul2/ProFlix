@@ -1,40 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaAngleDown, FaAngleUp } from 'react-icons/fa'; // Import the arrow icons
 
 const MovieCard = ({ movie }) => {
-  const [isExpanded, setIsExpanded] = useState(false); // State to track whether the dropdown is expanded
-
-  const toggleDropdown = (e) => {
-    e.preventDefault(); 
-    setIsExpanded(!isExpanded);
-  };
-
   return (
-    <div>
-      <Link
-        to={`/info/${encodeURIComponent(movie.id)}`}
-      >
-        <div className="relative w-64 bg-gray-900 rounded-lg shadow-md m-4 cursor-pointer transition-transform duration-300 hover:scale-105">
-          <img src={movie.image} alt={movie.name} className="w-full h-48 object-cover rounded-t-lg" />
-          <div className="p-4">
-            <div className="flex justify-between items-center">
-              <h3 className="text-white text-lg font-semibold">{movie.name}</h3>
-              {/* Render the appropriate arrow icon based on the dropdown state */}
-              {isExpanded ? (
-                <FaAngleUp className="text-gray-300 cursor-pointer" onClick={toggleDropdown} />
-              ) : (
-                <FaAngleDown className="text-gray-300 cursor-pointer" onClick={toggleDropdown} />
-              )}
-            </div>
-            <p className="text-gray-300 mb-2">{movie.rating}</p>
-            {/* Render the release date and description if the dropdown is expanded */}
-            {isExpanded && (
-              <>
-                <p className="text-gray-300 mb-2">Release Date: {movie.date}</p>
-                <p className="text-gray-300 mb-2">Description: {movie.description}</p>
-              </>
-            )}
+    <div className="w-64 m-4 relative">
+      <Link to={`/info/${encodeURIComponent(movie.id)}`}>
+        <div className="relative">
+          <img src={movie.image} alt={movie.name} className="w-full h-70 object-cover rounded-lg" />
+          <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 flex justify-center items-center transition-opacity duration-300">
+            <h3 className="text-white text-lg font-semibold text-center">{movie.name}</h3>
           </div>
         </div>
       </Link>

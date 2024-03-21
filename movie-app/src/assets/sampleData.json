@@ -22,7 +22,9 @@
                 "Omg this was life changing",
                 "This has the guy from the mario movie",
                 "Lego movie 2 was bad"
-            ]
+            ],
+            "nowPlaying": true,
+            "comingSoon": false
         },
         {
             "id": "jf74ndhsi6ma9qng",
@@ -46,7 +48,9 @@
                 "I was there when that happened.",
                 "This movie is the bomb.",
                 "Inspirational. I aspire to do what he did."
-            ]
+            ],
+            "nowPlaying": false,
+            "comingSoon": true
         },
         {
             "id": "fj5d84nc7djgl4dw",
@@ -70,7 +74,9 @@
                 "500 stars",
                 "Shimshaw",
                 "Why was Morgan Freeman playing the Irish guy?"
-            ]
+            ],
+            "nowPlaying": true,
+            "comingSoon": false
         },
         {
             "id": "dj68dmcnv6352hdf",
@@ -94,7 +100,9 @@
                 "I did not care for The Godfather",
                 "Waste of 3 hours of my life",
                 "Best movie for boring people"
-            ]
+            ],
+            "nowPlaying": false,
+            "comingSoon": true
         },
         {
             "id": "dk68v9fne4xk5nd7",
@@ -118,7 +126,9 @@
                 "It's clobbering time",
                 "This is amongus",
                 "Good movie i guess"
-            ]
+            ],
+            "nowPlaying": true,
+            "comingSoon": false
         },
         {
             "id": "dm48chrnt7ahgmdi",
@@ -142,7 +152,9 @@
                 "Good movie",
                 "I watched this at 2x speed",
                 "I personally would've slowed down."
-            ]
+            ],
+            "nowPlaying": false,
+            "comingSoon": true
         },
         {
             "id": "4mf8chd6sje743hd",
@@ -166,7 +178,9 @@
                 "The book was worse",
                 "OMG! This has the guy from the mario movie",
                 "I'm getting tired of making these fake reviews"
-            ]
+            ],
+            "nowPlaying": true,
+            "comingSoon": false
         },
         {
             "id": "dmfjc84nfhdjtlif",
@@ -190,7 +204,9 @@
                 "I wish I could go back in time and watch that again",
                 "Almost as realistic as HotTub Time Machine 2",
                 "10/10 does exist"
-            ]
+            ],
+            "nowPlaying": false,
+            "comingSoon": true
         },
         {
             "id": "idmr7fhej4kslodc",
@@ -214,7 +230,9 @@
                 "Glorified advert",
                 "Who says advert? Like, why?",
                 "Loved the Tako Tuesday joke"
-            ]
+            ],
+            "nowPlaying": true,
+            "comingSoon": false
         },
         {
             "id": "dmfiejtudnctiondl",
@@ -238,7 +256,9 @@
                 "That gun had no clothes on",
                 "Wow the title is so long",
                 "Pew pew pew. Its a gun"
-            ]
+            ],
+            "nowPlaying": false,
+            "comingSoon": true
         },
         {
             "id": "itmeslftwantydsf",
@@ -262,7 +282,9 @@
                 "I haven't seen it",
                 "Quite spooky",
                 "Rawr"
-            ]
+            ],
+            "nowPlaying": true,
+            "comingSoon": false
         },
         {
             "id": "84jfnc72jdmfkc8a",
@@ -286,7 +308,9 @@
                 "Best Star War",
                 "Great ending to the series",
                 "I lost my legs in Vietnam. Great movie."
-            ]
+            ],
+            "nowPlaying": false,
+            "comingSoon": true
         },
         {
             "id": "dj5mfyctwamf83jd",
@@ -297,7 +321,7 @@
             "rating": 7,
             "description":
                 "A student at Oxford University finds himself drawn into the world of a charming and aristocratic classmate, who invites him to his eccentric family's sprawling estate for a summer never to be forgotten.",
-            "image": "https://images.thedirect.com/media/article_full/salt1.jpg",
+            "image": "https://i.ebayimg.com/images/g/pvEAAOSwyABk-pKg/s-l1200.webp",
             "trailer": "https://www.youtube.com/embed/lALMdJf6UUE",
             "director": "Emerald Fennell",
             "producer": "Mr Producer",
@@ -310,7 +334,9 @@
                 "You should watch this",
                 "How did you trick me into watching this?!",
                 "I can't really say that I liked this because then you'd think I was weird."
-            ]
+            ],
+            "nowPlaying": false,
+            "comingSoon": false
         },
         {
             "id": "dmf83jdncghal92j",
@@ -334,7 +360,9 @@
                 "Best joke at the end",
                 "Best Teen Titans incarnation",
                 "Teen Titans Go to the poles"
-            ]
+            ],
+            "nowPlaying": false,
+            "comingSoon": false
         }
     ]
 }

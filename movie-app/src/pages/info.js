@@ -15,11 +15,7 @@ const Info = () => {
     }
 
     const containerStyle = {
-        backgroundImage: `url(${movie.image})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed',
-        backgroundRepeat: 'no-repeat',
+        background: 'black',
     };
 
     return (
