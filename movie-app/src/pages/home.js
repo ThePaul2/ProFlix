@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import MovieSlider from "../components/MovieSlider";
 import data from "../assets/sampleData.json";
 import VideoPlayer from "../components/VideoPlayer";
-import SearchBar from "../components/SearchBar";
+import SearchBar from "../components/HomeSearchbar";
 
 const Home = () => {
   let movies = data.movies;
