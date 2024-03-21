@@ -1,45 +1,49 @@
-// Filename - components/SearchBar.js
-
 import React, { useState } from 'react';
 
-const SearchBar = ({ onSearch, onFilter }) => {
+const SearchBar = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedFilter, setSelectedFilter] = useState('');
 
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-    onSearch(e.target.value);
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
   };
 
-  const handleFilterChange = (e) => {
-    setSelectedFilter(e.target.value);
-    onFilter(e.target.value);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Call the onSearch function with the current search term
+    onSearch(searchTerm);
   };
 
   return (
-    <div className="flex items-center space-x-4">
-      {/* Search input */}
-      <input
-        type="text"
-        placeholder="Search movies..."
-        value={searchTerm}
-        onChange={handleSearchChange}
-        className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-      />
-      
-      {/* Filter select */}
-      <select
-        value={selectedFilter}
-        onChange={handleFilterChange}
-        className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-      >
-        <option value="">All</option>
-        <option value="Action">Action</option>
-        <option value="Comedy">Comedy</option>
-        <option value="Drama">Drama</option>
-        {/* Add more filter options as needed */}
-      </select>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <div className="relative">
+        <input
+          type="text"
+          placeholder="Search..."
+          value={searchTerm}
+          onChange={handleSearchChange}
+          className="bg-gray-200 border border-gray-300 rounded-md py-4 px-16 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+        />
+        <button
+          type="submit"
+          className="absolute inset-y-0 right-0 flex items-center px-4 text-red-500"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 15l5-5m0 0l-5-5m5 5h-13"
+            />
+          </svg>
+        </button>
+      </div>
+    </form>
   );
 };
 
