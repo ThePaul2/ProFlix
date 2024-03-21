@@ -1,6 +1,7 @@
 package com.ecinema.springboot.ecinema.springboot.service.impl;
 
-import javax.management.RuntimeErrorException;
+import java.lang.RuntimeException;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.*;
