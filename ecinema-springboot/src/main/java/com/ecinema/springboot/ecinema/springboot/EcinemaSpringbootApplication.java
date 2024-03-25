@@ -9,7 +9,6 @@ import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties
 @SpringBootApplication
 @Configuration
 @EnableEncryptableProperties
-
 public class EcinemaSpringbootApplication {
 
 	public static void main(String[] args) {
