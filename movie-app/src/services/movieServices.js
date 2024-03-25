@@ -4,8 +4,6 @@ class MovieServices {
     getAll() {
         return http.get("/movies")
             .then(response => {
-                // Assuming the response.data contains an array of movie objects
-                // Each movie object contains properties as specified in the Movie class model
                 return response.data.map(movie => ({
                     id: movie.id,
                     title: movie.title,
