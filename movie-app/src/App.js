@@ -15,6 +15,7 @@ import AdminPromo from "./pages/adminPromo";
 import AdminUsers from "./pages/adminUsers";
 import EditProfile from "./pages/editProfile";
 import EditMovie from "./pages/adminEditMovie";
+import EditPromo from "./pages/adminEditPromo";
 import Info from "./pages/info";
 import Confirmation from "./pages/confirmation";
 import User from "./pages/user";
@@ -36,6 +37,7 @@ function App() {
         <Route path="/adminUsers" element={<AdminUsers />} />
         <Route path="/adminPromo" element={<AdminPromo />} />
         <Route path="/edit-movie" element={<EditMovie />} />
+        <Route path="/edit-promo" element={<EditPromo />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/events" element={<Events />} />
         <Route path="/rewards" element={<Rewards />} />
