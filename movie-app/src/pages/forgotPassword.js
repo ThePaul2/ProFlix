@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
+import axios from 'axios';
 
 export default function ForgotPassword() {
     const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
 
     const handleChange = (e) => {
         setEmail(e.target.value);
     };
 
-    const handleSubmit = () => {
-        // Handle submission, for example, send a reset password email
-        console.log('Email submitted:', email);
+    const handleForgotPassword = async () => {
+        try {
+          const response = await axios.post('http://localhost:8080/users/forgot-password', { email });
+          setMessage(response.data.message);
+        } catch (error) {
+          setMessage('Failed to reset password. Please try again later.');
+          console.error(error);
+        }
     };
 
     return (
@@ -30,7 +37,8 @@ export default function ForgotPassword() {
                     Enter your email address below and we'll send you instructions on how to reset your password.
                 </div>
                 <div className="text-center mt-4 md:text-left">
-                    <button className="mt-4 bg-red-600 hover:bg-red-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider" onClick={handleSubmit}>Submit</button>
+                    <button className="mt-4 bg-red-600 hover:bg-red-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider" onClick={handleForgotPassword}>Submit</button>
+                    <p className="mt-4 text-sm text-slate-500 text-center md:text-left">{message}</p>
                 </div>
                 <div className="mt-4 font-semibold text-sm text-slate-500 text-center md:text-left">
                     Remember your password? <Link className="text-red-600 hover:underline hover:underline-offset-4" to="/login">Login</Link>
