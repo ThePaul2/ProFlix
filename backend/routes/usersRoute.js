@@ -1,5 +1,6 @@
 import express from 'express';
 import { User } from '../models/userModel.js';
+import bcrypt from 'bcrypt';
 
 const router = express.Router();
 
@@ -17,8 +18,8 @@ router.post('/', async (request, response) => {
       city,
       state,
       cardNumber,
-      month,
-      year,
+      exp,
+      status,
       CVN,
       cardFirst,
       cardLast
@@ -27,21 +28,28 @@ router.post('/', async (request, response) => {
     // Log the received request body
     console.log('Received request body:', request.body);
 
-    // Create a new user with all fields from request body
+    // Hash sensitive fields
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Check if optional fields exist and hash them if they do
+    const hashedCardNumber = cardNumber ? await bcrypt.hash(cardNumber.toString(), 10) : undefined;
+    const hashedCVN = CVN ? await bcrypt.hash(CVN.toString(), 10) : undefined;
+
+    // Create a new user with hashed sensitive fields
     const newUser = await User.create({
       firstName,
       lastName,
       email,
-      password,
+      password: hashedPassword,
       country,
       street1,
       street2,
       city,
       state,
-      cardNumber,
-      month,
-      year,
-      CVN,
+      cardNumber: hashedCardNumber,
+      exp,
+      status,
+      CVN: hashedCVN,
       cardFirst,
       cardLast
     });
@@ -52,6 +60,7 @@ router.post('/', async (request, response) => {
     return response.status(500).json({ message: 'Internal server error' });
   }
 });
+
 
 
 

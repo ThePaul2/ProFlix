@@ -31,6 +31,7 @@ mongoose
   .connect(mongoDBURL)
   .then(() => {
     console.log('Connected to database');
+    console.log('Status for user: 0 if active, 1 if inactive, 2 if user');
     app.listen(PORT, () => {
       console.log(`App is listening to port: ${PORT}`);
     });

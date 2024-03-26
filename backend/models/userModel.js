@@ -39,28 +39,28 @@ const userSchema = mongoose.Schema({
       trim: true,
   },
   cardNumber: {
-      type: Number,
+      type: String,
       trim: true,
       minlength: 16,
   },
-  month: {
+  exp: {
       type: Number,
       trim: true,
   },
-  year: {
+  status: {
       type: Number,
       trim: true,
   },
   CVN: {
-      type: Number,
+      type: String,
       trim: true,
   }, 
   cardFirst: {
-      type: Number,
+      type: String,
       trim: true,
   },
   cardLast: {
-      type: Number,
+      type: String,
       trim: true,
   },
 });
