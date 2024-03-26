@@ -41,7 +41,7 @@ const Footer = () => {
                     <ul className="list-none">
                         <li><button className="text-white font-semibold hover:text-red-500 transition duration-500 cursor-pointer">Food and Drinks</button></li>
                         <li className='md:ml-8 md:my-0 my-7 font-semibold'>
-                        <Link to="/admin" className='text-white font-semibold hover:text-red-500 transition duration-500 cursor-pointer'>Admin</Link>
+                        
                     </li>
                     </ul>
                 </div>
