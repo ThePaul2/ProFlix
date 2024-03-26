@@ -2,9 +2,12 @@ import express from 'express';
 import { PORT, mongoDBURL } from './config.js';
 import mongoose from 'mongoose';
 import usersRoute from './routes/usersRoute.js';
+import dotenv from 'dotenv';
 import cors from 'cors';
 
 const app = express();
+
+dotenv.config();
 
 app.use(express.json());
 
