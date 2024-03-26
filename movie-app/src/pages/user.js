@@ -3,10 +3,11 @@ import userPhoto from '../assets/userPhoto.jpg';
 import Navbar from '../components/Navbar';
 import MovieSlider from '../components/MovieSlider';
 import data from "../assets/sampleData.json";
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom'; 
 
 const User = () => {
     let movies = data.movies;
+    let { email } = useParams();
   const getRandomNumber = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };

@@ -33,11 +33,9 @@ router.post('/', async (request, response) => {
     // Hash sensitive fields
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Check if optional fields exist and hash them if they do
     const hashedCardNumber = cardNumber ? await bcrypt.hash(cardNumber.toString(), 10) : undefined;
     const hashedCVN = CVN ? await bcrypt.hash(CVN.toString(), 10) : undefined;
 
-    // Create a new user with hashed sensitive fields
     const newUser = await User.create({
       firstName,
       lastName,
@@ -185,36 +183,28 @@ router.post('/reset-password', async (req, res) => {
   }
 });
 
-router.get('/', async (request, response) => {
+router.get('/login/:email', async (request, response) => {
   try {
-    const { email, password } = request.query;
+    const email = request.params.email;
 
-    // Find the user with the provided email
-    const user = await User.findOne({ email });
+    // Search for the user by email in the database and specify the fields to include
+    const user = await User.findOne({ email }, { password: 1, email: 1, status: 1 });
 
     if (!user) {
-      // User not found
       return response.status(404).json({ message: 'User not found' });
     }
 
-    // Compare the provided password with the hashed password stored in the database
-    const passwordMatch = await bcrypt.compare(password, user.password);
-
-    if (!passwordMatch) {
-      // Passwords do not match
-      return response.status(401).json({ message: 'Incorrect password' });
-    }
-
-    // Passwords match, generate JWT token for authentication
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-
-    // Send the token and user details in the response
-    return response.status(200).json({ token, user });
+    // Return user data including the password, email, and status fields
+    return response.status(200).json(user);
   } catch (error) {
     console.error(error);
     return response.status(500).json({ message: 'Internal server error' });
   }
 });
+
+
+
+
 
 export default router;
 

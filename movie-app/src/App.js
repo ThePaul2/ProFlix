@@ -45,6 +45,7 @@ function App() {
         <Route path="/edit-profile" element={<EditProfile />} />
         <Route path="/info/:id" element={<Info />} />
         <Route path="/user" element={<User />} />
+        <Route path="/users/:email" element={<User />} />
         <Route path="/confirmation" element={<Confirmation />} />
         <Route path="/ticketconfirmation" element={<TicketConfirmation />} />
         <Route path="/showtimes" element={<Showtimes />} />

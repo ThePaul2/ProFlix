@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../assets/logo.png';
-import { signupUser } from '../components/signupUser'; // Import the signupUser function
+import { signupUser } from '../components/signupUser'; 
 
 export default function Signup({
     setUser,
@@ -21,8 +21,12 @@ export default function Signup({
         expirationDate: '',
         cvn: '',
         cardFirstName: '',
-        cardLastName: ''
+        cardLastName: '',
+        status: '0'
     });
+
+    const navigate = useNavigate(); 
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -30,15 +34,24 @@ export default function Signup({
     };
 
     const handleSubmit = async () => {
+        
+        if (formData.firstName.trim() === '' || formData.lastName.trim() === '' || formData.email.trim() === '' || formData.password.trim() === '') {
+            // If empty, display a pop-up or an error message
+            alert('Please enter all required fields.');
+            return; 
+        }
+
         try {
             const data = await signupUser(formData);
             console.log('Signup successful:', data);
-            // Handle successful signup
+           
+            navigate('/');
         } catch (error) {
             console.error('Signup error:', error.message);
-            // Handle signup error
+           
         }
     };
+    
 
     return (
         <section className="bg-black h-screen flex flex-col md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center my-2 mx-5 md:mx-0 md:my-0">
@@ -85,7 +98,7 @@ export default function Signup({
                 <div className="mt-4 flex justify-between font-semibold text-sm">
                     <label className="flex text-slate-500 hover:text-slate-600 cursor-pointer">
                         <input className="mr-1" type="checkbox" />
-                        <span>Remember Me</span>
+                        <span>Register for Promotion</span>
                     </label>
                     <Link className="text-red-600 hover:text-red-700 hover:underline hover:underline-offset-4" to="/forgot-password">Need Help?</Link>
                 </div>
