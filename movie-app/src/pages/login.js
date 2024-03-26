@@ -1,9 +1,10 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../assets/logo.png';
 
 export default function Login({ setUser, setAuthState }) {
   const navigate = useNavigate();
+  const [error, setError] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -25,13 +26,20 @@ export default function Login({ setUser, setAuthState }) {
       if (passwordFromForm === password && status === 0) {
         // Password and status match, navigate to /users/login/:email
         navigate(`/users/${email}`);
+      } else if (status === 1) {
+        // Account is inactive, show pop-up message
+        setError('Your account is inactive. Please contact support.');
+      } else if (passwordFromForm === password && status === 2) {
+        // Account is inactive, show pop-up message
+        navigate(`/admin`);
       } else {
         // Password or status don't match, handle the error (e.g., show a message to the user)
-        console.error('Incorrect password or inactive account');
+        setError('Incorrect password or Email is Wrong');
       }
     } catch (error) {
       // Handle fetch error
       console.error('Error fetching user data:', error);
+      setError('Error fetching user data. Please try again later.');
     }
   };
 
@@ -63,6 +71,7 @@ export default function Login({ setUser, setAuthState }) {
         <div className="mt-4 font-semibold text-sm text-slate-500 text-center md:text-left">
           Don't have an account? <Link className="text-red-600 hover:underline hover:underline-offset-4" to="/signup">Register</Link>
         </div>
+        {error && <div className="mt-4 text-red-500">{error}</div>}
       </div>
     </section>
   );
