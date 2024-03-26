@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../assets/logo.png';
+import bcrypt from 'bcryptjs'; // Import bcrypt for password hashing
 
 export default function Login({ setUser, setAuthState }) {
   const navigate = useNavigate();
@@ -15,22 +16,21 @@ export default function Login({ setUser, setAuthState }) {
     const passwordFromForm = formData.get('password');
 
     try {
-      // Fetch user data from the server based on the entered email
       const response = await fetch(`http://localhost:8080/users/login/${email}`);
       const userData = await response.json();
 
-      // Extract password and status from user data
-      const { password, status } = userData;
+      const { password: hashedPassword, status } = userData;
 
-      // Compare the entered password with the password retrieved from the server
-      if (passwordFromForm === password && status === 0) {
-        // Password and status match, navigate to /users/login/:email
+      const passwordMatch = await bcrypt.compare(passwordFromForm, hashedPassword);
+
+      if (passwordMatch && status === 0) {
+        // Password matches and account is active, navigate to /users/login/:email
         navigate(`/users/${email}`);
       } else if (status === 1) {
         // Account is inactive, show pop-up message
         setError('Your account is inactive. Please contact support.');
-      } else if (passwordFromForm === password && status === 2) {
-        // Account is inactive, show pop-up message
+      } else if (passwordMatch && status === 2) {
+        // Password matches and account is admin, navigate to admin page
         navigate(`/admin`);
       } else {
         // Password or status don't match, handle the error (e.g., show a message to the user)
@@ -76,6 +76,7 @@ export default function Login({ setUser, setAuthState }) {
     </section>
   );
 }
+
 
 
 
