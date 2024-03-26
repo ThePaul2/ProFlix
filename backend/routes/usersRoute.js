@@ -1,6 +1,8 @@
 import express from 'express';
 import { User } from '../models/userModel.js';
 import bcrypt from 'bcrypt';
+import nodemailer from 'nodemailer';
+import jwt from 'jsonwebtoken';
 
 const router = express.Router();
 
@@ -60,9 +62,6 @@ router.post('/', async (request, response) => {
     return response.status(500).json({ message: 'Internal server error' });
   }
 });
-
-
-
 
 // Route for getting all users
 router.get('/', async (request, response) => {
@@ -128,7 +127,16 @@ router.delete('/:id', async (request, response) => {
   }
 });
 
+
+
+
+
+
+
+
 export default router;
+
+
 
 
 
