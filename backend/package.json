@@ -16,7 +16,10 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
+<<<<<<< HEAD
     "mailgun-js": "^0.22.0",
+=======
+>>>>>>> b4ca4fd0ce0ff2972dd0d9f3bbdf9f4d98e44f90
     "mongoose": "^7.3.1",
     "nodemailer": "^6.9.13",
     "nodemon": "^2.0.22"
