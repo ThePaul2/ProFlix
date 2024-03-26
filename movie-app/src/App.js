@@ -22,7 +22,7 @@ import User from "./pages/user";
 import TicketConfirmation from "./pages/ticketConfirmation";
 import Showtimes from "./pages/showtimes";
 import ForgotPassword from "./pages/forgotPassword";
-import ResetPassword from "./pages/resetPassword";
+
 
 
 
@@ -51,7 +51,6 @@ function App() {
         <Route path="/ticketconfirmation" element={<TicketConfirmation />} />
         <Route path="/showtimes" element={<Showtimes />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset_password/:id/:token" element={<ResetPassword />}></Route>
       </Routes>
     </Router>
   );
