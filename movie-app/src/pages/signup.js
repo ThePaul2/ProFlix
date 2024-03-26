@@ -11,7 +11,17 @@ export default function Signup({
         firstName: '',
         lastName: '',
         email: '',
-        password: ''
+        password: '',
+        city: '',
+        state: '',
+        country: '',
+        streetAddress: '',
+        apartment: '',
+        cardNumber: '',
+        expirationDate: '',
+        cvn: '',
+        cardFirstName: '',
+        cardLastName: ''
     });
 
     const handleChange = (e) => {
@@ -34,35 +44,43 @@ export default function Signup({
         <section className="bg-black h-screen flex flex-col md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center my-2 mx-5 md:mx-0 md:my-0">
             <div className="md:w-1/3 max-w-sm">
                 <Link to="/"> 
-                    <img
-                    src={logo}
-                    alt="Logo" />
+                    <img src={logo} alt="Logo" />
                 </Link>
             </div>
             <div className="md:w-1/3 max-w-sm">
-                <h1 className="text-3xl font-bold text-white mb-6">Create an Account</h1>
+                <h1 className="text-3xl font-bold text-white mb-2">Create an Account</h1>
                 <div className="text-center md:text-left">
-                    <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="text" name="firstName" value={formData.firstName} onChange={handleChange} placeholder="First Name *" required />
-                    <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="text" name="lastName" value={formData.lastName} onChange={handleChange} placeholder="Last Name *" required />
+                    <div className="flex">
+                        <input className="text-sm w-1/2 px-4 py-2 border border-solid border-gray-300 rounded mt-4 mr-2" type="text" name="firstName" value={formData.firstName} onChange={handleChange} placeholder="First Name *" required />
+                        <input className="text-sm w-1/2 px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="text" name="lastName" value={formData.lastName} onChange={handleChange} placeholder="Last Name *" required />
+                    </div>
                     <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email Address *" required />
                     <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password *" required />
 
-
-                    <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="text" placeholder="Street Address" />
-                    <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="text" placeholder="Apartment, suite, etc..." />
-                    <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="text" placeholder="City" />
-                    <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="text" placeholder="State" />
-                    <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="text" placeholder="Country" />
-
-                    <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="text" placeholder="Card Number" />
-                    <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="text" placeholder="Expiration Date" />
-                    <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="text" placeholder="CVN" />
-                    <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="text" placeholder="First Name on Card" />
-                    <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="text" placeholder="Last Name on Card" />
-
-
+                    <div className="mt-4 font-semibold text-sm text-slate-500 text-center md:text-left">
+                        Billing and Payment Information (Optional) 
+                    </div>
                     
+                    <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="text" name="streetAddress" value={formData.streetAddress} onChange={handleChange} placeholder="Street Address" />
+                    <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="text" name="apartment" value={formData.apartment} onChange={handleChange} placeholder="Apartment, suite, etc..." />
+                    <div className="flex">
+                        <input className="text-sm w-1/2 px-4 py-2 border border-solid border-gray-300 rounded mt-4 mr-2" type="text" name="city" value={formData.city} onChange={handleChange} placeholder="City" required />
+                        <input className="text-sm w-1/2 px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="text" name="state" value={formData.state} onChange={handleChange} placeholder="State" required />
+                    </div>
+                    <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="text" name="country" value={formData.country} onChange={handleChange} placeholder="Country" />
 
+                    <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="text" name="cardNumber" value={formData.cardNumber} onChange={handleChange} placeholder="Card Number" />
+                    <div className="flex">
+                        <input className="text-sm w-1/2 px-4 py-2 border border-solid border-gray-300 rounded mt-4 mr-2" type="text" name="expirationDate" value={formData.expirationDate} onChange={handleChange} placeholder="Expiration Date" required />
+                        <input className="text-sm w-1/2 px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="text" name="cvn" value={formData.cvn} onChange={handleChange} placeholder="CVN" required />
+                    </div>
+                    <div className="flex">
+                        <input className="text-sm w-1/2 px-4 py-2 border border-solid border-gray-300 rounded mt-4 mr-2" type="text" name="cardFirstName" value={formData.cardFirstName} onChange={handleChange} placeholder="First Name on Card" required />
+                        <input className="text-sm w-1/2 px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="text" name="cardLastName" value={formData.cardLastName} onChange={handleChange} placeholder="Last Name on Card" required />
+                    </div>
+                </div>
+                <div className="mt-4 font-semibold text-sm text-slate-500 text-center md:text-left">
+                    <label className="text-red-600">* Required</label>
                 </div>
                 <div className="mt-4 flex justify-between font-semibold text-sm">
                     <label className="flex text-slate-500 hover:text-slate-600 cursor-pointer">
@@ -71,7 +89,7 @@ export default function Signup({
                     </label>
                     <Link className="text-red-600 hover:text-red-700 hover:underline hover:underline-offset-4" to="/forgot-password">Need Help?</Link>
                 </div>
-                <div className="text-center md:text-left my-6">
+                <div className="text-center md:text-left my-1">
                     <button className="mt-6 bg-red-600 hover:bg-red-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider" onClick={handleSubmit}>Create Account</button>
                 </div>
                 <div className="mt-4 font-semibold text-sm text-slate-500 text-center md:text-left">
@@ -81,6 +99,7 @@ export default function Signup({
         </section>
     )
 }
+
 
 
 
