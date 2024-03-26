@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import NavbarAdmin from '../components/NavbarAdmin';
 
 const AdminDashboard = () => {
@@ -60,7 +61,7 @@ const AdminDashboard = () => {
                   <span>{`Promotion ${promotion.id} (${promotion.name}) - ${promotion.length}`}</span>
                 </div>
                 <div>
-                  <button onClick={() => handleEditPromotion(promotion.id)} className="mr-2 px-4 py-2 bg-green-500 rounded-md text-white hover:bg-green-600 transition duration-300 ease-in-out">Edit Promotion</button>
+                  <Link to={`/edit-promo`} className="mr-2 px-4 py-2 bg-green-500 rounded-md text-white hover:bg-green-600 transition duration-300 ease-in-out">Edit</Link>
                   <button onClick={() => handleDeleteUser(promotion.id)} className="px-4 py-2 bg-red-500 rounded-md text-white hover:bg-red-600 transition duration-300 ease-in-out">Delete Promotion</button>
                 </div>
               </li>
