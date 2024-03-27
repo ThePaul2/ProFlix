@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import { signupUser } from '../components/signupUser'; 
+import axios from 'axios';
 
 export default function Signup({
     setUser,
@@ -34,7 +35,6 @@ export default function Signup({
     };
 
     const handleSubmit = async () => {
-        
         if (formData.firstName.trim() === '' || formData.lastName.trim() === '' || formData.email.trim() === '' || formData.password.trim() === '') {
             // If empty, display a pop-up or an error message
             alert('Please enter all required fields.');
@@ -44,11 +44,17 @@ export default function Signup({
         try {
             const data = await signupUser(formData);
             console.log('Signup successful:', data);
+
+            try {
+                const response = await axios.post('http://localhost:8080/users/confirmation', { email: formData.email });
+                console.log('Confirmation email sent:', response.data);
+            } catch (error) {
+                console.error('Failed to send confirmation email:', error);
+            }
            
             navigate('/');
         } catch (error) {
             console.error('Signup error:', error.message);
-           
         }
     };
     

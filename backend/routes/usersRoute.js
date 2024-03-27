@@ -228,6 +228,21 @@ router.post('/reset-password/:email', async (req, res) => {
 });
 
 
+router.post('/confirmation', async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    // Send email with registration confirmation link
+    await sendRegistrationConfirmationEmail(email);
+    
+    res.json({ message: 'Confirmation email sent' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+
 
 
 
