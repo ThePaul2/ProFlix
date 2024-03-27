@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
     const links = [
         { name: "MOVIES", link: "/movies" },
-        { name: "EVENTS", link: "/events" },
+        { name: "PROMOS", link: "/promos" },
         { name: "SHOWTIMES", link: "/showtimes" },
     ];
     const [open, setOpen] = useState(false);
