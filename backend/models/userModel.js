@@ -27,6 +27,7 @@ const userSchema = mongoose.Schema({
         type: Date,
         default: null,
     },
+    // Existing fields
     country: {
         type: String,
         trim: true,

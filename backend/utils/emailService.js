@@ -22,8 +22,8 @@ async function sendResetPasswordEmail(email, resetToken) {
         from: 'E-Cinema Support <postmaster@sandbox215c79a7b4aa460caa7047dde7f63b4c.mailgun.org>',
         to: email,
         subject: 'Password Reset',
-        html: `<p>You have requested a password reset. Click <a href="http://localhost:3030/forgot-password?token=${resetToken}">here</a> to reset your password.</p>`,
-      };
+        html: `<p>You have requested a password reset. Click <a href="http://localhost:3000/reset-password">here</a> to reset your password.</p>`,
+    };
   
       // Send email using nodemailer
       const info = await transporter.sendMail(mailOptions);
@@ -33,5 +33,23 @@ async function sendResetPasswordEmail(email, resetToken) {
       throw new Error('Failed to send reset password email');
     }
   }
+  async function sendRegistrationConfirmationEmail(email) {
+    try {
+      const mailOptions = {
+        from: 'E-Cinema Support <postmaster@sandbox215c79a7b4aa460caa7047dde7f63b4c.mailgun.org>',
+        to: email,
+        subject: 'Registration Confirmation',
+        html: `<p>You have successfully registered with E-Cinema. Welcome aboard!</p>`,
+      };
   
-  export default sendResetPasswordEmail;
+      // Send email using Mailgun
+      const info = await mg.messages().send(mailOptions);
+      console.log('Email sent:', info);
+    } catch (error) {
+      console.error('Error sending email:', error);
+      throw new Error('Failed to send registration confirmation email');
+    }
+  }
+  
+  
+  export { sendResetPasswordEmail, sendRegistrationConfirmationEmail };
