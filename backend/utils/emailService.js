@@ -22,8 +22,8 @@ async function sendResetPasswordEmail(email, resetToken) {
         from: 'E-Cinema Support <postmaster@sandbox215c79a7b4aa460caa7047dde7f63b4c.mailgun.org>',
         to: email,
         subject: 'Password Reset',
-        html: `<p>You have requested a password reset. Click <a href="http://localhost:3030/forgot-password?token=${resetToken}">here</a> to reset your password.</p>`,
-      };
+        html: `<p>You have requested a password reset. Click <a href="http://localhost:3000/reset-password">here</a> to reset your password.</p>`,
+    };
   
       // Send email using nodemailer
       const info = await transporter.sendMail(mailOptions);
