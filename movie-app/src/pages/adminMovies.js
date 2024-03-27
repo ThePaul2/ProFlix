@@ -18,7 +18,7 @@ const AdminMovies = () => {
           {data.movies.map(movie => (
             <div key={movie.id} className="mb-2 p-4 bg-white rounded-md shadow-md flex justify-between items-center hover:bg-red-300">
               <p className="flex-1 mr-4">{`id: ${movie.id} - ${movie.name}`}</p>
-              <Link to={`/edit-movie`} className="px-4 py-2 bg-red-500 rounded-md text-white hover:bg-red-600 transition duration-300 ease-in-out">Edit</Link>
+              <Link to={`/edit-movie`} className="px-4 py-2 bg-green-500 rounded-md text-white hover:bg-green-600 transition duration-300 ease-in-out">Edit</Link>
             </div>
           ))}
         </div>

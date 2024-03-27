@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import Navbar from "../components/NavbarAdmin";
 import TextInput from "../components/TextInput";
 
@@ -7,11 +8,18 @@ const editMovie = () => {
 		<div>
 			<Navbar />
 			<div
-				className="h-screen pt-16"
+				className="h-screen pt-16 bg-zinc-900"
 			>
 				<div className="bg-zinc-900 text-white font-bold leading-10 py-10 px-60 w-full h-fit">
-					<h1>Edit Movie</h1>
-					<p>Movie Info</p>
+					<div className="flex flex-row w-full">
+						<div>
+							<h1>Edit Movie</h1>
+							<p>Movie Info</p>
+						</div>
+						<div className="ml-auto">
+							<Link to={`/adminMovies`} className="mr-2 px-4 py-2 bg-green-500 rounded-md text-white hover:bg-green-600 transition duration-300 ease-in-out">Quit Without Saving</Link>
+						</div>
+					</div>
 					
 					<br />
 					<TextInput name="Title" placeholder="Oppenheimer" />
