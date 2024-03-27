@@ -4,11 +4,7 @@ import TextInput from "../components/TextInput";
 import axios from "axios";
 
 const EditProfile = () => {
-	const [userData, setUserData] = useState({
-		password: ''
-		email: '',
-		
-	  });
+	const [userInfo, setUserInfo] = useState(null);
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
