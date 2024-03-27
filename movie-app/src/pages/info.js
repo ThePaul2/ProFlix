@@ -48,7 +48,7 @@ const Info = () => {
             <p>Director: {movie.director}</p>
             <p>Producer: {movie.producer}</p>
             <ul className="mb-4">
-              <li>Reviews: :{movie.reviews}</li>
+              <li>Reviews: {movie.reviews}</li>
             </ul>
             </div>
           </div>

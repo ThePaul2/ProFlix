@@ -13,13 +13,13 @@
             "director": "Phil Lord",
             "producer": "Mr Producer",
             "cast": [
-                "Chris Pratt",
-                "Will Ferrell",
+                "Chris Pratt, ",
+                "Will Ferrell, ",
                 "Elizabeth Banks"
             ],
             "reviews": [
-                "Omg this was life changing",
-                "This has the guy from the mario movie",
+                "Omg this was life changing, ",
+                "This has the guy from the mario movie, ",
                 "Lego movie 2 was bad"
             ],
             "nowPlaying": true,
@@ -55,13 +55,13 @@
             "director": "Christopher Nolan",
             "producer": "Mr Producer",
             "cast": [
-                "Cillian Murphy",
-                "Emily Blunt",
+                "Cillian Murphy, ",
+                "Emily Blunt, ",
                 "Matt Damon"
             ],
             "reviews": [
-                "I was there when that happened.",
-                "This movie is the bomb.",
+                "I was there when that happened., ",
+                "This movie is the bomb., ",
                 "Inspirational. I aspire to do what he did."
             ],
             "nowPlaying": false,
@@ -92,13 +92,13 @@
             "director": "Frank Darabont",
             "producer": "Mr Producer",
             "cast": [
-                "Tim Robbins",
-                "Morgan Freeman",
+                "Tim Robbins, ",
+                "Morgan Freeman, ",
                 "Bob Gunton"
             ],
             "reviews": [
-                "500 stars",
-                "Shimshaw",
+                "500 stars, ",
+                "Shimshaw, ",
                 "Why was Morgan Freeman playing the Irish guy?"
             ],
             "nowPlaying": true,
@@ -130,13 +130,13 @@
             "director": "Francis Ford Coppola",
             "producer": "Mr Producer",
             "cast": [
-                "Marlon Brando",
-                "Al Paccino",
+                "Marlon Brando, ",
+                "Al Paccino, ",
                 "James Caan"
             ],
             "reviews": [
-                "I did not care for The Godfather",
-                "Waste of 3 hours of my life",
+                "I did not care for The Godfather, ",
+                "Waste of 3 hours of my life, ",
                 "Best movie for boring people"
             ],
             "nowPlaying": false,
@@ -173,13 +173,13 @@
             "director": "John Carpenter",
             "producer": "Mr Producer",
             "cast": [
-                "Kurt Russell",
-                "Wilford Brimley",
-                "Keith David"
+                "Kurt Russell, ",
+                "Wilford Brimley, ",
+                "Keith David, "
             ],
             "reviews": [
-                "It's clobbering time",
-                "This is amongus",
+                "It's clobbering time, ",
+                "This is amongus, ",
                 "Good movie i guess"
             ],
             "nowPlaying": true,
@@ -216,13 +216,13 @@
             "director": "Jan de Bont",
             "producer": "Mr Producer",
             "cast": [
-                "Keanu Reeves",
-                "Dennis Hopper",
+                "Keanu Reeves, ",
+                "Dennis Hopper, ",
                 "Sandra Bullock"
             ],
             "reviews": [
-                "Good movie",
-                "I watched this at 2x speed",
+                "Good movie, ",
+                "I watched this at 2x speed, ",
                 "I personally would've slowed down."
             ],
             "nowPlaying": false,
@@ -259,13 +259,13 @@
             "director": "Steven Speilberg",
             "producer": "Mr Producer",
             "cast": [
-                "Sam Neill",
-                "Laura Dern",
+                "Sam Neill, ",
+                "Laura Dern, ",
                 "Jeff Goldblum"
             ],
             "reviews": [
-                "The book was worse",
-                "OMG! This has the guy from the mario movie",
+                "The book was worse, ",
+                "OMG! This has the guy from the mario movie, ",
                 "I'm getting tired of making these fake reviews"
             ],
             "nowPlaying": true,
@@ -302,13 +302,13 @@
             "director": "Shane Carruth",
             "producer": "Mr Producer",
             "cast": [
-                "Shane Carruth",
-                "David Sullivan",
+                "Shane Carruth, ",
+                "David Sullivan, ",
                 "Casey Gooden"
             ],
             "reviews": [
-                "I wish I could go back in time and watch that again",
-                "Almost as realistic as HotTub Time Machine 2",
+                "I wish I could go back in time and watch that again, ",
+                "Almost as realistic as HotTub Time Machine 2, ",
                 "10/10 does exist"
             ],
             "nowPlaying": false,
@@ -345,13 +345,13 @@
             "director": "Lino DiSalvo",
             "producer": "Mr Producer",
             "cast": [
-                "Anya Taylor-Joy",
-                "Jim Gaffigan",
+                "Anya Taylor-Joy, ",
+                "Jim Gaffigan, ",
                 "Gabriel Bateman"
             ],
             "reviews": [
-                "Glorified advert",
-                "Who says advert? Like, why?",
+                "Glorified advert, ",
+                "Who says advert? Like, why?, ",
                 "Loved the Tako Tuesday joke"
             ],
             "nowPlaying": true,
@@ -388,13 +388,13 @@
             "director": "David Zucker",
             "producer": "Mr Producer",
             "cast": [
-                "Leslie Nielsen",
-                "Priscilla Presley",
+                "Leslie Nielsen, ",
+                "Priscilla Presley, ",
                 "O.J. Simpson"
             ],
             "reviews": [
-                "That gun had no clothes on",
-                "Wow the title is so long",
+                "That gun had no clothes on, ",
+                "Wow the title is so long, ",
                 "Pew pew pew. Its a gun"
             ],
             "nowPlaying": false,
@@ -431,13 +431,13 @@
             "director": "Gore Verbinski",
             "producer": "Mr Producer",
             "cast": [
-                "Naomi Watts",
-                "Martin Henderson",
+                "Naomi Watts, ",
+                "Martin Henderson, ",
                 "Brian Cox"
             ],
             "reviews": [
-                "I haven't seen it",
-                "Quite spooky",
+                "I haven't seen it, ",
+                "Quite spooky, ",
                 "Rawr"
             ],
             "nowPlaying": true,
@@ -474,13 +474,13 @@
             "director": "George Lucas",
             "producer": "Mr Producer",
             "cast": [
-                "Hayden Christensen",
-                "Natalie Portman",
+                "Hayden Christensen, ",
+                "Natalie Portman, ",
                 "Ewan McGregor"
             ],
             "reviews": [
-                "Best Star War",
-                "Great ending to the series",
+                "Best Star War, ",
+                "Great ending to the series, ",
                 "I lost my legs in Vietnam. Great movie."
             ],
             "nowPlaying": false,
@@ -517,13 +517,13 @@
             "director": "Emerald Fennell",
             "producer": "Mr Producer",
             "cast": [
-                "Barry Keoghan",
-                "Jacob Elordi",
+                "Barry Keoghan, ",
+                "Jacob Elordi, ",
                 "Rosamund Pike"
             ],
             "reviews": [
-                "You should watch this",
-                "How did you trick me into watching this?!",
+                "You should watch this, ",
+                "How did you trick me into watching this?!, ",
                 "I can't really say that I liked this because then you'd think I was weird."
             ],
             "nowPlaying": false,
@@ -560,13 +560,13 @@
             "director": "Aaron Horvath",
             "producer": "Mr Producer",
             "cast": [
-                "Greg Cipes",
-                "Scott Menville",
+                "Greg Cipes, ",
+                "Scott Menville, ",
                 "Khary Payton"
             ],
             "reviews": [
-                "Best joke at the end",
-                "Best Teen Titans incarnation",
+                "Best joke at the end, ",
+                "Best Teen Titans incarnation, ",
                 "Teen Titans Go to the poles"
             ],
             "nowPlaying": false,
