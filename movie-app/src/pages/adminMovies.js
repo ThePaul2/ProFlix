@@ -12,13 +12,13 @@ const AdminMovies = () => {
         <div style={styles.content}>
           <h3 style={styles.subHeading}>
             Edit Movies
-            <Link to={`/edit-movie`} style={styles.addButton}>Add Movie</Link>
+            <Link to={`/edit-movie/new-movie`} style={styles.addButton}>Add Movie</Link>
           </h3>
           {/* Mapping through the movies array */}
           {data.movies.map(movie => (
             <div key={movie.id} className="mb-2 p-4 bg-white rounded-md shadow-md flex justify-between items-center hover:bg-red-300">
               <p className="flex-1 mr-4">{`id: ${movie.id} - ${movie.name}`}</p>
-              <Link to={`/edit-movie`} className="px-4 py-2 bg-green-500 rounded-md text-white hover:bg-green-600 transition duration-300 ease-in-out">Edit</Link>
+              <Link to={`/edit-movie/${encodeURIComponent(movie.id)}`} className="px-4 py-2 bg-green-500 rounded-md text-white hover:bg-green-600 transition duration-300 ease-in-out">Edit</Link>
             </div>
           ))}
         </div>
