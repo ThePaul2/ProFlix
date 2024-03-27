@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../components/Navbar'; // Assuming you have a Navbar component
 
-const EventsPage = () => {
+const Promos = () => {
   // Sample events data (you can replace it with your actual data)
   const events = [
     { id: 1, image: 'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/movie-theatre-poster-template-5c872c5ff28ad75b461b35f268379459_screen.jpg?ts=1636968444', title: 'Event 1', description: 'Watch a special Screening' },
@@ -78,5 +78,5 @@ const EventsPage = () => {
 	},
   };
   
-  export default EventsPage;
+  export default Promos;
   

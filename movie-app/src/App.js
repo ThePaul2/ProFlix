@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/home";
 import Movies from "./pages/movies";
+import Promos from "./pages/promos";
 import Rewards from "./pages/rewards";
 import Tickets from "./pages/tickets";
 import Login from "./pages/login";
@@ -31,8 +32,10 @@ function App() {
         <Route path="/adminMovies" element={<AdminMovies />} />
         <Route path="/adminUsers" element={<AdminUsers />} />
         <Route path="/adminPromo" element={<AdminPromo />} />
-        <Route path="/edit-movie" element={<EditMovie />} />
+        <Route path="/edit-movie/:id" element={<EditMovie />} />
         <Route path="/edit-promo" element={<EditPromo />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/promos" element={<Promos />} />
         <Route path="/rewards" element={<Rewards />} />
         <Route path="/tickets/:id" element={<Tickets />} />
         <Route path="/login" element={<Login />} />

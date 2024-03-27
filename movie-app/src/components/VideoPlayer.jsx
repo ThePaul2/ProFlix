@@ -1,5 +1,5 @@
 import React from "react";
-import Video from "../assets/video.mp4";
+import Video from "../assets/popcorn.mp4";
 import { FilmIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 
@@ -39,7 +39,7 @@ const VideoPlayer = () => {
             <span className="text-red-500 font-bold">Movies</span>
           </Link>
           <Link
-            to="/events"
+            to="/promos"
             className="rounded-full border border-red-500 p-3 px-6 hover:bg-white transition duration-300 ease-in-out"
           >
             <span className="text-red-500 font-bold">Promos</span>
