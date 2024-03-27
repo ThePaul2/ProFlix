@@ -13,7 +13,7 @@ const User = () => {
   };
 
   let myMovies = [];
-
+  // test
  
   for (let i = 0; i < 4; i++) {
     myMovies.push(movies[Math.floor(movies.length*Math.random())])
