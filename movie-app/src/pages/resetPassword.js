@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom'; // Import useNavigate
 import logo from '../assets/logo.png';
-import axios from 'axios';
+import { resetPasswordUser } from '../components/resetPasswordUser'; 
 
 export default function ResetPassword() {
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
-    const { userEmailAddress } = useParams(); // Get the user's email address from the URL params
+    const { email } = useParams(); // Extract the email address from the URL params
+    const navigate = useNavigate(); // Get the navigate function
 
     const handleChange = (e) => {
         setPassword(e.target.value);
@@ -14,14 +15,14 @@ export default function ResetPassword() {
 
     const handleForgotPassword = async () => {
         try {
-            const response = await axios.post(`http://localhost:8080/reset-password/${userEmailAddress}`, {
-                password: password
-            });
+            const response = await resetPasswordUser({ newPassword: password }, email); 
 
-            setMessage(response.data.message);
+            navigate('/login');
+            
+            setMessage(response.message);
         } catch (error) {
             console.error('Reset password error:', error.message);
-            setMessage('Failed to update password.');
+            setMessage(`Failed to update password for email: ${email}`);
         }
     };
 
