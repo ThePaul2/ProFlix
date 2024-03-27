@@ -16,13 +16,8 @@ export default function Signup({
         city: '',
         state: '',
         country: '',
-        streetAddress: '',
-        apartment: '',
-        cardNumber: '',
-        expirationDate: '',
-        cvn: '',
-        cardFirstName: '',
-        cardLastName: '',
+        street1: '',
+        street2: '',
         status: '0'
     });
 
@@ -40,23 +35,40 @@ export default function Signup({
             alert('Please enter all required fields.');
             return; 
         }
-
+    
         try {
-            const data = await signupUser(formData);
-            console.log('Signup successful:', data);
-
-            try {
-                const response = await axios.post('http://localhost:8080/users/confirmation', { email: formData.email });
-                console.log('Confirmation email sent:', response.data);
-            } catch (error) {
-                console.error('Failed to send confirmation email:', error);
+            // Check if the email already exists in the database
+            const emailExistsResponse = await axios.get(`http://localhost:8080/users/check-email/${formData.email}`);
+            const { exists } = emailExistsResponse.data;
+    
+            if (exists) {
+                alert('Email already exists.');
+                return;
             }
-           
-            navigate('/');
+    
+            // If email does not exist, proceed with signup
+            try {
+                const data = await signupUser(formData);
+                console.log('Signup successful:', data);
+    
+                try {
+                    const response = await axios.post('http://localhost:8080/users/confirmation', { email: formData.email });
+                    console.log('Confirmation email sent:', response.data);
+                } catch (error) {
+                    console.error('Failed to send confirmation email:', error);
+                }
+               
+                navigate('/');
+            } catch (error) {
+                console.error('Signup error:', error.message);
+            }
+    
         } catch (error) {
-            console.error('Signup error:', error.message);
+            console.error('Error checking email existence:', error.message);
+            alert('Error checking email existence. Please try again.');
         }
     };
+    
     
 
     return (
@@ -80,8 +92,8 @@ export default function Signup({
                         Billing and Payment Information (Optional) 
                     </div>
                     
-                    <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="text" name="streetAddress" value={formData.streetAddress} onChange={handleChange} placeholder="Street Address" />
-                    <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="text" name="apartment" value={formData.apartment} onChange={handleChange} placeholder="Apartment, suite, etc..." />
+                    <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="text" name="street1" value={formData.street1} onChange={handleChange} placeholder="Street Address" />
+                    <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="text" name="street2" value={formData.street2} onChange={handleChange} placeholder="Apartment, suite, etc..." />
                     <div className="flex">
                         <input className="text-sm w-1/2 px-4 py-2 border border-solid border-gray-300 rounded mt-4 mr-2" type="text" name="city" value={formData.city} onChange={handleChange} placeholder="City" required />
                         <input className="text-sm w-1/2 px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="text" name="state" value={formData.state} onChange={handleChange} placeholder="State" required />

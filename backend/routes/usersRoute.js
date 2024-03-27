@@ -249,6 +249,26 @@ router.get('/get-userid/:email', async (request, response) => {
   }
 });
 
+router.get('/check-email/:email', async (request, response) => {
+  try {
+    const { email } = request.params;
+
+    // Search for the user by email in the database
+    const user = await User.findOne({ email });
+
+    if (user) {
+      // Email exists in the database
+      return response.status(200).json({ exists: true });
+    } else {
+      // Email does not exist in the database
+      return response.status(200).json({ exists: false });
+    }
+  } catch (error) {
+    console.error(error);
+    return response.status(500).json({ message: 'Internal server error' });
+  }
+});
+
 
 
 
