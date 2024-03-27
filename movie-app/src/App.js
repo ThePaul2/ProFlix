@@ -21,10 +21,7 @@ import TicketConfirmation from "./pages/ticketConfirmation";
 import Showtimes from "./pages/showtimes";
 import ForgotPassword from "./pages/forgotPassword";
 import ResetPassword from "./pages/resetPassword";
-
-
-
-
+import Purchased from "./pages/purchased";
 
 function App() {
   return (
@@ -48,6 +45,7 @@ function App() {
         <Route path="/info/:id" element={<Info />} />
         <Route path="/users/:email" element={<User />} />
         <Route path="/confirmation" element={<Confirmation />} />
+        <Route path="/purchased" element={<Purchased />} />
         <Route path="/ticketconfirmation" element={<TicketConfirmation />} />
         <Route path="/showtimes" element={<Showtimes />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />

@@ -7,8 +7,7 @@
             "mpaa": "PG",
             "date": "2014",
             "rating": 10,
-            "description":
-                "An ordinary LEGO construction worker, thought to be the prophesied as \"special\", is recruited to join a quest to stop an evil tyrant from gluing the LEGO universe into eternal stasis.",
+            "description": "An ordinary LEGO construction worker, thought to be the prophesied as 'special', is recruited to join a quest to stop an evil tyrant from gluing the LEGO universe into eternal stasis.",
             "image": "https://upload.wikimedia.org/wikipedia/en/1/10/The_Lego_Movie_poster.jpg",
             "trailer": "https://www.youtube.com/embed/fZ_JOBCLF-I",
             "director": "Phil Lord",
@@ -16,7 +15,7 @@
             "cast": [
                 "Chris Pratt",
                 "Will Ferrell",
-                "Elizabeth banks"
+                "Elizabeth Banks"
             ],
             "reviews": [
                 "Omg this was life changing",
@@ -24,7 +23,24 @@
                 "Lego movie 2 was bad"
             ],
             "nowPlaying": true,
-            "comingSoon": false
+            "comingSoon": false,
+            "showtimes": [
+                {
+                    "date": "2024-03-30",
+                    "time": "3:00pm",
+                    "theaterNumber": 1
+                },
+                {
+                    "date": "2024-03-30",
+                    "time": "6:00pm",
+                    "theaterNumber": 2
+                },
+                {
+                    "date": "2024-03-31",
+                    "time": "2:00pm",
+                    "theaterNumber": 1
+                }
+            ]
         },
         {
             "id": "jf74ndhsi6ma9qng",
@@ -33,8 +49,7 @@
             "mpaa": "R",
             "date": "2023",
             "rating": 8.4,
-            "description":
-                "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
+            "description": "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
             "image": "https://upload.wikimedia.org/wikipedia/en/thumb/4/4a/Oppenheimer_%28film%29.jpg/220px-Oppenheimer_%28film%29.jpg",
             "trailer": "https://www.youtube.com/embed/uYPbbksJxIg",
             "director": "Christopher Nolan",
@@ -50,7 +65,19 @@
                 "Inspirational. I aspire to do what he did."
             ],
             "nowPlaying": false,
-            "comingSoon": true
+            "comingSoon": true,
+            "showtimes": [
+                {
+                    "date": "2024-03-30",
+                    "time": "9:00pm",
+                    "theaterNumber": 1
+                },
+                {
+                    "date": "2024-03-31",
+                    "time": "6:00pm",
+                    "theaterNumber": 3
+                }
+            ]
         },
         {
             "id": "fj5d84nc7djgl4dw",
@@ -59,8 +86,7 @@
             "mpaa": "R",
             "date": "1994",
             "rating": 9.3,
-            "description":
-                "Over the course of several years, two convicts form a friendship, seeking consolation and, eventually, redemption through basic compassion.",
+            "description": "Over the course of several years, two convicts form a friendship, seeking consolation and, eventually, redemption through basic compassion.",
             "image": "https://upload.wikimedia.org/wikipedia/en/8/81/ShawshankRedemptionMoviePoster.jpg",
             "trailer": "https://www.youtube.com/embed/NmzuHjWmXOc",
             "director": "Frank Darabont",
@@ -76,7 +102,19 @@
                 "Why was Morgan Freeman playing the Irish guy?"
             ],
             "nowPlaying": true,
-            "comingSoon": false
+            "comingSoon": false,
+            "showtimes": [
+                {
+                    "date": "2024-03-30",
+                    "time": "9:00pm",
+                    "theaterNumber": 2
+                },
+                {
+                    "date": "2024-03-31",
+                    "time": "4:00pm",
+                    "theaterNumber": 2
+                }
+            ]
         },
         {
             "id": "dj68dmcnv6352hdf",
@@ -102,7 +140,24 @@
                 "Best movie for boring people"
             ],
             "nowPlaying": false,
-            "comingSoon": true
+            "comingSoon": true,
+            "showtimes": [
+                {
+                    "date": "2024-03-30",
+                    "time": "3:00pm",
+                    "theaterNumber": 1
+                },
+                {
+                    "date": "2024-03-30",
+                    "time": "6:00pm",
+                    "theaterNumber": 2
+                },
+                {
+                    "date": "2024-03-31",
+                    "time": "2:00pm",
+                    "theaterNumber": 1
+                }
+            ]
         },
         {
             "id": "dk68v9fne4xk5nd7",
@@ -128,7 +183,24 @@
                 "Good movie i guess"
             ],
             "nowPlaying": true,
-            "comingSoon": false
+            "comingSoon": false,
+            "showtimes": [
+                {
+                    "date": "2024-03-30",
+                    "time": "3:00pm",
+                    "theaterNumber": 1
+                },
+                {
+                    "date": "2024-03-30",
+                    "time": "6:00pm",
+                    "theaterNumber": 2
+                },
+                {
+                    "date": "2024-03-31",
+                    "time": "2:00pm",
+                    "theaterNumber": 1
+                }
+            ]
         },
         {
             "id": "dm48chrnt7ahgmdi",
@@ -154,7 +226,24 @@
                 "I personally would've slowed down."
             ],
             "nowPlaying": false,
-            "comingSoon": true
+            "comingSoon": true,
+            "showtimes": [
+                {
+                    "date": "2024-03-30",
+                    "time": "3:00pm",
+                    "theaterNumber": 1
+                },
+                {
+                    "date": "2024-03-30",
+                    "time": "6:00pm",
+                    "theaterNumber": 2
+                },
+                {
+                    "date": "2024-03-31",
+                    "time": "2:00pm",
+                    "theaterNumber": 1
+                }
+            ]
         },
         {
             "id": "4mf8chd6sje743hd",
@@ -180,7 +269,24 @@
                 "I'm getting tired of making these fake reviews"
             ],
             "nowPlaying": true,
-            "comingSoon": false
+            "comingSoon": false,
+            "showtimes": [
+                {
+                    "date": "2024-03-30",
+                    "time": "3:00pm",
+                    "theaterNumber": 1
+                },
+                {
+                    "date": "2024-03-30",
+                    "time": "6:00pm",
+                    "theaterNumber": 2
+                },
+                {
+                    "date": "2024-03-31",
+                    "time": "2:00pm",
+                    "theaterNumber": 1
+                }
+            ]
         },
         {
             "id": "dmfjc84nfhdjtlif",
@@ -206,7 +312,24 @@
                 "10/10 does exist"
             ],
             "nowPlaying": false,
-            "comingSoon": true
+            "comingSoon": true,
+            "showtimes": [
+                {
+                    "date": "2024-03-30",
+                    "time": "3:00pm",
+                    "theaterNumber": 1
+                },
+                {
+                    "date": "2024-03-30",
+                    "time": "6:00pm",
+                    "theaterNumber": 2
+                },
+                {
+                    "date": "2024-03-31",
+                    "time": "2:00pm",
+                    "theaterNumber": 1
+                }
+            ]
         },
         {
             "id": "idmr7fhej4kslodc",
@@ -232,7 +355,24 @@
                 "Loved the Tako Tuesday joke"
             ],
             "nowPlaying": true,
-            "comingSoon": false
+            "comingSoon": false,
+            "showtimes": [
+                {
+                    "date": "2024-03-30",
+                    "time": "3:00pm",
+                    "theaterNumber": 1
+                },
+                {
+                    "date": "2024-03-30",
+                    "time": "6:00pm",
+                    "theaterNumber": 2
+                },
+                {
+                    "date": "2024-03-31",
+                    "time": "2:00pm",
+                    "theaterNumber": 1
+                }
+            ]
         },
         {
             "id": "dmfiejtudnctiondl",
@@ -258,7 +398,24 @@
                 "Pew pew pew. Its a gun"
             ],
             "nowPlaying": false,
-            "comingSoon": true
+            "comingSoon": true,
+            "showtimes": [
+                {
+                    "date": "2024-03-30",
+                    "time": "3:00pm",
+                    "theaterNumber": 1
+                },
+                {
+                    "date": "2024-03-30",
+                    "time": "6:00pm",
+                    "theaterNumber": 2
+                },
+                {
+                    "date": "2024-03-31",
+                    "time": "2:00pm",
+                    "theaterNumber": 1
+                }
+            ]
         },
         {
             "id": "itmeslftwantydsf",
@@ -284,7 +441,24 @@
                 "Rawr"
             ],
             "nowPlaying": true,
-            "comingSoon": false
+            "comingSoon": false,
+            "showtimes": [
+                {
+                    "date": "2024-03-30",
+                    "time": "3:00pm",
+                    "theaterNumber": 1
+                },
+                {
+                    "date": "2024-03-30",
+                    "time": "6:00pm",
+                    "theaterNumber": 2
+                },
+                {
+                    "date": "2024-03-31",
+                    "time": "2:00pm",
+                    "theaterNumber": 1
+                }
+            ]
         },
         {
             "id": "84jfnc72jdmfkc8a",
@@ -310,7 +484,24 @@
                 "I lost my legs in Vietnam. Great movie."
             ],
             "nowPlaying": false,
-            "comingSoon": true
+            "comingSoon": true,
+            "showtimes": [
+                {
+                    "date": "2024-03-30",
+                    "time": "3:00pm",
+                    "theaterNumber": 1
+                },
+                {
+                    "date": "2024-03-30",
+                    "time": "6:00pm",
+                    "theaterNumber": 2
+                },
+                {
+                    "date": "2024-03-31",
+                    "time": "2:00pm",
+                    "theaterNumber": 1
+                }
+            ]
         },
         {
             "id": "dj5mfyctwamf83jd",
@@ -336,7 +527,24 @@
                 "I can't really say that I liked this because then you'd think I was weird."
             ],
             "nowPlaying": false,
-            "comingSoon": false
+            "comingSoon": false,
+            "showtimes": [
+                {
+                    "date": "2024-03-30",
+                    "time": "3:00pm",
+                    "theaterNumber": 1
+                },
+                {
+                    "date": "2024-03-30",
+                    "time": "6:00pm",
+                    "theaterNumber": 2
+                },
+                {
+                    "date": "2024-03-31",
+                    "time": "2:00pm",
+                    "theaterNumber": 1
+                }
+            ]
         },
         {
             "id": "dmf83jdncghal92j",
@@ -362,7 +570,24 @@
                 "Teen Titans Go to the poles"
             ],
             "nowPlaying": false,
-            "comingSoon": false
+            "comingSoon": false,
+            "showtimes": [
+                {
+                    "date": "2024-03-30",
+                    "time": "3:00pm",
+                    "theaterNumber": 1
+                },
+                {
+                    "date": "2024-03-30",
+                    "time": "6:00pm",
+                    "theaterNumber": 2
+                },
+                {
+                    "date": "2024-03-31",
+                    "time": "2:00pm",
+                    "theaterNumber": 1
+                }
+            ]
         }
     ]
 }
