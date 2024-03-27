@@ -2,6 +2,7 @@ import express from 'express';
 import { PORT, mongoDBURL } from './config.js';
 import mongoose from 'mongoose';
 import usersRoute from './routes/usersRoute.js';
+import paymentsRoute from './routes/paymentsRoute.js';
 import dotenv from 'dotenv';
 import cors from 'cors';
 
@@ -24,6 +25,7 @@ app.get('/', async (request, response, next) => {
 });
 
 app.use('/users', usersRoute);
+app.use('/payments', paymentsRoute);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);

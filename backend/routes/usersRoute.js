@@ -19,12 +19,7 @@ router.post('/', async (request, response) => {
       street2,
       city,
       state,
-      cardNumber,
-      exp,
-      status,
-      CVN,
-      cardFirst,
-      cardLast
+      status
     } = request.body;
 
     // Log the received request body
@@ -33,8 +28,6 @@ router.post('/', async (request, response) => {
     // Hash sensitive fields
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const hashedCardNumber = cardNumber ? await bcrypt.hash(cardNumber.toString(), 10) : undefined;
-    const hashedCVN = CVN ? await bcrypt.hash(CVN.toString(), 10) : undefined;
 
     const newUser = await User.create({
       firstName,
@@ -46,12 +39,8 @@ router.post('/', async (request, response) => {
       street2,
       city,
       state,
-      cardNumber: hashedCardNumber,
-      exp,
       status,
-      CVN: hashedCVN,
-      cardFirst,
-      cardLast
+
     });
 
     return response.status(201).json(newUser);

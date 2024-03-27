@@ -18,6 +18,10 @@ const userSchema = mongoose.Schema({
         required: true,
         minlength: 4,
     },
+    status: {
+        type: Number,
+        trim: true,
+    },
     // New fields for password reset
     resetPasswordToken: {
         type: String,
@@ -47,32 +51,7 @@ const userSchema = mongoose.Schema({
     state: {
         type: String,
         trim: true,
-    },
-    cardNumber: {
-        type: String,
-        trim: true,
-        minlength: 16,
-    },
-    exp: {
-        type: Number,
-        trim: true,
-    },
-    status: {
-        type: Number,
-        trim: true,
-    },
-    CVN: {
-        type: String,
-        trim: true,
-    }, 
-    cardFirst: {
-        type: String,
-        trim: true,
-    },
-    cardLast: {
-        type: String,
-        trim: true,
-    },
+    }
 });
 
 export const User = mongoose.model('User', userSchema);
