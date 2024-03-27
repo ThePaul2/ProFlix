@@ -52,7 +52,7 @@ const User = () => {
         </div>
         <div className="text-white">
             <Link to={`/edit-profile/${email}`} className="block mb-2 font-bold hover:text-red-500">Edit Profile</Link>
-            <Link to="/my-tickets" className="block mb-2 font-bold hover:text-red-500">My Tickets</Link>
+            <Link to={`/edit-payments/${email}`} className="block mb-2 font-bold hover:text-red-500">Edit Payments</Link>
             <Link to="/past-tickets" className="block mb-2 font-bold hover:text-red-500">Past Tickets</Link>
             <Link to="/events" className="block mb-2 font-bold hover:text-red-500">Events</Link>
             <Link to="/newsletter" className="block mb-2 font-bold hover:text-red-500">Newsletter</Link>

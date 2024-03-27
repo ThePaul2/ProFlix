@@ -22,6 +22,7 @@ import Showtimes from "./pages/showtimes";
 import ForgotPassword from "./pages/forgotPassword";
 import ResetPassword from "./pages/resetPassword";
 import Purchased from "./pages/purchased";
+import EditPayments from "./pages/editPayments";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/edit-profile/:email" element={<EditProfile />} />
+        <Route path="/edit-payments/:email" element={<EditPayments />} />
         <Route path="/info/:id" element={<Info />} />
         <Route path="/users/:email" element={<User />} />
         <Route path="/confirmation" element={<Confirmation />} />

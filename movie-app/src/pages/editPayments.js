@@ -80,28 +80,18 @@ const EditProfile = () => {
 			>
 				<div className="bg-zinc-900 text-white font-bold leading-10 py-10 px-60 w-full h-fit">
 				<div className='flex justify-between items-center'>
-   					 <h1>Edit Profile</h1>
+   					 <h1>Edit Payments</h1>
     				<Link to='../users/:userId' className='bg-gray-500 hover:bg-red-500 px-2 rounded'>Back</Link>
 				</div>
 					<form onSubmit={handleSubmit}>
-						<label>
-							Password:
-							<input
-								type="password"
-								name="password"
-								value={userData.password}
-								onChange={handleChange}
-								style={{color: 'black'}}
-								className="border-2 border-neutral-200 rounded-xl px-4 py-2 w-full"
-							/>
-						</label>
+						<h1>Card Info</h1>
 						<label>
 							First Name:
 							<input
 								type="text"
-            					name="firstName"
-            					value={userData.firstName}
-            					onChange={handleChange}
+								name="cardFirst"
+								value={userData.cardFirst}
+								onChange={handleChange}
 								style={{color: 'black'}}
 								className="border-2 border-neutral-200 rounded-xl px-4 py-2 w-full"
 							/>
@@ -110,62 +100,46 @@ const EditProfile = () => {
 							Last Name:
 							<input
 								type="text"
-								name="lastName"
-								value={userData.lastName}
+								name="cardLast"
+								value={userData.cardLast}
 								onChange={handleChange}
 								style={{color: 'black'}}
 								className="border-2 border-neutral-200 rounded-xl px-4 py-2 w-full"
 							/>
 						</label>
-						<br />
-						<br />
-						<hr />
-						<h1>Billing Address</h1>
 						<label>
-							Street:
+							Card Number:
+							<input
+								type="password"
+								name="cardNumber"
+								value={userData.cardNumber}
+								onChange={handleChange}
+								style={{ color: 'black' }}
+								className="border-2 border-neutral-200 rounded-xl px-4 py-2 w-full"
+							/>
+						</label>
+						<label>
+							Expiration Date:
 							<input
 								type="text"
-            					name="street"
-            					value={userData.street1}
-            					onChange={handleChange}
+								name="exp"
+								value={userData.exp}
+								onChange={handleChange}
 								style={{color: 'black'}}
 								className="border-2 border-neutral-200 rounded-xl px-4 py-2 w-full"
 							/>
 						</label>
 						<label>
-							City:
+							CVN:
 							<input
-								type="text"
-            					name="city"
-            					value={userData.city}
-            					onChange={handleChange}
+								type="password"
+								name="CVN"
+								value={userData.CVN}
+								onChange={handleChange}
 								style={{color: 'black'}}
 								className="border-2 border-neutral-200 rounded-xl px-4 py-2 w-full"
 							/>
 						</label>
-						<label>
-							State:
-							<input
-								type="text"
-            					name="state"
-            					value={userData.state}
-            					onChange={handleChange}
-								style={{color: 'black'}}
-								className="border-2 border-neutral-200 rounded-xl px-4 py-2 w-full"
-							/>
-						</label>
-						<label>
-							Country:
-							<input
-								type="text"
-            					name="country"
-            					value={userData.country}
-            					onChange={handleChange}
-								style={{color: 'black'}}
-								className="border-2 border-neutral-200 rounded-xl px-4 py-2 w-full"
-							/>
-						</label>
-						
 						<br />
 						<br />
 						<button className="text-center rounded-xl border-neutral-200 border-2 px-4 py-4 w-full bg-red-400 text-xl font-semibold">Submit Changes</button>
