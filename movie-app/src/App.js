@@ -33,15 +33,15 @@ function App() {
         <Route path="/adminMovies" element={<AdminMovies />} />
         <Route path="/adminUsers" element={<AdminUsers />} />
         <Route path="/adminPromo" element={<AdminPromo />} />
-        <Route path="/edit-movie" element={<EditMovie />} />
-        <Route path="/edit-promo" element={<EditPromo />} />
+        <Route path="/edit-movie/:id" element={<EditMovie />} />
+        <Route path="/edit-promo/:id" element={<EditPromo />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/promos" element={<Promos />} />
         <Route path="/rewards" element={<Rewards />} />
         <Route path="/tickets/:id" element={<Tickets />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/edit-profile" element={<EditProfile />} />
+        <Route path="/edit-profile/:email" element={<EditProfile />} />
         <Route path="/info/:id" element={<Info />} />
         <Route path="/users/:email" element={<User />} />
         <Route path="/confirmation" element={<Confirmation />} />

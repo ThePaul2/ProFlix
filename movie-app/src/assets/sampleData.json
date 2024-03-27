@@ -589,5 +589,48 @@
                 }
             ]
         }
+    ],
+    
+    "promos": [
+        {
+            "id": 1,
+            "image": "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/movie-theatre-poster-template-5c872c5ff28ad75b461b35f268379459_screen.jpg?ts=1636968444",
+            "title": "Watch a Special Screening",
+            "description": "We make this movie experience extra special.",
+            "start_date": "1/13/2024",
+            "end_date": "4/13/2024"
+        },
+        {
+            "id": 2,
+            "image": "https://marketplace.canva.com/EAE37tOzCNk/1/0/1131w/canva-blue-illustration-movie-night-poster-SzakHZJYsGw.jpg",
+            "title": "Dress up Day",
+            "description": "Put on your coolest outfit and show up in style.",
+            "start_date": "2/19/2024",
+            "end_date": "5/3/2024"
+        },
+        {
+            "id": 3,
+            "image": "https://c8.alamy.com/comp/2GPG982/breakfast-at-tiffanys-movie-poster-now-showing-outside-of-theater-nyc-2GPG982.jpg",
+            "title": "Free for Kids",
+            "description": "Kids can watch free. Kids under the age of 12 must be accompanied by an adult.",
+            "start_date": "1/1/2024",
+            "end_date": "12/31/2024"
+        },
+        {
+            "id": 4,
+            "image": "https://shop.cinemashop.com/cdn/shop/products/gd-outdoor-290_290x.jpg?v=1559320347",
+            "title": "Neon Out",
+            "description": "Wear your coolest neon outfit for this fun-in-the-dark showing.",
+            "start_date": "1/1/2023",
+            "end_date": "1/1/2024"
+        },
+        {
+            "id": 5,
+            "image": "https://c8.alamy.com/comp/2ERTW8T/movie-night-poster-cinema-festival-night-event-in-movie-theater-vector-flyer-with-cartoon-illustration-of-people-in-cinema-hall-with-open-doors-and-red-rope-fence-2ERTW8T.jpg",
+            "title": "Bring a Date!",
+            "description": "Watch a romantic movie with a date on this special occasion.",
+            "start_date": "4/7/2024",
+            "end_date": "6/30/2024"
+        }
     ]
 }

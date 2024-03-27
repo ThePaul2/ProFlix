@@ -1,56 +1,77 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from "../components/NavbarUser";
 import axios from "axios";
+import { useParams } from 'react-router-dom';
 
 const EditProfile = () => {
-	const [userData, setUserData] = useState({
-		firstName: '',
-		lastName: '',
-		email: '',
-		country: '',
-		street1: '',
-		street2: '',
-		city: '',
-		state: '',
-		cardNumber: '',
-		exp: '',
-		CVN: '',
-		cardFirst: '',
-		cardLast: '',
-		password: ''
-	});
-	useEffect(() => {
-		// Fetch user data when the component mounts
-		fetchUserData();
-	  }, []);
+    let { email } = useParams();
+    const [userId, setUserId] = useState(null);
+    const [userData, setUserData] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        country: '',
+        street1: '',
+        street2: '',
+        city: '',
+        state: '',
+        cardNumber: '',
+        exp: '',
+        CVN: '',
+        cardFirst: '',
+        cardLast: '',
+        password: ''
+    });
 
-	  const fetchUserData = async () => {
-		try {
-		  const response = await axios.get('http://localhost:8080/users/660376bef1a8d044300881b4'); // Adjust the endpoint based on your API
-		  const { firstName, lastName, email, country, street1, street2, city, state, cardNumber, exp, CVN, cardFirst, cardLast } = response.data;
-		  setUserData({ firstName, lastName, email, country, street1, street2, city, state, cardNumber, exp, CVN, cardFirst, cardLast });
-		} catch (error) {
-		  console.error('Error fetching user data:', error);
-		}
-	  };
-	  const handleChange = (e) => {
-		const { name, value } = e.target;
-		setUserData(prevData => ({
-		  ...prevData,
-		  [name]: value,
-		}));
-	  };
-	
-	  const handleSubmit = async (e) => {
-		e.preventDefault();
-		try {
-		  await axios.put('http://localhost:8080/users/660376bef1a8d044300881b4', userData); // Adjust the endpoint based on your API
-		  alert('User data updated successfully!');
-		} catch (error) {
-		  console.error('Error updating user data:', error);
-		  alert('Failed to update user data');
-		}
-	  };
+    useEffect(() => {
+        fetchUserId();
+		   // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    const fetchUserId = async () => {
+        try {
+            const response = await axios.get(`http://localhost:8080/users/get-userid/${email}`);
+            setUserId(response.data.userId);
+        } catch (error) {
+            console.error('Error fetching user ID:', error);
+        }
+    };
+
+    useEffect(() => {
+        if (userId) {
+            fetchUserData();
+        }
+		   // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [userId]);
+
+    const fetchUserData = async () => {
+        try {
+            const response = await axios.get(`http://localhost:8080/users/${userId}`);
+            const { firstName, lastName, email, country, street1, street2, city, state, cardNumber, exp, CVN, cardFirst, cardLast } = response.data;
+            setUserData({ firstName, lastName, email, country, street1, street2, city, state, cardNumber, exp, CVN, cardFirst, cardLast });
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+        }
+    };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setUserData(prevData => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await axios.put(`http://localhost:8080/users/${userId}`, userData);
+            alert('User data updated successfully!');
+        } catch (error) {
+            console.error('Error updating user data:', error);
+            alert('Failed to update user data');
+        }
+    };
 	return (
 		<div>
 			<Navbar />
