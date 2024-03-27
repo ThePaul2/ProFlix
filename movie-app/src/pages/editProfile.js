@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from "../components/NavbarUser";
 import axios from "axios";
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const EditProfile = () => {
     let { email } = useParams();
@@ -79,7 +79,10 @@ const EditProfile = () => {
 				className="h-screen pt-16"
 			>
 				<div className="bg-zinc-900 text-white font-bold leading-10 py-10 px-60 w-full h-fit">
-					<h1>Edit Profile</h1>
+				<div className='flex justify-between items-center'>
+   					 <h1>Edit Profile</h1>
+    				<Link to='../users/:userId' className='bg-gray-500 hover:bg-red-500 px-2 rounded'>Back</Link>
+				</div>
 					<form onSubmit={handleSubmit}>
 						<label>
 							Password:
