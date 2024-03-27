@@ -202,10 +202,6 @@ router.get('/login/:email', async (request, response) => {
   }
 });
 
-
-
-
-
 export default router;
 
 

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from "../components/NavbarUser";
-import TextInput from "../components/TextInput";
 import axios from "axios";
 
 const EditProfile = () => {
@@ -27,7 +26,7 @@ const EditProfile = () => {
 
 	  const fetchUserData = async () => {
 		try {
-		  const response = await axios.get('http://localhost:8080/users/660326e8a037c7884cea4359'); // Adjust the endpoint based on your API
+		  const response = await axios.get('http://localhost:8080/users/660376bef1a8d044300881b4'); // Adjust the endpoint based on your API
 		  const { firstName, lastName, email, country, street1, street2, city, state, cardNumber, exp, CVN, cardFirst, cardLast } = response.data;
 		  setUserData({ firstName, lastName, email, country, street1, street2, city, state, cardNumber, exp, CVN, cardFirst, cardLast });
 		} catch (error) {
@@ -45,7 +44,7 @@ const EditProfile = () => {
 	  const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-		  await axios.put('http://localhost:8080/users/660326e8a037c7884cea4359', userData); // Adjust the endpoint based on your API
+		  await axios.put('http://localhost:8080/users/660376bef1a8d044300881b4', userData); // Adjust the endpoint based on your API
 		  alert('User data updated successfully!');
 		} catch (error) {
 		  console.error('Error updating user data:', error);

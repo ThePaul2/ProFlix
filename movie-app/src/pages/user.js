@@ -30,7 +30,6 @@ const User = () => {
         </div>
         <div className="text-white">
           <Link to="/edit-profile" className="block mb-2 font-bold hover:text-red-500">Edit Profile</Link>
-          <Link to="/edit-payment-info" className="block mb-2 font-bold hover:text-red-500">Edit Payment Info</Link>
           <Link to="/my-tickets" className="block mb-2 font-bold hover:text-red-500">My Tickets</Link>
           <Link to="/past-tickets" className="block mb-2 font-bold hover:text-red-500">Past Tickets</Link>
           <Link to="/events" className="block mb-2 font-bold hover:text-red-500">Events</Link>
