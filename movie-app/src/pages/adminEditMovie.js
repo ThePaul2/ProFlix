@@ -36,7 +36,7 @@ const EditMovie = () => {
 			}
 		}
 
-		show=true;
+		show = true;
 	}
 
 	return (

@@ -1,9 +1,35 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Navbar from "../components/NavbarAdmin";
 import TextInput from "../components/TextInput";
+import data from "../assets/sampleData.json";
 
-const editPromo = () => {
+const EditPromo = () => {
+	let { id } = useParams();
+	console.log(id);
+    let promos = data.promos;
+
+    let promo = {};
+	let show;
+	if (id == "new-movie") {
+		promo.id = "NEW_RANDOM_ID";
+		promo.image = "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/movie-theatre-poster-template-5c872c5ff28ad75b461b35f268379459_screen.jpg?ts=1636968444";
+		promo.title = "Special Day";
+		promo.description = "A special day";
+		promo.start_date = "3/20/2024";
+		promo.end_date = "5/5/2025";
+
+		show = false;
+	} else {
+		for (let i = 0; i < promos.length; i++) {
+			if (id == promos[i].id) {
+				promo = promos[i];
+			}
+		}
+
+		show = true;
+	}
+
 	return (
 		<div>
 			<Navbar />
@@ -22,9 +48,15 @@ const editPromo = () => {
 					</div>
 					
 					<br />
-					<TextInput name="Name" placeholder="Free Popcorn" />
+					<TextInput name="Title" placeholder={promo.title} show={show} />
 					<br />
-					<TextInput name="Time" placeholder="2023" />
+					<TextInput name="Image" placeholder={promo.image} show={show} />
+					<br />
+					<TextInput name="Description" placeholder={promo.description} show={show} />
+					<br />
+					<TextInput name="Start Date" placeholder={promo.start_date} show={show} />
+					<br />
+					<TextInput name="End Date" placeholder={promo.end_date} show={show} />
 					<hr />
 					<br />
 				
@@ -37,4 +69,4 @@ const editPromo = () => {
 	);
 };
 
-export default editPromo;
+export default EditPromo;
