@@ -1,52 +1,77 @@
 import express from 'express';
 import { User } from '../models/userModel.js';
+import { Payment } from '../models/paymentModel.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { sendResetPasswordEmail, sendRegistrationConfirmationEmail } from '../utils/emailService.js';
 
 const router = express.Router();
 
-// Route for saving a new User
-router.post('/', async (request, response) => {
+// Route for creating a new user
+router.post('/', async (req, res) => {
   try {
-    const {
-      firstName,
-      lastName,
-      email,
-      password,
-      country,
-      street1,
-      street2,
-      city,
-      state,
-      status
-    } = request.body;
+      // Extract user data from request body
+      const { firstName, lastName, email, password, country, street1, street2, city, state, status } = req.body;
 
-    // Log the received request body
-    console.log('Received request body:', request.body);
+      // Create a new user instance
+      const newUser = new User({
+          firstName,
+          lastName,
+          email,
+          password,
+          country,
+          street1,
+          street2,
+          city,
+          state,
+          status
+      });
 
-    // Hash sensitive fields
-    const hashedPassword = await bcrypt.hash(password, 10);
+      // Save the user to the database
+      const savedUser = await newUser.save();
 
-
-    const newUser = await User.create({
-      firstName,
-      lastName,
-      email,
-      password: hashedPassword,
-      country,
-      street1,
-      street2,
-      city,
-      state,
-      status,
-
-    });
-
-    return response.status(201).json(newUser);
+      res.status(201).json(savedUser); // Respond with the saved user object
   } catch (error) {
-    console.error(error);
-    return response.status(500).json({ message: 'Internal server error' });
+      res.status(400).json({ message: error.message }); // Handle error if any
+  }
+});
+
+// Route for creating a new payment for a user
+router.post('/:userId/payments', async (req, res) => {
+  try {
+      const { userId } = req.params; // Extract user ID from request params
+      const user = await User.findById(userId); // Find the user by ID
+
+      if (!user) {
+          return res.status(404).json({ message: 'User not found' });
+      }
+
+      // Extract payment data from request body
+      const { cardNumber, exp, CVN, cardFirst, cardLast } = req.body;
+
+      // Create a new payment instance
+      const newPayment = new Payment({
+          cardNumber,
+          exp,
+          CVN,
+          cardFirst,
+          cardLast,
+          userEmail: user.email // Assuming user's email is associated with the payment
+      });
+
+      // Save the new payment to the database
+      const savedPayment = await newPayment.save();
+
+      // Add the payment to the user's payments array
+      user.payments.push(savedPayment);
+
+      // Save the updated user to the database
+      await user.save();
+
+      res.status(201).json(savedPayment); // Respond with the created payment object
+  } catch (error) {
+      console.error(error);
+      res.status(400).json({ message: "Error adding payment" });
   }
 });
 

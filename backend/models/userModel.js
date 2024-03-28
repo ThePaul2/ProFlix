@@ -1,4 +1,6 @@
 import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
+import { Payment } from './paymentModel.js';
 
 const userSchema = mongoose.Schema({
     firstName: {
@@ -18,20 +20,6 @@ const userSchema = mongoose.Schema({
         required: true,
         minlength: 4,
     },
-    status: {
-        type: Number,
-        trim: true,
-    },
-    // New fields for password reset
-    resetPasswordToken: {
-        type: String,
-        default: null,
-    },
-    resetPasswordExpires: {
-        type: Date,
-        default: null,
-    },
-    // Existing fields
     country: {
         type: String,
         trim: true,
@@ -51,6 +39,41 @@ const userSchema = mongoose.Schema({
     state: {
         type: String,
         trim: true,
+    },
+    resetPasswordToken: {
+        type: String,
+        default: null,
+    },
+    resetPasswordExpires: {
+        type: Date,
+        default: null,
+    },
+    status: {
+        type: Number,
+        trim: true,
+    },
+    payments: {
+        type: [Payment.Schema],
+        validate: [paymentsLimit, '{PATH} exceeds the limit of 3']
+    }
+});
+
+function paymentsLimit(val) {
+    return val.length <= 3;
+}
+
+// Encrypt password before saving
+userSchema.pre('save', async function(next) {
+    const user = this;
+    if (!user.isModified('password')) return next();
+
+    try {
+        const salt = await bcrypt.genSalt(10);
+        const hash = await bcrypt.hash(user.password, salt);
+        user.password = hash;
+        next();
+    } catch (error) {
+        return next(error);
     }
 });
 
