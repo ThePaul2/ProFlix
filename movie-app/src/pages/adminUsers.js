@@ -36,13 +36,13 @@ const AdminDashboard = () => {
     <div className="bg-black min-h-screen">
       <NavbarAdmin />
       <div className="bg-black p-4 rounded-lg shadow-md font-sans max-w-4xl mx-auto">
-        <h2 className="text-2xl font-bold mb-4 text-gray-800">Welcome to Admin Dashboard</h2>
+        <h1 className="text-3xl font-bold mb-4 text-gray-800">Welcome to Admin Dashboard</h1>
         <div>
-          <h3 className="text-xl font-bold mb-2 text-gray-100">Users</h3>
+          <h1 className="text-3xl font-bold mb-2 text-gray-100">Users</h1>
           <ul className="list-none ">
             {recentUserActivity.map((user) => (
               <li key={user.id} className={myStyles.container}>
-                <div>
+                <div className="flex-1">
                   <span>{`User ${user.id} (${user.name}) - ${user.action}`}</span>
                   <br />
                   <span>{user.email}</span>

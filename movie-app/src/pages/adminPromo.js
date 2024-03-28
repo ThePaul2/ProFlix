@@ -15,11 +15,11 @@ const AdminPromo = () => {
   return (
     <div className="bg-black min-h-screen">
       <NavbarAdmin />
-      <div className="bg-black p-6 rounded-lg shadow-md font-sans max-w-screen-md mx-auto">
+      <div className="bg-black p-6 rounded-lg shadow-md font-sans max-w-4xl mx-auto">
         <h2 className="text-2xl font-bold mb-4 text-gray-800">Welcome to Admin Dashboard</h2>
         <div>
           <div className="flex flex-row w-full">
-            <h3 className="text-xl font-bold mb-2 text-gray-100">Promotions</h3>
+            <h1 className="text-3xl font-bold mb-2 text-gray-100">Promotions</h1>
             <div className="ml-auto">
               <Link to={`/edit-promo/new-movie`} className={myStyles.greenButton}>Add Promotion</Link>
             </div>

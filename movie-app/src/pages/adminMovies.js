@@ -4,25 +4,36 @@ import NavbarAdmin from '../components/NavbarAdmin';
 import data from "../assets/sampleData.json";
 
 const AdminMovies = () => {
+  const handleDeleteUser = (userId) => {
+    // Implement your delete user logic here
+    console.log(`Deleting user with ID: ${userId}`);
+  };
+
   return (
     <div className="bg-black min-h-screen">
       <NavbarAdmin />
-      <div style={styles.dashboard}>
+      <div className="bg-black p-4 rounded-lg shadow-md font-sans max-w-4xl mx-auto">
         <h2 style={styles.heading}>Welcome to Admin Dashboard</h2>
         <div style={styles.content}>
           <div className="flex flex-row w-full">
-            <h3 className="text-xl font-bold mb-2 text-gray-100">Movies</h3>
+            <h1 className="text-3xl font-bold mb-2 text-gray-100">Movies</h1>
             <div className="ml-auto">
               <Link to={`/edit-movie/new-movie`} className={myStyles.greenButton}>Add Movie</Link>
             </div>
           </div>
-          {/* Mapping through the movies array */}
+          <ul className="list-none">
           {data.movies.map(movie => (
-            <div key={movie.id} className={myStyles.container}>
-              <p className="flex-1 mr-4">{`id: ${movie.id} - ${movie.name}`}</p>
-              <Link to={`/edit-movie/${encodeURIComponent(movie.id)}`} className={myStyles.greenButton}>Edit</Link>
-            </div>
+            <li key={movie.id} className={myStyles.container}>
+              <div className="flex-1">
+                <span>{`id: ${movie.id} - ${movie.name}`}</span>
+              </div>
+              <div>
+                <Link to={`/edit-movie/${encodeURIComponent(movie.id)}`} className={myStyles.greenButton}>Edit</Link>
+                <button onClick={() => handleDeleteUser(movie.id)} className={myStyles.redButton}>Delete Movie</button>
+              </div>
+            </li>
           ))}
+          </ul>
         </div>
       </div>
     </div>
