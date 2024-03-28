@@ -59,16 +59,29 @@ const EditMovie = () => {
 					<br />
 					<TextInput name="Genre" placeholder={movie.genre} show={show} />
 					<br />
-					<TextInput name="Rating" placeholder={movie.rating} show={show} />
+					<TextInput name="MPAA Rating" placeholder={movie.mpaa} show={show} />
 					<br />
 					<TextInput name="Release Date" placeholder={movie.date} show={show} />
 					<br />
-					<TextInput name="Trailer Link" placeholder={movie.trailer} show={show} />
+					<TextInput name="Rating" placeholder={movie.rating} show={show} />
+					<br />
+					<TextInput name="Description" placeholder={movie.description} show={show} />
 					<br />
 					<TextInput name="Image" placeholder={movie.image} show={show} />
-					<hr />
 					<br />
-				
+					<TextInput name="Trailer Link" placeholder={movie.trailer} show={show} />
+					<br />
+					<TextInput name="Director" placeholder={movie.director} show={show} />
+					<br />
+					<TextInput name="Producer" placeholder={movie.producer} show={show} />
+					<br />
+					{/* NOTE TO SELF: Add add feature for list of cast */}
+					<TextInput name="Cast" placeholder={movie.cast} show={show} />
+					<br />
+					{/* NOTE TO SELF: Add add feature for list of reviews */}
+					<TextInput name="Reviews" placeholder={movie.reviews} show={show} />
+					<br />
+					<hr />
 					<br />
 					
 					<button className="text-center rounded-xl border-neutral-200 border-2 px-4 py-4 w-full bg-red-400 text-xl font-semibold">Submit Changes</button>
