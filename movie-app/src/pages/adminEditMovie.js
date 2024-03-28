@@ -1,14 +1,17 @@
 import React from "react";
+import * as ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { Link, useParams } from "react-router-dom";
 import Navbar from "../components/NavbarAdmin";
 import TextInput from "../components/TextInput";
 import data from "../assets/sampleData.json";
 
 const EditMovie = () => {
+	// Get Defaults
 	let { id } = useParams();
-	console.log(id);
     let movies = data.movies;
 
+	// Set default for new movie
     let movie = {};
 	let show;
 	if (id == "new-movie") {
@@ -37,6 +40,66 @@ const EditMovie = () => {
 		}
 
 		show = true;
+	}
+
+	// New input for cast or reviews
+	const NewInput = ({name, text, show}) => {
+		function deleteSelf(event) {
+			let parent = event.target.parentElement;
+			parent.remove();
+
+			let castI = movie.cast.indexOf(text);
+			let reviewI = movie.reviews.indexOf(text);
+			if (castI != -1) {
+				movie.cast.splice(castI, 1);
+			}
+			if (reviewI != -1) {
+				movie.reviews.splice(reviewI, 1);
+			}
+		}
+		return (
+			<div className="flex mb-2">
+				<TextInput name={name} placeholder={text} show={show} />
+				<button onClick={deleteSelf} className={myStyles.redButton}>Delete</button>
+			</div>
+		);
+	}
+
+	// Add new input for cast or reviews
+	function addItemTo(type) {
+		let parent;
+		let newName;
+		let list;
+		if (type == "cast") {
+			newName = "New Cast Member";
+			parent = "cast-container";
+
+			movie.cast.push(newName);
+			list = movie.cast;
+		} else if (type == "reviews") {
+			newName = "New Review";
+			parent = "review-container";
+
+			movie.reviews.push(newName);
+			list = movie.reviews;
+		}
+		let base = document.getElementById(parent);
+		let root = createRoot(base);
+
+		let elements = [];
+		for (let i = 0; i < list.length; i++) {
+			let show = true;
+			if (list[i] == newName) {
+				show = false;
+			}
+			elements.push(<NewInput name="" text={list[i]} show={show} />);
+		}
+		let newParent = React.createElement('div', {}, elements);
+		root.render(newParent);
+	}
+
+	function update() {
+		//
 	}
 
 	return (
@@ -75,11 +138,26 @@ const EditMovie = () => {
 					<br />
 					<TextInput name="Producer" placeholder={movie.producer} show={show} />
 					<br />
-					{/* NOTE TO SELF: Add add feature for list of cast */}
-					<TextInput name="Cast" placeholder={movie.cast} show={show} />
-					<br />
-					{/* NOTE TO SELF: Add add feature for list of reviews */}
-					<TextInput name="Reviews" placeholder={movie.reviews} show={show} />
+					<h1 className="font-semibold">Cast Members</h1>
+					<div id="cast-container">
+						<div>
+							{movie.cast.map(person => (
+								<NewInput name="" text={person} show={true} />
+							))}
+						</div>
+					</div>
+					<button onClick={() => addItemTo("cast")} className={myStyles.greenButton}>Add Cast Member</button>
+					<br /><br />
+					<h1 className="font-semibold">Reviews</h1>
+					<div id="review-container">
+						<div>
+							{movie.reviews.map(review => (
+								<NewInput name="" text={review} show={true} />
+							))}
+						</div>
+					</div>
+					<button onClick={() => addItemTo("reviews")} className={myStyles.greenButton}>Add Review</button>
+					<br /><br />
 					<br />
 					<hr />
 					<br />
@@ -92,3 +170,9 @@ const EditMovie = () => {
 };
 
 export default EditMovie;
+
+const myStyles = {
+	greenButton: "px-4 py-2 bg-green-500 rounded-md text-white hover:bg-green-600 transition duration-300 ease-in-out ml-3",
+	redButton: "px-4 py-2 bg-red-500 rounded-md text-white hover:bg-red-600 transition duration-300 ease-in-out ml-3",
+	container: "mb-2 p-4 bg-white rounded-md shadow-md flex justify-between items-center hover:bg-red-300",
+}

@@ -5,11 +5,24 @@ const TextInput = ({ name, placeholder, show=false }) => {
 	if (show) {
 		value = placeholder;
 	}
+	const NameLabel = () => {
+		if (name === "") {
+			return (
+				<div></div>
+			);
+		} else {
+			return (
+				<div>
+					<label className="font-semibold">{name}</label>
+    	       		<br />
+				</div>
+			);
+		}
+	}
 	return (
 		<div className="w-full leading-loose">
-            <label className="font-semibold">{name}</label>
-            <br />
-            <input type="text" placeholder={placeholder} value={value} className="w-full px-4 py-4 rounded-lg text-black"></input>
+			<NameLabel />
+            <input type="text" placeholder={placeholder} defaultValue={value} className="w-full px-4 py-4 rounded-lg text-black"></input>
       	</div>
   	)
 }
