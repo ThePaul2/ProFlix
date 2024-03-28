@@ -3,6 +3,12 @@ import { PORT, mongoDBURL } from './config.js';
 import mongoose from 'mongoose';
 import usersRoute from './routes/usersRoute.js';
 import paymentsRoute from './routes/paymentsRoute.js';
+
+import bookingRoute from './routes/bookingRoute.js';
+import movieRoute from './routes/movieRoute.js';
+import promoRoute from './routes/promoRoute.js';
+import roomRoute from './routes/roomRoute.js';
+import theatreRoute from './routes/theatreRoute.js';
 import dotenv from 'dotenv';
 import cors from 'cors';
 
@@ -26,6 +32,12 @@ app.get('/', async (request, response, next) => {
 
 app.use('/users', usersRoute);
 app.use('/payments', paymentsRoute);
+
+app.use('/booking', bookingRoute);
+app.use('/movie', movieRoute);
+app.use('/promo', promoRoute);
+app.use('/room', roomRoute);
+app.use('/theatre', theatreRoute);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
