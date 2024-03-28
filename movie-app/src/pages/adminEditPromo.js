@@ -57,9 +57,8 @@ const EditPromo = () => {
 					<TextInput name="Start Date" placeholder={promo.start_date} show={show} />
 					<br />
 					<TextInput name="End Date" placeholder={promo.end_date} show={show} />
-					<hr />
 					<br />
-				
+					<hr />
 					<br />
 					
 					<button className="text-center rounded-xl border-neutral-200 border-2 px-4 py-4 w-full bg-red-400 text-xl font-semibold">Submit Changes</button>
