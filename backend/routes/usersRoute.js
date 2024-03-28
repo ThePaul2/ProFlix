@@ -295,6 +295,30 @@ router.get('/check-email/:email', async (request, response) => {
 });
 
 
+router.post('/activate/:email', async (req, res) => {
+  const { email } = req.params;
+
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Update the user's status to 1
+    user.status = 0;
+    await user.save();
+
+    res.json({ message: 'Activated successful' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+
+
+
 
 
 

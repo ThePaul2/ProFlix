@@ -17,7 +17,7 @@ export default function Signup({
         country: '',
         street1: '',
         street2: '',
-        status: '0'
+        status: '1'
     });
 
     const navigate = useNavigate(); 
