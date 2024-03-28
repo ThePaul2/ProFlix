@@ -23,8 +23,8 @@ import ForgotPassword from "./pages/forgotPassword";
 import ResetPassword from "./pages/resetPassword";
 import Purchased from "./pages/purchased";
 import EditPayments from "./pages/editPayments";
-import ActivateUser from "./pages/activateUser";
 import CardInfoPage from "./pages/cardInfoPage";
+import ActivateUser from "./pages/activateUser";
 
 function App() {
   return (
