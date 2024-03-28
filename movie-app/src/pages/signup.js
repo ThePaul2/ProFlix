@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../assets/logo.png';
-import { signupUser } from '../components/signupUser'; 
 import axios from 'axios';
 
 export default function Signup({
@@ -48,17 +47,19 @@ export default function Signup({
     
             // If email does not exist, proceed with signup
             try {
-                const data = await signupUser(formData);
+                const response = await axios.post('http://localhost:8080/users', formData);
+                const data = response.data;
                 console.log('Signup successful:', data);
-    
+                localStorage.setItem('userId', data._id);
+                console.log(data._id);
                 try {
-                    const response = await axios.post('http://localhost:8080/users/confirmation', { email: formData.email });
-                    console.log('Confirmation email sent:', response.data);
+                    const confirmationResponse = await axios.post('http://localhost:8080/users/confirmation', { email: formData.email });
+                    console.log('Confirmation email sent:', confirmationResponse.data);
                 } catch (error) {
                     console.error('Failed to send confirmation email:', error);
                 }
-               
-                navigate('/');
+    
+                navigate('/card-info');
             } catch (error) {
                 console.error('Signup error:', error.message);
             }
@@ -68,8 +69,6 @@ export default function Signup({
             alert('Error checking email existence. Please try again.');
         }
     };
-    
-    
 
     return (
         <section className="bg-black h-screen flex flex-col md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center my-2 mx-5 md:mx-0 md:my-0">

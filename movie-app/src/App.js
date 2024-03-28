@@ -23,6 +23,7 @@ import ForgotPassword from "./pages/forgotPassword";
 import ResetPassword from "./pages/resetPassword";
 import Purchased from "./pages/purchased";
 import EditPayments from "./pages/editPayments";
+import CardInfoPage from "./pages/cardInfoPage";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
         <Route path="/tickets/:id" element={<Tickets />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/card-info" element={<CardInfoPage />} />
         <Route path="/edit-profile/:email" element={<EditProfile />} />
         <Route path="/edit-payments/:email" element={<EditPayments />} />
         <Route path="/info/:id" element={<Info />} />
