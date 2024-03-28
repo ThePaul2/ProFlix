@@ -81,7 +81,7 @@ const EditProfile = () => {
 				<div className="bg-zinc-900 text-white font-bold leading-10 py-10 px-60 w-full h-fit">
 				<div className='flex justify-between items-center'>
    					 <h1>Edit Profile</h1>
-    				<Link to='../users/:userId' className='bg-gray-500 hover:bg-red-500 px-2 rounded'>Back</Link>
+						<Link to={`../users/${email}`} className='bg-gray-500 hover:bg-red-500 px-2 rounded'>Back</Link>
 				</div>
 					<form onSubmit={handleSubmit}>
 						<label>
