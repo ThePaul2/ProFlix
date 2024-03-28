@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/home";
 import Movies from "./pages/movies";
 import Promos from "./pages/promos";
@@ -32,13 +33,13 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/movies" element={<Movies />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/adminMovies" element={<AdminMovies />} />
-        <Route path="/adminUsers" element={<AdminUsers />} />
+        <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
+        <Route path="/adminMovies" element={<ProtectedRoute><AdminMovies /></ProtectedRoute>} />
+        <Route path="/adminUsers" element={<ProtectedRoute><AdminUsers /></ProtectedRoute>} />
         <Route path="/adminPromo" element={<AdminPromo />} />
         <Route path="/edit-movie/:id" element={<EditMovie />} />
         <Route path="/edit-promo/:id" element={<EditPromo />} />
-        <Route path="/admin" element={<Admin />} />
+        <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
         <Route path="/promos" element={<Promos />} />
         <Route path="/rewards" element={<Rewards />} />
         <Route path="/tickets/:id" element={<Tickets />} />
