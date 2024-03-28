@@ -18,7 +18,7 @@ export default function Signup({
         country: '',
         street1: '',
         street2: '',
-        status: '0'
+        status: '1'
     });
 
     const navigate = useNavigate(); 
@@ -30,45 +30,45 @@ export default function Signup({
     };
 
     const handleSubmit = async () => {
-        if (formData.firstName.trim() === '' || formData.lastName.trim() === '' || formData.email.trim() === '' || formData.password.trim() === '') {
-            // If empty, display a pop-up or an error message
-            alert('Please enter all required fields.');
-            return; 
+    if (formData.firstName.trim() === '' || formData.lastName.trim() === '' || formData.email.trim() === '' || formData.password.trim() === '') {
+        // If empty, display a pop-up or an error message
+        alert('Please enter all required fields.');
+        return; 
+    }
+
+    try {
+        // Check if the email already exists in the database
+        const emailExistsResponse = await axios.get(`http://localhost:8080/users/check-email/${formData.email}`);
+        const { exists } = emailExistsResponse.data;
+
+        if (exists) {
+            alert('Email already exists.');
+            return;
         }
-    
+
+        // If email does not exist, proceed with signup
         try {
-            // Check if the email already exists in the database
-            const emailExistsResponse = await axios.get(`http://localhost:8080/users/check-email/${formData.email}`);
-            const { exists } = emailExistsResponse.data;
-    
-            if (exists) {
-                alert('Email already exists.');
-                return;
-            }
-    
-            // If email does not exist, proceed with signup
+            const data = await signupUser(formData);
+            console.log('Signup successful:', data);
+
             try {
-                const data = await signupUser(formData);
-                console.log('Signup successful:', data);
-    
-                try {
-                    const response = await axios.post('http://localhost:8080/users/confirmation', { email: formData.email });
-                    console.log('Confirmation email sent:', response.data);
-                } catch (error) {
-                    console.error('Failed to send confirmation email:', error);
-                }
-               
-                navigate('/');
+                const response = await axios.post('http://localhost:8080/users/confirmation', { email: formData.email });
+                console.log('Confirmation email sent:', response.data);
             } catch (error) {
-                console.error('Signup error:', error.message);
+                console.error('Failed to send confirmation email:', error);
             }
-    
+           
+            navigate('/');
         } catch (error) {
-            console.error('Error checking email existence:', error.message);
-            alert('Error checking email existence. Please try again.');
+            console.error('Signup error:', error.message);
         }
-    };
-    
+
+    } catch (error) {
+        console.error('Error checking email existence:', error.message);
+        alert('Error checking email existence. Please try again.');
+    }
+};
+
     
 
     return (

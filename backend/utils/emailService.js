@@ -40,6 +40,8 @@ async function sendResetPasswordEmail(email, resetToken) {
         to: email,
         subject: 'Registration Confirmation',
         html: `<p>You have successfully registered with E-Cinema. Welcome aboard!</p>`,
+        html: `<p>You have successfully registered with E-Cinema. Please verify your email to activate your account! Click <a href="http://localhost:3000/activate-user/${email}">here</a> to activate it.</p>`,
+
       };
   
       // Send email using Mailgun

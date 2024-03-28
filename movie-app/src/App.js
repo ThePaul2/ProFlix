@@ -23,6 +23,7 @@ import ForgotPassword from "./pages/forgotPassword";
 import ResetPassword from "./pages/resetPassword";
 import Purchased from "./pages/purchased";
 import EditPayments from "./pages/editPayments";
+import ActivateUser from "./pages/activateUser";
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
         <Route path="/showtimes" element={<Showtimes />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:email" element={<ResetPassword />} />
+        <Route path="/activate-user/:email" element={<ActivateUser />} />
       </Routes>
     </Router>
   );
