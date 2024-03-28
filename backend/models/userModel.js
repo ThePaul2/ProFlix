@@ -59,7 +59,7 @@ const userSchema = mongoose.Schema({
 });
 
 function paymentsLimit(val) {
-    return val.length <= 3;
+    return val.length <= 2;
 }
 
 // Encrypt password before saving

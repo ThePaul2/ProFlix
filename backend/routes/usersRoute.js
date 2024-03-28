@@ -75,6 +75,60 @@ router.post('/:userId/payments', async (req, res) => {
   }
 });
 
+// Route for getting a user's payments
+router.get('/:userId/payments', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Find all payments associated with the user
+    const payments = await Payment.find({ userEmail: user.email });
+
+    // Construct an array of payment objects with IDs included
+    const formattedPayments = payments.map(payment => ({
+      _id: payment._id,
+      cardNumber: payment.cardNumber,
+      exp: payment.exp,
+      CVN: payment.CVN,
+      cardFirst: payment.cardFirst,
+      cardLast: payment.cardLast
+    }));
+    console.log(formattedPayments);
+    return res.status(200).json({ payments: formattedPayments });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+// Update payment information
+router.put('/payments/:paymentId', async (req, res) => {
+  try {
+    const paymentId = req.params.paymentId;
+    const updatedPaymentData = req.body; // Assuming request body contains updated payment data
+    console.log('Updating payment with ID:', paymentId);
+    console.log('Updated payment data:', updatedPaymentData);
+
+    // Find the payment by ID and update it
+    const updatedPayment = await Payment.findByIdAndUpdate(paymentId, updatedPaymentData, { new: true });
+
+    if (!updatedPayment) {
+      console.log('Payment not found');
+      return res.status(404).json({ message: 'Payment not found' });
+    }
+
+    console.log('Payment updated successfully:', updatedPayment);
+    return res.status(200).json({ message: 'Payment updated successfully', payment: updatedPayment });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
 // Route for getting all users
 router.get('/', async (request, response) => {
   try {

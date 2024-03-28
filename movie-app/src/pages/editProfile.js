@@ -75,9 +75,7 @@ const EditProfile = () => {
 	return (
 		<div>
 			<Navbar />
-			<div
-				className="h-screen pt-16"
-			>
+			<div className="h-screen pt-16">
 				<div className="bg-zinc-900 text-white font-bold leading-10 py-10 px-60 w-full h-fit">
 				<div className='flex justify-between items-center'>
    					 <h1>Edit Profile</h1>
