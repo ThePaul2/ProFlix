@@ -32,37 +32,37 @@ const AdminDashboard = () => {
         <div>
           <h3 className="text-xl font-bold mb-2 text-gray-100">Recent User Activity</h3>
           <ul className="list-none">
-            <li className="mb-2 p-4 bg-white rounded-md shadow-md flex justify-between items-center transition duration-300 ease-in-out hover:bg-red-600 cursor-pointer">
+            <li className={myStyles.redButton}>
               <span>User 34863 - edited payment</span>
             </li>
-            <li className="mb-2 p-4 bg-white rounded-md shadow-md flex justify-between items-center transition duration-300 ease-in-out hover:bg-red-600 cursor-pointer">
+            <li className={myStyles.redButton}>
               <span>User 10134 - created an account</span>
             </li>
-            <li className="mb-2 p-4 bg-white rounded-md shadow-md flex justify-between items-center transition duration-300 ease-in-out hover:bg-red-600 cursor-pointer">
+            <li className={myStyles.redButton}>
               <span>User 2342 - booked Barbie</span>
             </li>
-            <li className="mb-2 p-4 bg-white rounded-md shadow-md flex justify-between items-center transition duration-300 ease-in-out hover:bg-red-600 cursor-pointer">
+            <li className={myStyles.redButton}>
               <span>User 232341 - changed their password</span>
             </li>
-            <li className="mb-2 p-4 bg-white rounded-md shadow-md flex justify-between items-center transition duration-300 ease-in-out hover:bg-red-600 cursor-pointer">
+            <li className={myStyles.redButton}>
               <span>User 09863 - edited payment</span>
             </li>
-            <li className="mb-2 p-4 bg-white rounded-md shadow-md flex justify-between items-center transition duration-300 ease-in-out hover:bg-red-600 cursor-pointer">
+            <li className={myStyles.redButton}>
               <span>User 102343 - added an avatar</span>
             </li>
-            <li className="mb-2 p-4 bg-white rounded-md shadow-md flex justify-between items-center transition duration-300 ease-in-out hover:bg-red-600 cursor-pointer">
+            <li className={myStyles.redButton}>
               <span>User 132485 - logged in</span>
             </li>
-            <li className="mb-2 p-4 bg-white rounded-md shadow-md flex justify-between items-center transition duration-300 ease-in-out hover:bg-red-600 cursor-pointer">
+            <li className={myStyles.redButton}>
               <span>User 23975- deleted their account</span>
             </li>
-            <li className="mb-2 p-4 bg-white rounded-md shadow-md flex justify-between items-center transition duration-300 ease-in-out hover:bg-red-600 cursor-pointer">
+            <li className={myStyles.redButton}>
               <span>User 382308 - changed their password</span>
             </li>
-            <li className="mb-2 p-4 bg-white rounded-md shadow-md flex justify-between items-center transition duration-300 ease-in-out hover:bg-red-600 cursor-pointer">
+            <li className={myStyles.redButton}>
               <span>User 967230 - changed their username</span>
             </li>
-            <li className="mb-2 p-4 bg-white rounded-md shadow-md flex justify-between items-center transition duration-300 ease-in-out hover:bg-red-600 cursor-pointer">
+            <li className={myStyles.redButton}>
               <span>User 286323 - edited payment</span>
             </li>
           </ul>
@@ -73,3 +73,8 @@ const AdminDashboard = () => {
 };
 
 export default AdminDashboard;
+
+const myStyles = {
+  greenButton: "px-4 py-2 bg-green-500 rounded-md text-white hover:bg-green-600 transition duration-300 ease-in-out ml-3",
+  redButton: "px-4 py-2 bg-red-500 rounded-md text-white hover:bg-red-600 transition duration-300 ease-in-out ml-3"
+}

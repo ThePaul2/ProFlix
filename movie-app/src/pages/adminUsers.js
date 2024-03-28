@@ -41,13 +41,13 @@ const AdminDashboard = () => {
           <h3 className="text-xl font-bold mb-2 text-gray-100">Users</h3>
           <ul className="list-none ">
             {recentUserActivity.map((user) => (
-              <li key={user.id} className="mb-4 bg-white rounded-lg shadow-md p-4 flex justify-between items-center hover:bg-red-300">
+              <li key={user.id} className={myStyles.container}>
                 <div>
                   <span>{`User ${user.id} (${user.name}) - ${user.action}`}</span>
                   <br />
                   <span>{user.email}</span>
                 </div>
-                <button onClick={() => handleDeleteUser(user.id)} className="px-4 py-2 bg-red-500 rounded text-white cursor-pointer transition duration-300 hover:bg-red-600">Delete User</button>
+                <button onClick={() => handleDeleteUser(user.id)} className={myStyles.redButton}>Delete User</button>
               </li>
             ))}
           </ul>
@@ -58,3 +58,9 @@ const AdminDashboard = () => {
 };
 
 export default AdminDashboard;
+
+const myStyles = {
+  greenButton: "px-4 py-2 bg-green-500 rounded-md text-white hover:bg-green-600 transition duration-300 ease-in-out ml-3",
+  redButton: "px-4 py-2 bg-red-500 rounded-md text-white hover:bg-red-600 transition duration-300 ease-in-out ml-3",
+  container: "mb-2 p-4 bg-white rounded-md shadow-md flex justify-between items-center hover:bg-red-300",
+}
