@@ -11,7 +11,7 @@ const router = express.Router();
 router.post('/', async (req, res) => {
   try {
       // Extract user data from request body
-      const { firstName, lastName, email, password, country, street1, street2, city, state, status } = req.body;
+      const { firstName, lastName, email, password, country, street1, street2, city, state, status,promo } = req.body;
 
       // Create a new user instance
       const newUser = new User({
@@ -24,7 +24,8 @@ router.post('/', async (req, res) => {
           street2,
           city,
           state,
-          status
+          status,
+          promo
       });
 
       // Save the user to the database
