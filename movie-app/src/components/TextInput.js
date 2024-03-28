@@ -1,6 +1,6 @@
 import React from 'react'
 
-const TextInput = ({ name, placeholder, show=false }) => {
+const TextInput = ({ name, placeholder, show=false, identifier="blank" }) => {
 	let value = "";
 	if (show) {
 		value = placeholder;
@@ -22,7 +22,7 @@ const TextInput = ({ name, placeholder, show=false }) => {
 	return (
 		<div className="w-full leading-loose">
 			<NameLabel />
-            <input type="text" placeholder={placeholder} defaultValue={value} className="w-full px-4 py-4 rounded-lg text-black"></input>
+            <input type="text" placeholder={placeholder} defaultValue={value} name={identifier} className="w-full px-4 py-4 rounded-lg text-black"></input>
       	</div>
   	)
 }

@@ -43,7 +43,7 @@ const EditMovie = () => {
 	}
 
 	// New input for cast or reviews
-	const NewInput = ({name, text, show}) => {
+	const NewInput = ({name, text, show, identifier}) => {
 		function deleteSelf(event) {
 			let parent = event.target.parentElement;
 			parent.remove();
@@ -59,7 +59,7 @@ const EditMovie = () => {
 		}
 		return (
 			<div className="flex mb-2">
-				<TextInput name={name} placeholder={text} show={show} />
+				<TextInput name={name} placeholder={text} show={show} identifier={identifier} />
 				<button onClick={deleteSelf} className={myStyles.redButton}>Delete</button>
 			</div>
 		);
@@ -67,6 +67,8 @@ const EditMovie = () => {
 
 	// Add new input for cast or reviews
 	function addItemTo(type) {
+		update();
+
 		let parent;
 		let newName;
 		let list;
@@ -89,17 +91,39 @@ const EditMovie = () => {
 		let elements = [];
 		for (let i = 0; i < list.length; i++) {
 			let show = true;
+			if (list[i] == "") {
+				list[i] = newName;
+			}
 			if (list[i] == newName) {
 				show = false;
 			}
-			elements.push(<NewInput name="" text={list[i]} show={show} />);
+			elements.push(<NewInput name="" text={list[i]} show={show}  identifier={"movie-" + type}/>);
 		}
 		let newParent = React.createElement('div', {}, elements);
 		root.render(newParent);
 	}
 
 	function update() {
-		//
+		let attributes = ["name", "genre", "mpaa", "date", "rating", "description", "image", "trailer", "director", "producer"];
+		for (let i = 0; i < attributes.length; i++) {
+			let sterm = "movie-" + attributes[i];
+			let list = document.getElementsByName(sterm);
+			let keyItem = list[0];
+
+			movie[attributes[i]] = keyItem.value;
+		}
+
+		let arrAttributes = ["cast", "reviews"];
+		for (let i = 0; i < arrAttributes.length; i++) {
+			let sterm = "movie-" + arrAttributes[i];
+			let list = document.getElementsByName(sterm);
+			let nin = [];
+			for (let j = 0; j < list.length; j++) {
+				nin.push(list[j].value);
+			}
+
+			movie[arrAttributes[i]] = nin;
+		}
 	}
 
 	return (
@@ -118,31 +142,31 @@ const EditMovie = () => {
 					</div>
 					
 					<br />
-					<TextInput name="Title" placeholder={movie.name} show={show} />
+					<TextInput name="Title" placeholder={movie.name} show={show} identifier="movie-name" />
 					<br />
-					<TextInput name="Genre" placeholder={movie.genre} show={show} />
+					<TextInput name="Genre" placeholder={movie.genre} show={show} identifier="movie-genre" />
 					<br />
-					<TextInput name="MPAA Rating" placeholder={movie.mpaa} show={show} />
+					<TextInput name="MPAA Rating" placeholder={movie.mpaa} show={show} identifier="movie-mpaa" />
 					<br />
-					<TextInput name="Release Date" placeholder={movie.date} show={show} />
+					<TextInput name="Release Date" placeholder={movie.date} show={show} identifier="movie-date" />
 					<br />
-					<TextInput name="Rating" placeholder={movie.rating} show={show} />
+					<TextInput name="Rating" placeholder={movie.rating} show={show} identifier="movie-rating" />
 					<br />
-					<TextInput name="Description" placeholder={movie.description} show={show} />
+					<TextInput name="Description" placeholder={movie.description} show={show} identifier="movie-description" />
 					<br />
-					<TextInput name="Image" placeholder={movie.image} show={show} />
+					<TextInput name="Image" placeholder={movie.image} show={show} identifier="movie-image" />
 					<br />
-					<TextInput name="Trailer Link" placeholder={movie.trailer} show={show} />
+					<TextInput name="Trailer Link" placeholder={movie.trailer} show={show} identifier="movie-trailer" />
 					<br />
-					<TextInput name="Director" placeholder={movie.director} show={show} />
+					<TextInput name="Director" placeholder={movie.director} show={show} identifier="movie-director" />
 					<br />
-					<TextInput name="Producer" placeholder={movie.producer} show={show} />
+					<TextInput name="Producer" placeholder={movie.producer} show={show} identifier="movie-producer" />
 					<br />
 					<h1 className="font-semibold">Cast Members</h1>
 					<div id="cast-container">
 						<div>
 							{movie.cast.map(person => (
-								<NewInput name="" text={person} show={true} />
+								<NewInput name="" text={person} show={true} identifier="movie-cast" />
 							))}
 						</div>
 					</div>
@@ -152,13 +176,12 @@ const EditMovie = () => {
 					<div id="review-container">
 						<div>
 							{movie.reviews.map(review => (
-								<NewInput name="" text={review} show={true} />
+								<NewInput name="" text={review} show={true} identifier="movie-reviews" />
 							))}
 						</div>
 					</div>
 					<button onClick={() => addItemTo("reviews")} className={myStyles.greenButton}>Add Review</button>
 					<br /><br />
-					<br />
 					<hr />
 					<br />
 					
