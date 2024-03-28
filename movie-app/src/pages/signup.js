@@ -21,13 +21,20 @@ export default function Signup({
     });
 
     const navigate = useNavigate(); 
-
+    const [message, setMessage] = useState('');
+    const [accountCreated, setAccountCreated] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
-
+    const handleNext = () => {
+        if (accountCreated) {
+            navigate('/card-info');
+        } else {
+            alert('Please create an account first.');
+        }
+    };
     const handleSubmit = async () => {
         if (formData.firstName.trim() === '' || formData.lastName.trim() === '' || formData.email.trim() === '' || formData.password.trim() === '') {
             // If empty, display a pop-up or an error message
@@ -58,8 +65,8 @@ export default function Signup({
                 } catch (error) {
                     console.error('Failed to send confirmation email:', error);
                 }
-    
-                navigate('/card-info');
+                setMessage('Press Next to add Payment Info. Check your email for account verification.');
+                setAccountCreated(true);
             } catch (error) {
                 console.error('Signup error:', error.message);
             }
@@ -98,16 +105,6 @@ export default function Signup({
                         <input className="text-sm w-1/2 px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="text" name="state" value={formData.state} onChange={handleChange} placeholder="State" required />
                     </div>
                     <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="text" name="country" value={formData.country} onChange={handleChange} placeholder="Country" />
-
-                    <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="text" name="cardNumber" value={formData.cardNumber} onChange={handleChange} placeholder="Card Number" />
-                    <div className="flex">
-                        <input className="text-sm w-1/2 px-4 py-2 border border-solid border-gray-300 rounded mt-4 mr-2" type="text" name="expirationDate" value={formData.expirationDate} onChange={handleChange} placeholder="Expiration Date" required />
-                        <input className="text-sm w-1/2 px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="text" name="cvn" value={formData.cvn} onChange={handleChange} placeholder="CVN" required />
-                    </div>
-                    <div className="flex">
-                        <input className="text-sm w-1/2 px-4 py-2 border border-solid border-gray-300 rounded mt-4 mr-2" type="text" name="cardFirstName" value={formData.cardFirstName} onChange={handleChange} placeholder="First Name on Card" required />
-                        <input className="text-sm w-1/2 px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="text" name="cardLastName" value={formData.cardLastName} onChange={handleChange} placeholder="Last Name on Card" required />
-                    </div>
                 </div>
                 <div className="mt-4 font-semibold text-sm text-slate-500 text-center md:text-left">
                     <label className="text-red-600">* Required</label>
@@ -120,11 +117,13 @@ export default function Signup({
                     <Link className="text-red-600 hover:text-red-700 hover:underline hover:underline-offset-4" to="/forgot-password">Need Help?</Link>
                 </div>
                 <div className="text-center md:text-left my-1">
-                    <button className="mt-6 bg-red-600 hover:bg-red-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider" onClick={handleSubmit}>Create Account</button>
+                    <button className="mt-6 mr-4 bg-red-600 hover:bg-red-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider" onClick={handleSubmit}>Create Account</button>
+                    <button className="mt-6 bg-red-600 hover:bg-red-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider" onClick={handleNext}>Next</button>
                 </div>
                 <div className="mt-4 font-semibold text-sm text-slate-500 text-center md:text-left">
                     Already have an account? <Link className="text-red-600 hover:underline hover:underline-offset-4" to="/login">Login</Link>
                 </div>
+                {message && <p className="font-semibold text-red-600">{message}</p>}
             </div>
         </section>
     )
