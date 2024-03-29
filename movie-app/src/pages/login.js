@@ -25,12 +25,14 @@ export default function Login({ setUser, setAuthState }) {
 
       if (passwordMatch && status === 0) {
         // Password matches and account is active, navigate to /users/login/:email
+        localStorage.setItem('userRole', 'user');
         navigate(`/users/${email}`);
       } else if (status === 1) {
         // Account is inactive, show pop-up message
         setError('Your account is inactive. Please contact support.');
       } else if (passwordMatch && status === 2) {
         // Password matches and account is admin, navigate to admin page
+        localStorage.setItem('userRole', 'admin');
         navigate(`/admin`);
       } else {
         // Password or status don't match, handle the error (e.g., show a message to the user)
