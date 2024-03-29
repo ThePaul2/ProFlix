@@ -17,7 +17,8 @@ export default function Signup({
         country: '',
         street1: '',
         street2: '',
-        status: '1'
+        status: '1',
+        promo: false
     });
 
     const navigate = useNavigate(); 
@@ -25,9 +26,19 @@ export default function Signup({
     const [accountCreated, setAccountCreated] = useState(false);
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        const { name, value, type, checked } = e.target;
+
+        if (type === 'checkbox') {
+            setFormData({ ...formData, [name]: checked });
+        } else {
+            setFormData({ ...formData, [name]: value });
+        }
     };
+       
+    
+    
+    
+
     const handleNext = () => {
         if (accountCreated) {
             navigate('/card-info');
@@ -110,10 +121,16 @@ export default function Signup({
                     <label className="text-red-600">* Required</label>
                 </div>
                 <div className="mt-4 flex justify-between font-semibold text-sm">
-                    <label className="flex text-slate-500 hover:text-slate-600 cursor-pointer">
-                        <input className="mr-1" type="checkbox" />
-                        <span>Register for Promotion</span>
-                    </label>
+                <label className="flex text-slate-500 hover:text-slate-600 cursor-pointer">
+                    <input 
+                        className="mr-1" 
+                        type="checkbox" 
+                        name="promo"
+                        value={formData.promo}
+                        onChange={handleChange} 
+                    />
+                    <span>Register for Promotion</span>
+                </label>
                     <Link className="text-red-600 hover:text-red-700 hover:underline hover:underline-offset-4" to="/forgot-password">Need Help?</Link>
                 </div>
                 <div className="text-center md:text-left my-1">

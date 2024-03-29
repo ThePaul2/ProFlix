@@ -55,6 +55,9 @@ const userSchema = mongoose.Schema({
     payments: {
         type: [Payment.Schema],
         validate: [paymentsLimit, '{PATH} exceeds the limit of 3']
+    },
+    promo: {
+        type: Boolean
     }
 });
 
