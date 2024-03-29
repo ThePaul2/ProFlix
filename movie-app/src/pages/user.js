@@ -44,18 +44,16 @@ const User = () => {
       <Navbar />
       <div className="w-full md:w-1/3 p-4 bg-black flex flex-col">
         <div className="flex flex-col items-center mb-32">
-            <img src={userPhotoUrl} alt="User" className="w-48 h-48 rounded-full mb-4 mt-32" />
+            <img src={userPhotoUrl} alt="User" className="w-48 h-48 rounded-full mb-4 mt-16" />
             <button onClick={handlePhotoChange} className="bg-gray-500 hover:bg-red-500 p-2 rounded">Change Photo</button>
         </div>
         <div className='flex justify-center items-center'>
-          <p className='text-white mb-32 text-4xl'>Hello, {email}!</p>
+          <p className='text-white mb-24 text-4xl'>Hello, {email}!</p>
         </div>
         <div className="text-white">
             <Link to={`/edit-profile/${email}`} className="block mb-2 font-bold hover:text-red-500">Edit Profile</Link>
             <Link to={`/edit-payments/${email}`} className="block mb-2 font-bold hover:text-red-500">Edit Payments</Link>
-            <Link to="/past-tickets" className="block mb-2 font-bold hover:text-red-500">Past Tickets</Link>
-            <Link to="/events" className="block mb-2 font-bold hover:text-red-500">Events</Link>
-            <Link to="/newsletter" className="block mb-2 font-bold hover:text-red-500">Newsletter</Link>
+            <Link to="/past-tickets" className="block mb-2 font-bold hover:text-red-500">My Tickets</Link>
             <hr className="border-white my-4" />
             <Link to="/contact-faqs" className="block font-bold hover:text-red-500">Contact - FAQs</Link>
           </div>
