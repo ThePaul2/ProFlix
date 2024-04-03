@@ -1,30 +1,125 @@
+import React, { useState, useEffect } from 'react';
+import NavbarAdmin from '../components/NavbarAdmin';
+import axios from "axios";
+import { Link, useParams } from 'react-router-dom';
+
+const AdminDashboard = () => {
+  
+  const [users, setUsers] = useState([]); // Initialize users state as an empty array
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
+  const fetchUserData = async () => {
+    try {
+        const response = await axios.get(`http://localhost:8080/users/`);
+        const userData = response.data.data; // Access the 'data' array from the response
+        console.log('User Data:', userData); // Add this line to log user data
+        setUsers(userData); // Set the state variable with fetched user data
+    } catch (error) {
+        console.error('Error fetching user data:', error);
+    }
+  };
+
+  const handleDeleteUser = async (userId) => {
+    try {
+        await axios.delete(`http://localhost:8080/users/${userId}`);
+        console.log(`User with ID ${userId} deleted successfully.`);
+        // After successful deletion, fetch updated user data
+        fetchUserData();
+    } catch (error) {
+        console.error(`Error deleting user with ID ${userId}:`, error);
+    }
+  };
+
+  return (
+    <div className="bg-black min-h-screen">
+      <NavbarAdmin />
+      <div className="bg-black p-4 rounded-lg shadow-md font-sans max-w-4xl mx-auto">
+        <h1 className="text-3xl font-bold mb-4 text-gray-800">Welcome to Admin Dashboard</h1>
+        <div>
+          <h1 className="text-3xl font-bold mb-2 text-gray-100">Users</h1>
+          <ul className="list-none ">
+            {users.map((user) => (
+              <li key={user._id} className={myStyles.container}>
+                <div className="flex-1">
+                  <span>{`${user.firstName} ${user.lastName}`}</span>
+                  <br />
+                  <span>Email: {user.email}</span>
+                  <br />
+                  <span>Status: {getStatusLabel(user.status)}</span>
+                  <br />
+                  <span>User ID: {user._id}</span>
+                </div>
+                {shouldShowDeleteButton(user.status) && (
+                  <button onClick={() => handleDeleteUser(user._id)} className={myStyles.redButton}>Delete User</button>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const getStatusLabel = (status) => {
+  switch (status) {
+    case 0:
+      return 'Active';
+    case 1:
+      return 'Inactive';
+    case 2:
+      return 'Admin';
+    default:
+      return 'Unknown';
+  }
+};
+
+const shouldShowDeleteButton = (status) => {
+  return status !== 2; // Show delete button for users with status other than 2 
+};
+
+export default AdminDashboard;
+
+const myStyles = {
+  greenButton: "px-4 py-2 bg-green-500 rounded-md text-white hover:bg-green-600 transition duration-300 ease-in-out ml-3",
+  redButton: "px-4 py-2 bg-red-500 rounded-md text-white hover:bg-red-600 transition duration-300 ease-in-out ml-3",
+  container: "mb-2 p-4 bg-white rounded-md shadow-md flex justify-between items-center hover:bg-red-300",
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
 import React from 'react';
 import NavbarAdmin from '../components/NavbarAdmin';
 
 const AdminDashboard = () => {
+  
   const recentUserActivity = [
-    { id: 34863, name: 'John Doe', email: 'john@gmail.com', action: 'Since: 2021' },
-    { id: 10134, name: 'Jane Smith', email: 'jane2@gmail.com', action: 'Since: 2009' },
-    { id: 98765, name: 'Emily Davis', email: 'emilyiscool@gmail.com', action: 'Since: 2017' },
-    { id: 45678, name: 'Michael Wilson', email: 'michael123@gmail.com', action: 'Since: 2013' },
-    { id: 17223, name: 'Sarah Thompson', email: 'sarahisawesom@gmail.com', action: 'Since: 2012' },
-    { id: 77890, name: 'David Martinez', email: 'david@gmail.com', action: 'Since: 2020' },
-    { id: 57534, name: 'Sophia Taylor', email: 'sophia@gmail.com', action: 'Since: 2016' },
-    { id: 43444, name: 'James Rodriguez', email: 'jamesrpd@gmail.com', action: 'Since: 2019' },
-    { id: 36783, name: 'Olivia Hernandez', email: 'olivia@gmail.com', action: 'Since: 2014' },
-    { id: 22672, name: 'Daniel Gonzalez', email: 'daniel@gmail.com', action: 'Since: 2011' },
-    { id: 60856, name: 'Isabella Lopez', email: 'isabellalopez@gmail.com', action: 'Since: 2010' },
-    { id: 93277, name: 'William Perez', email: 'william@gmail.com', action: 'Since: 2018' },
-    { id: 71357, name: 'Ethan Adams', email: 'ethan@gmail.com', action: 'Since: 2015' },
-    { id: 82358, name: 'Mia Baker', email: 'mia@gmail.com', action: 'Since: 2012' },
-    { id: 12321, name: 'Alexander Rivera', email: 'alexander@gmail.com', action: 'Since: 2021' },
-    { id: 28972, name: 'Charlotte Wright', email: 'charlotte@gmail.com', action: 'Since: 2013' },
-    { id: 34653, name: 'Matthew Clark', email: 'matthew@gmail.com', action: 'Since: 2014' },
-    { id: 45675, name: 'Ava Lewis', email: 'ava@gmail.com', action: 'Since: 2017' },
-    { id: 59505, name: 'Jackson Lee', email: 'jacksoniscool@gmail.com', action: 'Since: 2016' },
-    { id: 67126, name: 'Amelia King', email: 'amelia@gmail.com', action: 'Since: 2019' },
-    { id: 70317, name: 'Logan Scott', email: 'loganisfunny@gmail.com', action: 'Since: 2020' },
-    { id: 80128, name: 'Abigail Hall', email: 'abigail@gmail.com', action: 'Since: 2018' }
+    { id: 34863, name: 'John Doe', email: 'john@gmail.com'},
+    { id: 10134, name: 'Jane Smith', email: 'jane2@gmail.com' },
+    { id: 98765, name: 'Emily Davis', email: 'emilyiscool@gmail.com'}
   ];
 
   const handleDeleteUser = (userId) => {
@@ -43,7 +138,7 @@ const AdminDashboard = () => {
             {recentUserActivity.map((user) => (
               <li key={user.id} className={myStyles.container}>
                 <div className="flex-1">
-                  <span>{`User ${user.id} (${user.name}) - ${user.action}`}</span>
+                  <span>{`${user.name} - User ${user.id} `}</span>
                   <br />
                   <span>{user.email}</span>
                 </div>
@@ -64,3 +159,5 @@ const myStyles = {
   redButton: "px-4 py-2 bg-red-500 rounded-md text-white hover:bg-red-600 transition duration-300 ease-in-out ml-3",
   container: "mb-2 p-4 bg-white rounded-md shadow-md flex justify-between items-center hover:bg-red-300",
 }
+
+*/
