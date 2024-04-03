@@ -37,7 +37,7 @@ function EditPayment() {
 
     fetchPayments();
   }, [userId]);
-  //test
+  
   const handlePaymentChange = (e) => {
     const { value } = e.target;
     if (value === "new") {
