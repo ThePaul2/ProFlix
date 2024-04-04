@@ -5,12 +5,12 @@ const movieSchema = mongoose.Schema({
         type: String,
         required: true, 
     },
-    category: {
+    genre: {
         type: String,
         required: true, 
     },
     cast:{
-        type: String,
+        type: [String],
         required: true,
     },
     director:{
@@ -25,10 +25,6 @@ const movieSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    review:{
-        type: String,
-        trim: true,
-    },
     trailer:{
         type: String,
         required: true,
@@ -38,14 +34,14 @@ const movieSchema = mongoose.Schema({
         required: true,
     },
     rating:{
-        type: Number,
-        trim: true,
+        type: String,
+        enum: ['G', 'PG', 'PG-13', 'R'],
     },
-    date:{
-        type: Number,
+    releaseDate:{
+        type: Date,
         required: true,
     },
-    time:{
+    duration:{
         type: Number,
         required: true,
     }

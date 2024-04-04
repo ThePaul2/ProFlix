@@ -67,4 +67,25 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
+// Route to get all movies in a specific genre
+router.get('/movies/:genre', async (req, res) => {
+    try {
+      const { genre } = req.params;
+  
+      // Find all movies with the specified genre
+      const movies = await Movie.find({ genre });
+  
+      // Check if any movies are found
+      if (movies.length === 0) {
+        return res.status(404).json({ message: 'No movies found in this genre.' });
+      }
+  
+      // If movies are found, return them
+      res.status(200).json(movies);
+    } catch (error) {
+      console.error('Error retrieving movies by genre:', error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  });
+  
 export default router;
