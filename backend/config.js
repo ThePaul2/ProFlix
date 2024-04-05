@@ -1,3 +1,3 @@
 export const PORT = 8080;
 
-export const mongoDBURL = 'mongodb+srv://ecinemaUser:TDYnCChwJfCQ1CUj@atlascluster.w8s7ltx.mongodb.net/?retryWrites=true&w=majority&appName=AtlasCluster'
+export const mongoDBURL = 'mongodb+srv://dbUser:d9r2NjuN14bfH3Np@atlascluster.w8s7ltx.mongodb.net/?retryWrites=true&w=majority&appName=CESDatabase'

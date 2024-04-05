@@ -1,17 +1,34 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import MovieSlider from "../components/MovieSlider";
-import data from "../assets/sampleData.json";
 import VideoPlayer from "../components/VideoPlayer";
 import SearchBar from "../components/HomeSearchbar";
 
 const Home = () => {
-  let movies = data.movies;
+  const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
+  const [comingSoonMovies, setComingSoonMovies] = useState([]);
 
-  // Filter movies based on "nowPlaying" and "comingSoon" properties
-  const nowPlayingMovies = movies.filter(movie => movie.nowPlaying);
-  const comingSoonMovies = movies.filter(movie => movie.comingSoon);
+  useEffect(() => {
+    // Fetch now playing movies
+    axios.get('http://localhost:8080/movie/now-playing')
+      .then(response => {
+        setNowPlayingMovies(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching now playing movies:', error);
+      });
+
+    // Fetch coming soon movies
+    axios.get('http://localhost:8080/movie/coming-soon')
+      .then(response => {
+        setComingSoonMovies(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching coming soon movies:', error);
+      });
+  }, []);
 
   return (
     <div className="bg-gray-800 min-h-screen"> 

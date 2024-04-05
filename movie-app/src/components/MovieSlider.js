@@ -25,30 +25,27 @@ const MovieSlider = ({ header, movies }) => {
   }, []);
 
   const slideLeft = () => {
-    if (firstVisibleIndex === 0) {
-      setFirstVisibleIndex(movies.length - numVisibleCards);
-    } else {
-      setFirstVisibleIndex(prevIndex => Math.max(prevIndex - 1, 0));
-    }
+    // Calculate the index for sliding left
+    const newIndex = (firstVisibleIndex - 1 + movies.length) % movies.length;
+    setFirstVisibleIndex(newIndex);
   };
 
   const slideRight = () => {
-    if (firstVisibleIndex === movies.length - numVisibleCards) {
-      setFirstVisibleIndex(0);
-    } else {
-      setFirstVisibleIndex(prevIndex => Math.min(prevIndex + 1, movies.length - numVisibleCards));
-    }
+    // Calculate the index for sliding right
+    const newIndex = (firstVisibleIndex + 1) % movies.length;
+    setFirstVisibleIndex(newIndex);
   };
 
   return (
     <div className='my-14'>
       <h2 className="text-3xl font-bold text-white mb-4">{header}</h2>
       <div className='relative overflow-hidden'>
-        <div ref={sliderRef} className='flex flex-nowrap ml-6'>
-          {[...movies.slice(firstVisibleIndex), ...movies.slice(0, firstVisibleIndex)].map((item, index) => (
+        <div ref={sliderRef} className='flex ml-6' style={{ transform: `translateX(-${firstVisibleIndex * cardWidth}px)`, transition: 'transform 0.5s ease' }}>
+          {/* Render each movie card */}
+          {movies.map((movie, index) => (
             <MovieCard
-              key={index}
-              movie={item}
+              key={movie.id} // Ensure each card has a unique key
+              movie={movie} // Pass movie data to MovieCard component
               style={{ width: `${cardWidth}px`, marginRight: '1rem' }}
             />
           ))}

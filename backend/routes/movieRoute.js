@@ -25,6 +25,26 @@ router.get('/', async (req, res) => {
     }
 });
 
+// Route to get movies that are now playing
+router.get('/now-playing', async (req, res) => {
+    try {
+        const nowPlayingMovies = await Movie.find({ status: 'Now Playing' });
+        res.json(nowPlayingMovies);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+// Route to get movies that are coming soon
+router.get('/coming-soon', async (req, res) => {
+    try {
+        const comingSoonMovies = await Movie.find({ status: 'Coming Soon' });
+        res.json(comingSoonMovies);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
 // Route for getting a single movie by ID
 router.get('/:id', async (req, res) => {
     try {
@@ -39,36 +59,8 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// Route for updating a movie by ID
-router.put('/:id', async (req, res) => {
-    try {
-        const updatedMovie = await Movie.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        if (!updatedMovie) {
-            return res.status(404).json({ message: 'Movie not found' });
-        }
-        res.status(200).json(updatedMovie);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
-    }
-});
-
-// Route for deleting a movie by ID
-router.delete('/:id', async (req, res) => {
-    try {
-        const deletedMovie = await Movie.findByIdAndDelete(req.params.id);
-        if (!deletedMovie) {
-            return res.status(404).json({ message: 'Movie not found' });
-        }
-        res.status(200).json({ message: 'Movie deleted successfully' });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
-    }
-});
-
 // Route to get all movies in a specific genre
-router.get('/movies/:genre', async (req, res) => {
+router.get('/:genre', async (req, res) => {
     try {
       const { genre } = req.params;
   
