@@ -44,6 +44,11 @@ const movieSchema = mongoose.Schema({
     duration:{
         type: Number,
         required: true,
+    },
+    status: {
+        type: String,
+        enum: ['Now Playing', 'Coming Soon'],
+        default: 'Coming Soon'
     }
 
 });
