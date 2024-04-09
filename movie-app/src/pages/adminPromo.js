@@ -34,26 +34,7 @@ const AdminPromo = () => {
     }
   };
 
-  const handleEditPromotion = (userId) => {
-    console.log(`Editing promotion for user with ID: ${userId}`);
-  };
 
-
-  /*
-  
-    const handleDeleteMovie = async (movieId) => {
-      try {
-          await axios.delete(`http://localhost:8080/users/${movieId}`);
-          console.log(`User with ID ${movieId} deleted successfully.`);
-          // After successful deletion, fetch updated user data
-          //fetchMovies();
-      } catch (error) {
-          console.error(`Error deleting user with ID ${movieId}:`, error);
-      }
-    };
-    */
-    
-    
   
     return (
       <div className="bg-black min-h-screen">
@@ -79,6 +60,8 @@ const AdminPromo = () => {
                       <span>Description: {promo.description}</span>
                       <br />
                       <span>Discount: {promo.discount}</span>
+                      <br />
+                      
                     </div>
                     <div>
                       <Link to={`/edit-promo/${encodeURIComponent(promo._id)}`} className={myStyles.greenButton}>Edit</Link>
