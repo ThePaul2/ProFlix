@@ -65,6 +65,7 @@ const AdminPromo = () => {
                     </div>
                     <div>
                       <Link to={`/edit-promo/${encodeURIComponent(promo._id)}`} className={myStyles.greenButton}>Edit</Link>
+                      <Link to={`/edit-promo/${encodeURIComponent(promo._id)}`} className={myStyles.yellowButton}>Send to Users</Link>
                       <button onClick={() => handleDeletePromo(promo._id)} className={myStyles.redButton}>Delete Promo</button>
                       
                     </div>
@@ -86,6 +87,7 @@ const AdminPromo = () => {
   const myStyles = {
     greenButton: "px-4 py-2 bg-green-500 rounded-md text-white hover:bg-green-600 transition duration-300 ease-in-out ml-3",
     redButton: "px-4 py-2 bg-red-500 rounded-md text-white hover:bg-red-600 transition duration-300 ease-in-out ml-3",
+    yellowButton: "px-4 py-2 bg-yellow-500 rounded-md text-white hover:bg-yellow-600 transition duration-300 ease-in-out ml-3",
     container: "mb-2 p-4 bg-white rounded-md shadow-md flex justify-between items-center hover:bg-red-300",
   }
   

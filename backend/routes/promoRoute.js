@@ -1,5 +1,6 @@
 import express from 'express';
 import { Promo } from '../models/promoModel.js';
+import { promoMail } from '../utils/emailService.js';
 
 const router = express.Router();
 
@@ -67,4 +68,29 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
+
+
+router.post('/email', async (req, res) => {
+  try {
+    // Fetch user emails from localhost:8080/users/
+    const usersResponse = await axios.get('http://localhost:8080/users');
+    const users = usersResponse.data;
+
+    // Filter out emails of users who have promo set to true
+    const promoEmails = users.filter(user => user.promo).map(user => user.email);
+
+    // Send registration confirmation email to promo emails
+    await promoMail(promoEmails);
+
+    res.json({ message: 'Emails sent' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+
+
+
 export default router;
+

@@ -58,6 +58,18 @@ router.get('/:id', async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
+router.delete('/:id', async (req, res) => {
+    try {
+        const deletedMovie = await Movie.findByIdAndDelete(req.params.id);
+        if (!deletedMovie) {
+            return res.status(404).json({ message: 'Movie not found' });
+        }
+        res.status(200).json({ message: 'Movie deleted successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
 
 // Route to get all movies in a specific genre
 router.get('/:genre', async (req, res) => {
@@ -79,5 +91,6 @@ router.get('/:genre', async (req, res) => {
       res.status(500).json({ message: 'Internal server error' });
     }
   });
+
   
 export default router;

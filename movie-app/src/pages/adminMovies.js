@@ -20,16 +20,17 @@ const AdminMovies = () => {
       fetchMovies();
   }, []);
   
-    const handleDeleteMovie = async (movieId) => {
-      try {
-          await axios.delete(`http://localhost:8080/users/${movieId}`);
-          console.log(`User with ID ${movieId} deleted successfully.`);
-          // After successful deletion, fetch updated user data
-          //fetchMovies();
-      } catch (error) {
-          console.error(`Error deleting user with ID ${movieId}:`, error);
-      }
-    };
+  const handleDeleteMovie = async (movieId) => {
+    try {
+        await axios.delete(`http://localhost:8080/movie/${movieId}`);
+        console.log(`Movie with ID ${movieId} deleted successfully.`);
+        // After successful deletion, filter out the deleted movie from the movies array
+        setMovies(prevMovies => prevMovies.filter(movie => movie._id !== movieId));
+    } catch (error) {
+        console.error(`Error deleting movie with ID ${movieId}:`, error);
+    }
+};
+
     
     
   
@@ -54,7 +55,7 @@ const AdminMovies = () => {
                   </div>
                   <div>
                     <Link to={`/edit-movie/${encodeURIComponent(movie.id)}`} className={myStyles.greenButton}>Edit</Link>
-                    <button onClick={() => handleDeleteMovie(movie.id)} className={myStyles.redButton}>Delete Movie</button>
+                    <button onClick={() => handleDeleteMovie(movie._id)} className={myStyles.redButton}>Delete Movie</button>
                   </div>
               
                 </li>
