@@ -5,33 +5,33 @@ import { Link, useParams } from 'react-router-dom';
 
 const AdminMovies = () => {
   
-    const [users, setUsers] = useState([]); // Initialize users state as an empty array
+  const [movies, setMovies] = useState([]);
   
     useEffect(() => {
-      fetchUserData();
-    }, []);
+      const fetchMovies = async () => {
+          try {
+              const response = await axios.get('http://localhost:8080/movie');
+              setMovies(response.data);
+          } catch (error) {
+              console.error('Error fetching movies:', error);
+          }
+      };
   
-    const fetchUserData = async () => {
-      try {
-          const response = await axios.get(`http://localhost:8080/movie/`);
-          const userData = response.data.data; // Access the 'data' array from the response
-          console.log('User Data:', userData); // Add this line to log user data
-          setUsers(userData); // Set the state variable with fetched user data
-      } catch (error) {
-          console.error('Error fetching user data:', error);
-      }
-    };
+      fetchMovies();
+  }, []);
   
-    const handleDeleteUser = async (userId) => {
+    const handleDeleteMovie = async (movieId) => {
       try {
-          await axios.delete(`http://localhost:8080/users/${userId}`);
-          console.log(`User with ID ${userId} deleted successfully.`);
+          await axios.delete(`http://localhost:8080/users/${movieId}`);
+          console.log(`User with ID ${movieId} deleted successfully.`);
           // After successful deletion, fetch updated user data
-          fetchUserData();
+          //fetchMovies();
       } catch (error) {
-          console.error(`Error deleting user with ID ${userId}:`, error);
+          console.error(`Error deleting user with ID ${movieId}:`, error);
       }
     };
+    
+    
   
     return (
       <div className="bg-black min-h-screen">
@@ -39,18 +39,22 @@ const AdminMovies = () => {
         <div className="bg-black p-4 rounded-lg shadow-md font-sans max-w-4xl mx-auto">
           <h1 className="text-3xl font-bold mb-4 text-gray-800">Welcome to Admin Dashboard</h1>
           <div>
-            <h1 className="text-3xl font-bold mb-2 text-gray-100">Users</h1>
+            <h1 className="text-3xl font-bold mb-2 text-gray-100">Movies</h1>
             <ul className="list-none ">
-              {users && users.map((user) => (
-                <li key={user._id} className={myStyles.container}>
+              {movies.map((movie, index) => (
+                <li key={movie._id} className={myStyles.container}>
                   <div className="flex-1">
-                    <span>{`${user._id} ${user._id}`}</span>
+                    <span>{`${movie._id}`}</span>
                     <br />
-                    <span>Email: {user._id}</span>
+                    <span>Title: {movie.title}</span>
                     <br />
-                    <span>Status: {user._id}</span>
+                    <span>Producer: {movie.producer}</span>
                     <br />
-                    <span>User ID: {user._id}</span>
+                    <span>Director: {movie.director}</span>
+                  </div>
+                  <div>
+                    <Link to={`/edit-movie/${encodeURIComponent(movie.id)}`} className={myStyles.greenButton}>Edit</Link>
+                    <button onClick={() => handleDeleteMovie(movie.id)} className={myStyles.redButton}>Delete Movie</button>
                   </div>
               
                 </li>
@@ -173,9 +177,9 @@ import NavbarAdmin from '../components/NavbarAdmin';
 import data from "../assets/sampleData.json";
 
 const AdminMovies = () => {
-  const handleDeleteUser = (userId) => {
+  const handleDeleteUser = (movieId) => {
     // Implement your delete user logic here
-    console.log(`Deleting user with ID: ${userId}`);
+    console.log(`Deleting user with ID: ${movieId}`);
   };
 
   return (
