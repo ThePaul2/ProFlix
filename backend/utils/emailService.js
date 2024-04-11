@@ -51,27 +51,28 @@ async function sendResetPasswordEmail(email, resetToken) {
     }
   }
 
-  async function promoMail(emails) {
+  async function promoMail(emails, promoName, promoDescription) {
     try {
       // Iterate over each email address
       for (const email of emails) {
         const mailOptions = {
           from: 'E-Cinema Support <postmaster@sandbox215c79a7b4aa460caa7047dde7f63b4c.mailgun.org>',
           to: email,
-          subject: 'Registration Confirmation',
-          html: `<p>You have successfully registered with E-Cinema. Please verify your email to activate your account! Click <a href="http://localhost:3000/activate-user/${email}">here</a> to activate it.</p>`
+          subject: 'NEW PROFLIX PROMOTION!!',
+          html: `<p>We are excited to announce a new promotion: ${promoName}</p><p>${promoDescription}</p>`
         };
-    
+  
         // Send email using Mailgun
         const info = await mg.messages().send(mailOptions);
         console.log('Email sent to', email, ':', info);
       }
     } catch (error) {
       console.error('Error sending email:', error);
-      throw new Error('Failed to send registration confirmation email');
+      throw new Error('Failed to send promotion announcement email');
     }
   }
   
+
 
   
   

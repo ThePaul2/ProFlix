@@ -8,6 +8,17 @@ const AdminPromo = () => {
   
   const [promos, setPromos] = useState([]);
 
+  const handleSendPromo = async (promoID, promoName, promoDescription) => {
+    try {
+      console.log(`Promo with ID ${promoID}`);
+      const response = await axios.post('http://localhost:8080/promo/email', { promoID, promoName, promoDescription });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+  
+
   useEffect(() => {
     fetchPromos();
   }, []);
@@ -65,7 +76,7 @@ const AdminPromo = () => {
                     </div>
                     <div>
                       <Link to={`/edit-promo/${encodeURIComponent(promo._id)}`} className={myStyles.greenButton}>Edit</Link>
-                      <Link to={`/edit-promo/${encodeURIComponent(promo._id)}`} className={myStyles.yellowButton}>Send to Users</Link>
+                      <button onClick={() => handleSendPromo(promo._id, promo.name, promo.description)} className={myStyles.yellowButton}>Send to Users</button>
                       <button onClick={() => handleDeletePromo(promo._id)} className={myStyles.redButton}>Delete Promo</button>
                       
                     </div>
