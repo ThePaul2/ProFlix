@@ -8,7 +8,7 @@ import axios from 'axios';
 
 const Movies = () => {
   const location = useLocation();
-  const [movies, setMovies] = useState([]);
+  let [movies, setMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState(data.movies);
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -26,22 +26,37 @@ const Movies = () => {
         try {
             const response = await axios.get('http://localhost:8080/movie');
             setMovies(response.data);
+            movies = response.data;
         } catch (error) {
             console.error('Error fetching movies:', error);
         }
     };
 
-    fetchMovies();
+    fetchMovies().then(() => {
+      handleSearch(searchTerm);
+    });
 }, []);
 
   const handleSearch = (searchTerm) => {
-    const filtered = movies.filter(movie =>
-      movie.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    console.log(movies)
+    let filtered = [];
+    for (let i = 0; i < movies.length; i++) {
+      let movie = movies[i];
+      let name = movie.name;
+      if (name == null) {
+        name = movie.title;
+      }
+      if (name == null) {
+        name = movie.movieTitle;
+      }
+      if (name.toLowerCase().includes(searchTerm.toLowerCase())) {
+        filtered.push(movie);
+      }
+    }
     setFilteredMovies(filtered);
   };
 
-  console.log('onSearch function:', handleSearch); // Log the onSearch function
+  // console.log('onSearch function:', handleSearch); // Log the onSearch function
 
   return (
     <div className="bg-gray-800 min-h-screen">
@@ -50,7 +65,7 @@ const Movies = () => {
         <SearchBar onSearch={handleSearch} initialSearchTerm={searchTerm} />
         <p className="text-white mt-4">Number of results: {movies.length}</p>
         <div className="mt-8">
-          <MovieGallery movies={movies} />
+          <MovieGallery movies={filteredMovies} />
         </div>
       </div>
     </div>
