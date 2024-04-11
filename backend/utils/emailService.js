@@ -59,7 +59,7 @@ async function sendResetPasswordEmail(email, resetToken) {
           from: 'E-Cinema Support <postmaster@sandbox215c79a7b4aa460caa7047dde7f63b4c.mailgun.org>',
           to: email,
           subject: 'NEW PROFLIX PROMOTION!!',
-          html: `<p>We are excited to announce a new promotion: ${promoName}</p><p>${promoDescription}</p>`
+          html: `<p>We are excited to announce a new promotion: ${promoName}</p><p>${promoDescription}</p><p>We hope to see you soon!</p>`
         };
   
         // Send email using Mailgun
