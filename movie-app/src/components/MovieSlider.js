@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
-import MovieCard from './MovieCard'; // Import the MovieCard component
+import MovieCard from './MovieCard'; 
 
 const MovieSlider = ({ header, movies }) => {
   const sliderRef = useRef(null);
@@ -35,7 +35,6 @@ const MovieSlider = ({ header, movies }) => {
     const newIndex = (firstVisibleIndex + 1) % movies.length;
     setFirstVisibleIndex(newIndex);
   };
-
   return (
     <div className='my-14'>
       <h2 className="text-3xl font-bold text-white mb-4">{header}</h2>

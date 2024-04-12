@@ -1,20 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import { useParams } from "react-router-dom";
-import data from "../assets/sampleData.json";
 import Seats from "../components/Seats.js";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Tickets = ({ location }) => {
   let { id } = useParams();
-  let movies = data.movies;
+  const [movie, setMovie] = useState([]);
+  const [bookings, setBookings] = useState([]);
+  const [selectedShowtime, setSelectedShowtime] = useState("");
 
-  let movie;
-  for (let i = 0; i < movies.length; i++) {
-    if (id === movies[i].id) {
-      movie = movies[i];
-    }
-  }
+  useEffect(() => {
+    const fetchMovie = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/movie/${id}`);
+        setMovie(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchMovie();
+  }, [id]);
+   
+  useEffect(() => {
+    const fetchBookings = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/booking/${id}`);
+        setBookings(response.data);
+      } catch (error) {
+        console.error('Error fetching bookings:', error);
+      }
+    };
+
+    fetchBookings();
+
+    // Cleanup function to abort the fetch request if the component unmounts
+    return () => {
+      // Abort fetch or any cleanup needed
+    };
+  }, [id]); // Dependency array, will trigger effect on movieID change
+  
+
+  
 
   const [numTickets, setNumTickets] = useState(0);
   const [selectedSeats, setSelectedSeats] = useState([]);
@@ -86,23 +115,43 @@ const Tickets = ({ location }) => {
         <div className="w-1/2 flex flex-col p-6">
           <div className="mb-8 flex items-center justify-start">
             <img
-              src={movie.image}
-              alt={movie.name}
+              src={movie.poster}
+              alt={movie.movieTitle}
               className="w-64 h-auto mr-6"
             />
             <div>
               <h2 className="font-bold text-xl mb-2 text-white">
                 {movie.name}
               </h2>
+              <p className="text-white">{movie.movieTitle}</p>
               <p className="text-white">{movie.genre}</p>
               <p className="text-white">Rating: {movie.rating}</p>
-              <p className="text-white">Release: {movie.date}</p>
+              <p className="text-white">Release: {movie.releaseDate}</p>
             </div>
           </div>
           <div>
             <h1 className="font-bold text-4xl mb-4 text-white">Tickets</h1>
+            {/* Showtime dropdown */}
+            <div className="mb-4">
+              <label htmlFor="showtime" className="font-bold text-white block mb-2">Select Showtime:</label>
+              <select
+                id="showtime"
+                className="bg-white text-black px-4 py-2 rounded-md"
+                value={selectedShowtime}
+                onChange={(e) => setSelectedShowtime(e.target.value)}
+              >
+                <option value="">Select Showtime</option>
+                {/* Map through bookings to display showtimes */}
+                {bookings.map((booking) => (
+                  booking.showTimes.map((time, index) => (
+                    <option key={index} value={time}>{time}</option>
+                  ))
+                ))}
+              </select>
+            </div>
             <div className="mb-4">
               <h2 className="font-bold mb-2 text-white">Child</h2>
+              {/* Increment and decrement buttons */}
               <button
                 onClick={() => handleDecrement("child")}
                 className="bg-white text-red-500 px-4 py-2 rounded-md mr-2"

@@ -38,7 +38,7 @@ const movieSchema = mongoose.Schema({
         enum: ['G', 'PG', 'PG-13', 'R'],
     },
     releaseDate:{
-        type: Date,
+        type: String,
         required: true,
     },
     duration:{

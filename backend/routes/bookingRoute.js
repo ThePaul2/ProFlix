@@ -6,8 +6,8 @@ const router = express.Router();
 // Route for creating a new booking
 router.post('/', async (req, res) => {
     try {
-        const { bookingNumber, totalSeats, showTime } = req.body;
-        const newBooking = await Booking.create({ bookingNumber, totalSeats, showTime });
+        const { bookingNumber, totalSeats, showTimes, showTimeDate, movieID } = req.body;
+        const newBooking = await Booking.create({ bookingNumber, totalSeats, showTimes, showTimeDate, movieID });
         res.status(201).json(newBooking);
     } catch (error) {
         console.error(error);
@@ -19,6 +19,21 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
     try {
         const bookings = await Booking.find({});
+        res.status(200).json(bookings);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+// Route for getting bookings by movieID
+router.get('/:movieID', async (req, res) => {
+    try {
+        const { movieID } = req.params;
+        const bookings = await Booking.find({ movieID });
+        if (bookings.length === 0) {
+            return res.status(404).json({ message: 'Bookings for this movie not found' });
+        }
         res.status(200).json(bookings);
     } catch (error) {
         console.error(error);
@@ -67,5 +82,7 @@ router.delete('/:id', async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
+
+
 
 export default router;

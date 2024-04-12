@@ -1,38 +1,59 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import { Link, useParams } from "react-router-dom";
-import data from "../assets/sampleData.json";
+import axios from "axios";
 
 const Info = () => {
   let { id } = useParams();
-  let movies = data.movies;
+  const [movie, setMovie] = useState([]);
+  const [bookings, setBookings] = useState([]);
 
-  let movie;
-  for (let i = 0; i < movies.length; i++) {
-    if (id === movies[i].id) {
-      movie = movies[i];
-    }
+  useEffect(() => {
+    const fetchMovie = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/movie/${id}`);
+        setMovie(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchMovie();
+  }, [id]);
+   
+  useEffect(() => {
+    const fetchBookings = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/booking/${id}`);
+        setBookings(response.data);
+      } catch (error) {
+        console.error('Error fetching bookings:', error);
+      }
+    };
+
+    fetchBookings();
+
+    // Cleanup function to abort the fetch request if the component unmounts
+    return () => {
+      // Abort fetch or any cleanup needed
+    };
+  }, [id]); // Dependency array, will trigger effect on movieID change
+  
+  if (!movie) {
+    return <div>No movie found with the title "{movie.title}"</div>;
   }
-
-  // Sort showtimes chronologically based on date and time
-  const sortedShowtimes = movie.showtimes.sort((a, b) => {
-    const dateA = new Date(a.date + "T" + a.time);
-    const dateB = new Date(b.date + "T" + b.time);
-    return dateA - dateB;
-  });
-
+  
   return (
     <div className="bg-black min-h-screen">
       <Navbar />
       <div className="container mx-auto flex flex-col lg:flex-row py-16">
         <div className="lg:w-1/2 relative">
           <div className="p-6 text-white">
-            <h1 className="font-bold text-4xl mb-4">{movie.name}</h1>
+            <h1 className="font-bold text-4xl mb-4">{movie.title}</h1>
             <div className="flex flex-wrap mb-4">
               <p className="mr-4 hover:bg-red-500">Genre: {movie.genre}</p>
               <p className="mr-4">MPAA-US film rating: {movie.rating}</p>
-              <p className="mr-4">Release Date: {movie.date}</p>
-              <p className="mr-4">Rating: {movie.rating}</p>
+              <p className="mr-4">Release Date: {movie.releaseDate}</p>
             </div>
             <p className="mb-4">{movie.description}</p>
             <h2 className="font-bold text-2xl mb-4">Trailer</h2>
@@ -44,13 +65,15 @@ const Info = () => {
               className="mb-4"
             />
             <div className="text-white">
-            <p>Cast: {movie.cast}</p>
-            <p>Director: {movie.director}</p>
-            <p>Producer: {movie.producer}</p>
-            <ul className="mb-4">
-              <li>Reviews: {movie.reviews}</li>
-            </ul>
+              <p>Cast: {movie.cast}</p>
+              <p>Director: {movie.director}</p>
+              <p>Producer: {movie.producer}</p>
+              <ul className="mb-4">
+                <li>Reviews: {movie.reviews}</li>
+              </ul>
             </div>
+            {/* Button to link to Tickets page */}
+            <Link to={`/tickets/${id}`} className="bg-red-400 text-white px-6 py-2 rounded-lg hover:bg-red-600 mt-4">Buy Tickets</Link>
           </div>
         </div>
         <div className="lg:w-1/2 relative">
@@ -58,19 +81,17 @@ const Info = () => {
             <div className="text-center ">
               <h2 className="text-3xl font-bold mb-4 ">Showtimes</h2>
               <ul>
-                  {sortedShowtimes.map((showtime, index) => (
-                      <li key={index} className="mb-2">
-                          <Link
-                              to={{
-                                pathname: `/tickets/${encodeURIComponent(movie.id)}`
-                            }}
-                              className="block w-full hover:bg-red-500 transition duration-300 rounded-lg p-4"
-                          >
-                              <p className="text-lg font-semibold">{showtime.date} - {showtime.time}</p>
-                              <p>Theater {showtime.theaterNumber}</p>
-                          </Link>
-                      </li>
-                  ))}
+                {bookings.map((booking) => (
+                  <li key={booking._id}>
+                    <div>
+                      <ul>
+                        {booking.showTimes.map((time, index) => (
+                          <li key={index}>{time} - {booking.showTimeDate[index]}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
@@ -78,21 +99,21 @@ const Info = () => {
       </div>
       <style>
         {`
-                    @media (max-width: 1024px) {
-                        .lg:flex-row {
-                            flex-direction: column;
-                        }
-                        .lg:absolute {
-                            position: static;
-                        }
-                        .lg:block {
-                            display: block;
-                        }
-                        .lg:hidden {
-                            display: none;
-                        }
-                    }
-                `}
+          @media (max-width: 1024px) {
+              .lg:flex-row {
+                  flex-direction: column;
+              }
+              .lg:absolute {
+                  position: static;
+              }
+              .lg:block {
+                  display: block;
+              }
+              .lg:hidden {
+                  display: none;
+              }
+          }
+        `}
       </style>
     </div>
   );
