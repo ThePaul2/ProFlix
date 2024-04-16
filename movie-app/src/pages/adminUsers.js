@@ -33,6 +33,19 @@ const AdminDashboard = () => {
     }
   };
 
+  const updateUserStatus = async (userId, newStatus) => {
+    try {
+      const updatedUser = { ...users.find(user => user._id === userId), status: newStatus }; // Update user status to newStatus
+      await axios.put(`http://localhost:8080/users/${userId}`, updatedUser);
+      console.log(`User with ID ${userId} status set to Admin.`);
+      // Update the users state immediately
+      setUsers(prevUsers => prevUsers.map(user => user._id === userId ? { ...user, status: newStatus } : user));
+    } catch (error) {
+      console.error(`Error updating user status with ID ${userId}:`, error);
+    }
+  };
+  
+
   return (
     <div className="bg-black min-h-screen">
       <NavbarAdmin />
@@ -53,7 +66,11 @@ const AdminDashboard = () => {
                   <span>User ID: {user._id}</span>
                 </div>
                 {shouldShowDeleteButton(user.status) && (
-                  <button onClick={() => handleDeleteUser(user._id)} className={myStyles.redButton}>Delete User</button>
+                  <>
+                    <button onClick={() => handleDeleteUser(user._id)} className={myStyles.redButton}>Delete User</button>
+                    <button onClick={() => updateUserStatus(user._id, 1)} className={myStyles.redButton}>Suspend</button>
+                    <button onClick={() => updateUserStatus(user._id, 2)} className={myStyles.greenButton}>Make Admin</button>
+                  </>
                 )}
               </li>
             ))}

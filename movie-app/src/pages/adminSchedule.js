@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import Navbar from "../components/NavbarAdmin";
 import axios from "axios";
 
@@ -67,6 +67,9 @@ const AddShowtime = () => {
                         <div>
                             <h1>Add Showtime for {movieTitle}</h1>
                             <p>Showtime Info</p>
+                        </div>
+                        <div className="ml-auto">
+                            <Link to={`/adminMovies`} className="mr-2 px-4 py-2 bg-green-500 rounded-md text-white hover:bg-green-600 transition duration-300 ease-in-out">Back</Link>
                         </div>
                     </div>
                     <br />
