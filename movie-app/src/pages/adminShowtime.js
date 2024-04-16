@@ -39,7 +39,14 @@ const AdminShowtime = () => {
         <div>
           <div className="flex flex-row w-full">
             <h1 className="text-3xl font-bold mb-2 text-gray-100">Showtimes for {movieTitle}</h1>
+            <div className="ml-auto">
+                <Link to={`/adminMovies`} className="mr-2 px-4 py-2 bg-green-500 rounded-md text-white hover:bg-green-600 transition duration-300 ease-in-out">Back</Link>
+            </div>
+            <div className="ml-auto">
+                <Link to={`/add-showtime/${movieTitle}`} className="mr-2 px-4 py-2 bg-green-500 rounded-md text-white hover:bg-green-600 transition duration-300 ease-in-out">Schedule</Link>
+            </div>
           </div>
+          
 
           <ul className="list-none ">
             {showtimes.map((showtime, index) => (
@@ -57,7 +64,6 @@ const AdminShowtime = () => {
                   <br />
                 </div>
                 <div>
-                  <Link to={`/edit-showtime/${encodeURIComponent(showtime._id)}`} className="px-4 py-2 bg-green-500 rounded-md text-white hover:bg-green-600 transition duration-300 ease-in-out ml-3">Edit</Link>
                   <button onClick={() => handleDeleteShowtime(showtime._id)} className="px-4 py-2 bg-red-500 rounded-md text-white hover:bg-red-600 transition duration-300 ease-in-out ml-3">Delete</button>
                 </div>
               </li>

@@ -60,8 +60,9 @@ const AdminMovies = () => {
                   </div>
                   <div>
                     <Link to={`/edit-movie/${encodeURIComponent(movie._id)}`} className={myStyles.greenButton}>Edit</Link>
+                    <Link to={`/add-showtime/${encodeURIComponent(movie.movieTitle)}`} className={myStyles.greenButton}>Schedule</Link>
                     <Link to={`/showtime-movie/${encodeURIComponent(movie.movieTitle)}`} className={myStyles.yellowButton}>Showtime</Link>
-                    <button onClick={() => handleDeleteMovie(movie._id)} className={myStyles.redButton}>Delete Movie</button>
+                    <button onClick={() => handleDeleteMovie(movie._id)} className={myStyles.redButton}>Delete</button>
                   </div>
               
                 </li>

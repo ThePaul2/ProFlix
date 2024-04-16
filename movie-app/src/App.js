@@ -11,6 +11,7 @@ import SignUp from "./pages/signup";
 import Admin from "./pages/adminHome";
 import AdminMovies from "./pages/adminMovies";
 import EditShowtime from "./pages/adminShowtime";
+import EditSchedule from "./pages/adminSchedule";
 import AdminPromo from "./pages/adminPromo";
 import AdminUsers from "./pages/adminUsers";
 import EditProfile from "./pages/editProfile";
@@ -39,6 +40,7 @@ function App() {
         <Route path="/adminUsers" element={<ProtectedRoute><AdminUsers /></ProtectedRoute>} />
         <Route path="/adminPromo" element={<AdminPromo />} />
         <Route path="/edit-movie/:id" element={<EditMovie />} />
+        <Route path="/add-showtime/:movieTitle" element={<EditSchedule />} />
         <Route path="/showtime-movie/:movieTitle" element={<EditShowtime />} />
         <Route path="/edit-promo/:id" element={<EditPromo />} />
         <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
