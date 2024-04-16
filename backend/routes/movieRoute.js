@@ -92,5 +92,20 @@ router.get('/:genre', async (req, res) => {
     }
   });
 
+router.put('/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const updatedMovie = await Movie.findByIdAndUpdate(id, req.body, { new: true });
+        if (!updatedMovie) {
+            return res.status(404).json({ message: 'Movie not found' });
+        }
+        res.status(200).json(updatedMovie);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+
   
 export default router;

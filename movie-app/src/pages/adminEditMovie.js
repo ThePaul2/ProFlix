@@ -1,3 +1,421 @@
+import React, { useEffect, useState } from "react";
+import { Link, useParams, useNavigate } from 'react-router-dom';
+import Navbar from "../components/NavbarAdmin";
+import axios from "axios";
+
+const EditMovie = () => {
+    const { id } = useParams();
+    const [movie, setMovie] = useState({
+        movieTitle: "", 
+        genre: "", 
+        cast: [], 
+        director: "", 
+        producer: "", 
+        synopsis: "", 
+        trailer: "", 
+        poster: "", 
+        rating: "", 
+        releaseDate: "", 
+        duration: 0, 
+        status: "Coming Soon"
+    });
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (id !== "new-movie") {
+            fetchMovie();
+        }
+    }, [id]);
+
+    const fetchMovie = async () => {
+        try {
+            const response = await axios.get(`http://localhost:8080/movie/${id}`);
+            if (response.status === 200) {
+                setMovie(response.data);
+            } else {
+                throw new Error('Failed to fetch movie');
+            }
+        } catch (error) {
+            console.error('Error fetching movie:', error);
+        }
+    };
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setMovie(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
+
+    const handleSubmit = async () => {
+		try {
+			// Check if all fields are complete
+			const areFieldsComplete = Object.values(movie).every(value => value !== "" && value !== null);
+			if (!areFieldsComplete) {
+				// If not, display a popup error message
+				alert("Error: Make sure all fields are complete");
+				return;
+			}
+	
+			const url = id === "new-movie" ? 'http://localhost:8080/movie' : `http://localhost:8080/movie/${id}`;
+			const method = id === "new-movie" ? 'post' : 'put';
+	
+			const response = await axios({
+				method: method,
+				url: url,
+				data: movie
+			});
+	
+			if (response.status >= 200 && response.status < 300) {
+				// Successful submission
+				navigate(`/adminMovies`);
+				console.log('Changes submitted successfully');
+			} else {
+				throw new Error('Failed to submit changes');
+			}
+		} catch (error) {
+			console.error('Error occurred during movie update:', error.message);
+		}
+	};
+	
+
+    return (
+        <div>
+            <Navbar />
+            <div className="h-screen pt-16 bg-zinc-900">
+                <div className="bg-zinc-900 text-white font-bold leading-10 py-10 px-60 w-full h-fit">
+                    <div className="flex flex-row w-full">
+                        <div>
+                            <h1>Edit Movie</h1>
+                            <p>Movie Info</p>
+                        </div>
+                        <div className="ml-auto">
+                            <Link to={`/adminMovies`} className="mr-2 px-4 py-2 bg-green-500 rounded-md text-white hover:bg-green-600 transition duration-300 ease-in-out">Quit Without Saving</Link>
+                        </div>
+                    </div>
+                    <br />
+                    <div>
+                        <label className="font-semibold">Name</label>
+                        <br />
+                        <input
+                            type="text"
+                            placeholder="Title"
+                            name="movieTitle"
+                            value={movie.movieTitle}
+                            className="w-full px-4 py-4 rounded-lg text-black"
+                            onChange={handleInputChange}
+                        />
+                    </div>
+                    
+                    <div>
+                        <label className="font-semibold">Genre</label>
+                        <br />
+                        <input
+                            type="text"
+                            placeholder="Genre"
+                            name="genre"
+                            value={movie.genre}
+                            className="w-full px-4 py-4 rounded-lg text-black"
+                            onChange={handleInputChange}
+                        />
+                    </div>
+
+                    <div>
+                        <label className="font-semibold">Cast</label>
+                        <br />
+                        <input
+                            type="text"
+                            placeholder="Cast (comma-separated)"
+                            name="cast"
+                            value={movie.cast.join(", ")}
+                            className="w-full px-4 py-4 rounded-lg text-black"
+                            onChange={(e) => setMovie(prevState => ({...prevState, cast: e.target.value.split(", ")}))}
+                        />
+                    </div>
+
+                    <div>
+                        <label className="font-semibold">Director</label>
+                        <br />
+                        <input
+                            type="text"
+                            placeholder="Director"
+                            name="director"
+                            value={movie.director}
+                            className="w-full px-4 py-4 rounded-lg text-black"
+                            onChange={handleInputChange}
+                        />
+                    </div>
+
+                    <div>
+                        <label className="font-semibold">Producer</label>
+                        <br />
+                        <input
+                            type="text"
+                            placeholder="Producer"
+                            name="producer"
+                            value={movie.producer}
+                            className="w-full px-4 py-4 rounded-lg text-black"
+                            onChange={handleInputChange}
+                        />
+                    </div>
+
+                    <div>
+                        <label className="font-semibold">Synopsis</label>
+                        <br />
+                        <textarea
+                            placeholder="Synopsis"
+                            name="synopsis"
+                            value={movie.synopsis}
+                            className="w-full px-4 py-4 rounded-lg text-black"
+                            onChange={handleInputChange}
+                        />
+                    </div>
+
+                    <div>
+                        <label className="font-semibold">Trailer</label>
+                        <br />
+                        <input
+                            type="text"
+                            placeholder="Trailer URL"
+                            name="trailer"
+                            value={movie.trailer}
+                            className="w-full px-4 py-4 rounded-lg text-black"
+                            onChange={handleInputChange}
+                        />
+                    </div>
+
+                    <div>
+                        <label className="font-semibold">Poster</label>
+                        <br />
+                        <input
+                            type="text"
+                            placeholder="Poster URL"
+                            name="poster"
+                            value={movie.poster}
+                            className="w-full px-4 py-4 rounded-lg text-black"
+                            onChange={handleInputChange}
+                        />
+                    </div>
+
+                    <div>
+                        <label className="font-semibold">Rating</label>
+                        <br />
+                        <select
+                            name="rating"
+                            value={movie.rating}
+                            onChange={handleInputChange}
+                            className="w-full px-4 py-4 rounded-lg text-black"
+                        >
+                            <option value="">Select Rating</option>
+                            <option value="G">G</option>
+                            <option value="PG">PG</option>
+                            <option value="PG-13">PG-13</option>
+                            <option value="R">R</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label className="font-semibold">Release Date</label>
+                        <br />
+                        <input
+                            type="date"
+                            name="releaseDate"
+                            value={movie.releaseDate}
+                            onChange={handleInputChange}
+                            className="w-full px-4 py-4 rounded-lg text-black"
+                        />
+                    </div>
+
+                    <div>
+                        <label className="font-semibold">Duration</label>
+                        <br />
+                        <input
+                            type="number"
+                            placeholder="Duration (in minutes)"
+                            name="duration"
+                            value={movie.duration}
+                            onChange={handleInputChange}
+                            className="w-full px-4 py-4 rounded-lg text-black"
+                        />
+                    </div>
+
+                    <div>
+                        <label className="font-semibold">Status</label>
+                        <br />
+                        <select
+                            name="status"
+                            value={movie.status}
+                            onChange={handleInputChange}
+                            className="w-full px-4 py-4 rounded-lg text-black"
+                        >
+                            <option value="Coming Soon">Coming Soon</option>
+                            <option value="Now Playing">Now Playing</option>
+                        </select>
+                    </div>
+
+                    <br />
+                    <hr />
+                    <button onClick={handleSubmit} className="text-center rounded-xl border-neutral-200 border-2 px-4 py-4 w-full bg-red-400 text-xl font-semibold">Submit Changes</button>
+                </div>
+            </div>
+        </div>
+    );
+
+};
+
+export default EditMovie;
+
+
+
+
+
+
+
+
+
+/*
+return (
+        <div>
+            <Navbar />
+            <div className="h-screen pt-16 bg-zinc-900">
+                <div className="bg-zinc-900 text-white font-bold leading-10 py-10 px-60 w-full h-fit">
+                    <div className="flex flex-row w-full">
+                        <div>
+                            <h1>Edit Movie</h1>
+                            <p>Movie Info</p>
+                        </div>
+                        <div className="ml-auto">
+                            <Link to={`/adminMovies`} className="mr-2 px-4 py-2 bg-green-500 rounded-md text-white hover:bg-green-600 transition duration-300 ease-in-out">Quit Without Saving</Link>
+                        </div>
+                    </div>
+                    <br />
+                    {movie && (
+                        <>
+                            <div>
+                                <label className="font-semibold">Name</label>
+                                <br />
+                            </div>
+                            <div className="w-full leading-loose">
+                                <input
+                                    type="text"
+                                    placeholder={id === "new-movie" ? "Title" : movie.name}
+                                    name="name"
+                                    value={movie.name}
+                                    className="w-full px-4 py-4 rounded-lg text-black"
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                            
+                            <div>
+                                <label className="font-semibold">Description</label>
+                                <br />
+                            </div>
+                            <div className="w-full leading-loose">
+                                <input
+                                    type="text"
+                                    placeholder={id === "new-movie" ? "Movie Description" : movie.description}
+                                    name="description"
+                                    value={movie.description}
+                                    className="w-full px-4 py-4 rounded-lg text-black"
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+
+                            <div>
+                                <label className="font-semibold">Discount</label>
+                                <br />
+                            </div>
+                            <div className="w-full leading-loose">
+                                <input
+                                    type="text"
+                                    placeholder={id === "new-movie" ? "Enter Discount Amount" : movie.discount}
+                                    name="discount"
+                                    value={movie.discount}
+                                    className="w-full px-4 py-4 rounded-lg text-black"
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+
+                            <div>
+                                <label className="font-semibold">Image</label>
+                                <br />
+                            </div>
+                            <div className="w-full leading-loose">
+                                <input
+                                    type="text"
+                                    placeholder={id === "new-mvoie" ? "Image URL" : movie.image}
+                                    name="image"
+                                    value={movie.image}
+                                    className="w-full px-4 py-4 rounded-lg text-black"
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                            
+                            <br />
+                            <hr />
+                            <button onClick={handleSubmit} className="text-center rounded-xl border-neutral-200 border-2 px-4 py-4 w-full bg-red-400 text-xl font-semibold">Submit Changes</button>
+                        </>
+                    )}
+                </div>
+            </div>
+        </div>
+    );
+
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 import React from "react";
 import * as ReactDOM from 'react-dom';
 import { createRoot } from 'react-dom/client';
@@ -199,3 +617,6 @@ const myStyles = {
 	redButton: "px-4 py-2 bg-red-500 rounded-md text-white hover:bg-red-600 transition duration-300 ease-in-out ml-3",
 	container: "mb-2 p-4 bg-white rounded-md shadow-md flex justify-between items-center hover:bg-red-300",
 }
+
+
+*/
