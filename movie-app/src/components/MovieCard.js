@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const MovieCard = ({ movie }) => {
-  console.log(movie.title);
-  console.log(movie._id);
+  // console.log(movie.title);
+  // console.log(movie._id);
   return (
     <div className="w-64 m-4 relative">
       <Link to={`/info/${encodeURIComponent(movie._id)}`}>
