@@ -9,6 +9,7 @@ import movieRoute from './routes/movieRoute.js';
 import promoRoute from './routes/promoRoute.js';
 import roomRoute from './routes/roomRoute.js';
 import theatreRoute from './routes/theatreRoute.js';
+import showtimeRoute from './routes/showtimeRoute.js';
 import dotenv from 'dotenv';
 import cors from 'cors';
 
@@ -33,6 +34,7 @@ app.get('/', async (request, response, next) => {
 app.use('/users', usersRoute);
 app.use('/payments', paymentsRoute);
 
+app.use('/showtime', showtimeRoute);
 app.use('/booking', bookingRoute);
 app.use('/movie', movieRoute);
 app.use('/promo', promoRoute);
