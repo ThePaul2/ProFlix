@@ -64,7 +64,7 @@ const Movies = () => {
       <div className="mt-16 flex flex-col justify-center items-center pt-16">
         <SearchBar onSearch={handleSearch} initialSearchTerm={searchTerm} />
         <p className="text-white mt-4">Number of Movies: {movies.length}</p>
-        <div className="mt-8">
+        <div className="mt-8 w-full">
           <MovieGallery movies={filteredMovies} />
         </div>
       </div>
