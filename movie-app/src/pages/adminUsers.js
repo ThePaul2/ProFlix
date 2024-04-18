@@ -24,7 +24,7 @@ const AdminDashboard = () => {
 
   const handleDeleteUser = async (userId) => {
     try {
-        await axios.delete(`http://localhost:8080/users/${userId}`);
+        await axios.delete(`http://localhost:8080/users/status/${userId}`);
         console.log(`User with ID ${userId} deleted successfully.`);
         // After successful deletion, fetch updated user data
         fetchUserData();
@@ -33,17 +33,43 @@ const AdminDashboard = () => {
     }
   };
 
-  const updateUserStatus = async (userId, newStatus) => {
+  const suspendUser = async (userId) => {
     try {
-      const updatedUser = { ...users.find(user => user._id === userId), status: newStatus }; // Update user status to newStatus
-      await axios.put(`http://localhost:8080/users/${userId}`, updatedUser);
-      console.log(`User with ID ${userId} status set to Admin.`);
-      // Update the users state immediately
-      setUsers(prevUsers => prevUsers.map(user => user._id === userId ? { ...user, status: newStatus } : user));
+      // Create an updated user object with the new status (1 for suspended)
+      const updatedUser = { status: 1 };
+      
+      // Make a PUT request with the updated user object in the request body
+      await axios.put(`http://localhost:8080/users/status/${userId}`, updatedUser);
+      
+      console.log(`User with ID ${userId} suspended.`);
+      
+      // After successful update, fetch updated user data
+      fetchUserData();
     } catch (error) {
-      console.error(`Error updating user status with ID ${userId}:`, error);
+      console.error(`Error suspending user with ID ${userId}:`, error);
     }
   };
+  
+
+  const adminUser = async (userId) => {
+    try {
+      // Create an updated user object with the new status (1 for suspended)
+      const updatedUser = { status: 2 };
+      
+      // Make a PUT request with the updated user object in the request body
+      await axios.put(`http://localhost:8080/users/status/${userId}`, updatedUser);
+      
+      console.log(`User with ID ${userId} made to admin.`);
+      
+      // After successful update, fetch updated user data
+      fetchUserData();
+    } catch (error) {
+      console.error(`Error user with ID ${userId}:`, error);
+    }
+  };
+  
+
+
   
 
   return (
@@ -68,8 +94,8 @@ const AdminDashboard = () => {
                 {shouldShowDeleteButton(user.status) && (
                   <>
                     <button onClick={() => handleDeleteUser(user._id)} className={myStyles.redButton}>Delete User</button>
-                    <button onClick={() => updateUserStatus(user._id, 1)} className={myStyles.redButton}>Suspend</button>
-                    <button onClick={() => updateUserStatus(user._id, 2)} className={myStyles.greenButton}>Make Admin</button>
+                    <button onClick={() => suspendUser(user._id)} className={myStyles.redButton}>Suspend</button>
+                    <button onClick={() => adminUser(user._id)} className={myStyles.greenButton}>Make Admin</button>
                   </>
                 )}
               </li>

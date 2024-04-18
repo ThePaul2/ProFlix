@@ -371,41 +371,19 @@ router.post('/activate/:email', async (req, res) => {
   }
 });
 
-// PUT route to update user status
-router.put('status/:id', async (req, res) => {
+
+router.put('/status/:id', async (req, res) => {
   try {
-    const { status } = req.body;
-
-    // Check if status is provided
-    if (status === undefined) {
-      return res.status(400).json({ message: 'Status field is required.' });
-    }
-
-    // Update user status in the database
-    const updatedUser = await User.findByIdAndUpdate(
-      req.params.id,
-      { status },
-      { new: true } // Return the updated document
-    );
-
-    // Check if user is found and return the updated user object
-    if (!updatedUser) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-
-    // Return the updated user object
-    res.status(200).json(updatedUser);
+      const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+      if (!updatedUser) {
+          return res.status(404).json({ message: 'Promo not found' });
+      }
+      res.status(200).json(updatedUser);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
+      console.error(error);
+      res.status(500).json({ message: 'Internal server error' });
   }
 });
-
-
-
-
-
-
 
 
 
