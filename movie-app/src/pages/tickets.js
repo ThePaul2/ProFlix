@@ -145,7 +145,7 @@ const Tickets = ({ location }) => {
                 <option value="">Select Showtime</option>
                 {/* Map through bookings to display showtimes */}
                 {showTime.map((showTime, index) => (
-                  <option key={index} value={showTime.time}>{showTime.time} - {showTime.date} - {showTime.theaterName}</option>
+                  <option key={index} value={showTime.time}>{showTime.time} - {showTime.date} - {showTime.roomName} - {showTime.theaterName}</option>
                 ))}
               </select>
             </div>
