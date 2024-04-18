@@ -87,7 +87,7 @@ const Info = () => {
                 <li key={index}>
                   <div>
                     <ul>
-                      <li>{showTime.time} - {showTime.date} - {showTime.roomName}</li>
+                      <li>{showTime.time} - {showTime.date} - {showTime.theaterName}</li>
                     </ul>
                   </div>
                 </li>
