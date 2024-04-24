@@ -34,28 +34,38 @@ const AddShowtime = () => {
           }
   
           // Check if a showtime with the same details already exists
-          const duplicateResponse = await axios.get(`http://localhost:8080/showtime?movieTitle=${showtime.movieTitle}&roomName=${showtime.roomName}&theaterName=${showtime.theaterName}&date=${showtime.date}&time=${showtime.time}`);
-          
-          if (duplicateResponse.data.length > 0) {
+          const duplicateResponse = await axios.get(`http://localhost:8080/showtime`, { params: showtime });
+  
+          // Filter the response to find showtimes with the same details
+          const duplicateShowtimes = duplicateResponse.data.filter(entry =>
+              entry.movieTitle === showtime.movieTitle &&
+              entry.roomName === showtime.roomName &&
+              entry.theaterName === showtime.theaterName &&
+              entry.date === showtime.date &&
+              entry.time === showtime.time
+          );
+  
+          if (duplicateShowtimes.length === 0) {
+              // If no duplicate entry is found, proceed with adding the showtime
+              const response = await axios.post('http://localhost:8080/showtime/', showtime);
+  
+              if (response.status >= 200 && response.status < 300) {
+                  // Successful submission
+                  navigate(`/adminMovies`);
+                  console.log('Showtime added successfully');
+              } else {
+                  throw new Error('Failed to add showtime');
+              }
+          } else {
               // If a duplicate entry is found, display an error message
               alert("Error: A showtime with the same details already exists");
-              return;
-          }
-  
-          // If no duplicate is found, proceed with adding the showtime
-          const response = await axios.post('http://localhost:8080/showtime/', showtime);
-  
-          if (response.status >= 200 && response.status < 300) {
-              // Successful submission
-              navigate(`/adminMovies`);
-              console.log('Showtime added successfully');
-          } else {
-              throw new Error('Failed to add showtime');
           }
       } catch (error) {
           console.error('Error occurred during adding showtime:', error.message);
       }
   };
+  
+  
   
 
     return (
