@@ -122,7 +122,6 @@ function EditPayment() {
                 <input
                   type="text"
                   name="CVN"
-                  value={formData.CVN}
                   onChange={handleInputChange}
                   placeholder="123"
                   style={{color: 'black'}}
