@@ -16,6 +16,10 @@ const promoSchema = mongoose.Schema({
     image:{
         type: String,
         trim: true,
+    },
+    code:{
+        type: String,
+        trim: true,
     }
 });
 

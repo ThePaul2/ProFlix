@@ -68,6 +68,8 @@ const AdminPromo = () => {
                       <br />
                       <span>Description: {promo.description}</span>
                       <br />
+                      <span>Code: {promo.code}</span>
+                      <br />
                       <span>Discount: {promo.discount}</span>
                       <br />
                       

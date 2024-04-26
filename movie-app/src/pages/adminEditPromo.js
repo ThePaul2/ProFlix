@@ -11,7 +11,7 @@ const EditPromo = () => {
         if (id !== "new-promo") {
             fetchPromo();
         } else {
-            setPromo({ name: "", description: "", discount: "", image: "" });
+            setPromo({ name: "", description: "", discount: "", image: "", code: "" });
         }
     }, [id]);
 
@@ -102,6 +102,21 @@ const EditPromo = () => {
                                     placeholder={id === "new-promo" ? "Promotion Description" : promo.description}
                                     name="description"
                                     value={promo.description}
+                                    className="w-full px-4 py-4 rounded-lg text-black"
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+
+                            <div>
+                                <label className="font-semibold">Code</label>
+                                <br />
+                            </div>
+                            <div className="w-full leading-loose">
+                                <input
+                                    type="text"
+                                    placeholder={id === "new-promo" ? "Promotion Code" : promo.code}
+                                    name="code"
+                                    value={promo.code}
                                     className="w-full px-4 py-4 rounded-lg text-black"
                                     onChange={handleInputChange}
                                 />

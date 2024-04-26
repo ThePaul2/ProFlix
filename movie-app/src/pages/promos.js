@@ -29,6 +29,7 @@ const Promos = () => {
               <div style={styles.eventDetails}>
                 <span style={styles.promoTitle}>{promo.name}</span><br />
                 <span>{promo.description}</span><br />
+                <span>Code: {promo.code}</span><br />
               </div>
               <div style={styles.imageContainer}>
                 <img src={promo.image} alt={promo.name} style={styles.image} />

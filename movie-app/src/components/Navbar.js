@@ -6,7 +6,7 @@ const Navbar = () => {
     const links = [
         { name: "MOVIES", link: "/movies?search=%20" },
         { name: "PROMOS", link: "/promos" },
-        { name: "SHOWTIMES", link: "/showtimes" },
+        
     ];
     const [open, setOpen] = useState(false);
 
