@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     const links = [
-        { name: "MOVIES", link: "/movies" },
+        { name: "MOVIES", link: "/movies?search=%20" },
         { name: "PROMOS", link: "/promos" },
         { name: "SHOWTIMES", link: "/showtimes" },
     ];

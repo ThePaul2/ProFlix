@@ -33,7 +33,7 @@ const VideoPlayer = () => {
         {/* Buttons */}
         <div className="flex mt-4">
           <Link
-            to="/movies"
+            to="/movies?search=%20"
             className="mr-4 rounded-full border border-red-500 p-3 px-6 hover:bg-white transition duration-300 ease-in-out"
           >
             <span className="text-red-500 font-bold">Movies</span>
