@@ -107,18 +107,27 @@ const EditMovie = () => {
                             onChange={handleInputChange}
                         />
                     </div>
-                    
-                    <div>
+
+					<div>
                         <label className="font-semibold">Genre</label>
                         <br />
-                        <input
-                            type="text"
-                            placeholder="Genre"
+                        <select
                             name="genre"
                             value={movie.genre}
-                            className="w-full px-4 py-4 rounded-lg text-black"
                             onChange={handleInputChange}
-                        />
+                            className="w-full px-4 py-4 rounded-lg text-black"
+                        >
+                            <option value="">Select Genre</option>
+                            <option value="Sci-Fi">Sci-Fi</option>
+                            <option value="Drama">Drama</option>
+                            <option value="Crime">Crime</option>
+                            <option value="Comedy">Comedy</option>
+							<option value="Superhero">Superhero</option>
+							<option value="Adventure">Adventure</option>
+							<option value="Fantasy">Fantasy</option>
+							<option value="War">War</option>
+							<option value="Animation">Animation</option>
+                        </select>
                     </div>
 
                     <div>
