@@ -10,6 +10,9 @@ const Tickets = () => {
   const location = useLocation(); // Use useLocation hook to access location object
   const [movie, setMovie] = useState([]);
   const [selectedShowtime, setSelectedShowtime] = useState("");
+  const [ticketInfo, setTicketInfo] = useState([]);
+
+
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -28,6 +31,22 @@ const Tickets = () => {
 
     fetchMovie();
   }, [id, location.search]);
+
+
+  useEffect(() => {
+    const fetchTicket = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/ticket/662bf2adca314a9cd524be8e`);
+        setTicketInfo(response.data);
+      
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchTicket();
+  }, [id, location.search]);
+  
   
   const [numTickets, setNumTickets] = useState(0);
   const [selectedSeats, setSelectedSeats] = useState([]);
@@ -36,9 +55,16 @@ const Tickets = () => {
   const [adultTicketCount, setAdultTicketCount] = useState(0);
   const [seniorTicketCount, setSeniorTicketCount] = useState(0);
 
-  const childTicketPrice = 7;
-  const adultTicketPrice = 11;
-  const seniorTicketPrice = 9;
+  console.log("hi");
+  console.log(movie);
+  console.log(ticketInfo);
+
+  const childTicketPrice = ticketInfo.child;
+  const adultTicketPrice = ticketInfo.adult;
+  const seniorTicketPrice = ticketInfo.senior;
+  const fees = ticketInfo.fees;
+  const taxes = ticketInfo.taxes;
+  
 
   const handleIncrement = (type) => {
     switch (type) {
@@ -138,8 +164,12 @@ const Tickets = () => {
               <span className="px-4 text-white">{seniorTicketCount}</span>
               <button onClick={() => handleIncrement("senior")} className="bg-white text-red-500 px-4 py-2 rounded-md ml-2">+</button>
             </div>
+            {/* fees */}
+            <p className="text-white mb-2">Fees: ${fees}</p>
+            {/* taxes */}
+            <p className="text-white mb-2">Taxes: ${taxes*totalPrice}</p>
             {/* Total price */}
-            <p className="font-bold text-white mb-2">Total: ${totalPrice}</p>
+            <p className="font-bold text-white mb-2">Total: ${totalPrice + taxes*totalPrice}</p>
             {/* <p className="text-white">Selected Seats: {selectedSeats.length}</p> */}
             <Link to={`/ticketConfirmation?totalPrice=${totalPrice}`} className="bg-red-400 text-white px-6 py-2 rounded-lg hover:bg-red-600 mt-16">Purchase Tickets</Link>
           </div>

@@ -10,6 +10,8 @@ import promoRoute from './routes/promoRoute.js';
 import roomRoute from './routes/roomRoute.js';
 import theatreRoute from './routes/theatreRoute.js';
 import showtimeRoute from './routes/showtimeRoute.js';
+import ticketRoute from './routes/ticketRoute.js';
+
 import dotenv from 'dotenv';
 import cors from 'cors';
 
@@ -40,6 +42,7 @@ app.use('/movie', movieRoute);
 app.use('/promo', promoRoute);
 app.use('/room', roomRoute);
 app.use('/theatre', theatreRoute);
+app.use('/ticket', ticketRoute);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
