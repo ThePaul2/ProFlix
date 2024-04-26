@@ -24,7 +24,7 @@ const AdminDashboard = () => {
 
   const handleDeleteUser = async (userId) => {
     try {
-        await axios.delete(`http://localhost:8080/users/status/${userId}`);
+        await axios.delete(`http://localhost:8080/users/${userId}`);
         console.log(`User with ID ${userId} deleted successfully.`);
         // After successful deletion, fetch updated user data
         fetchUserData();
