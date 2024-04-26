@@ -1,29 +1,26 @@
-import React, { useState, useEffect } from "react";
-import Navbar from "../components/Navbar";
-import { useParams, useLocation } from "react-router-dom";
-import Seats from "../components/Seats.js";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import Navbar from '../components/Navbar';
+import { useParams, useLocation } from 'react-router-dom';
+import Seats from '../components/Seats';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const Tickets = () => {
   let { id } = useParams();
-  const location = useLocation(); // Use useLocation hook to access location object
+  const location = useLocation();
   const [movie, setMovie] = useState([]);
-  const [selectedShowtime, setSelectedShowtime] = useState("");
+  const [selectedShowtime, setSelectedShowtime] = useState('');
   const [ticketInfo, setTicketInfo] = useState([]);
-
-
 
   useEffect(() => {
     const fetchMovie = async () => {
       try {
         const response = await axios.get(`http://localhost:8080/movie/${id}`);
         setMovie(response.data);
-        
-        // Extract the showtime from the URL query parameter if available
+
         const searchParams = new URLSearchParams(location.search);
         const showtimeId = searchParams.get('showtimeId');
-        setSelectedShowtime(searchParams.get('selectedShowtime') || ""); // Set selected showtime
+        setSelectedShowtime(searchParams.get('selectedShowtime') || '');
       } catch (error) {
         console.log(error);
       }
@@ -32,13 +29,13 @@ const Tickets = () => {
     fetchMovie();
   }, [id, location.search]);
 
-
   useEffect(() => {
     const fetchTicket = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/ticket/662bf2adca314a9cd524be8e`);
+        const response = await axios.get(
+          `http://localhost:8080/ticket/662bf2adca314a9cd524be8e`
+        );
         setTicketInfo(response.data);
-      
       } catch (error) {
         console.log(error);
       }
@@ -46,8 +43,7 @@ const Tickets = () => {
 
     fetchTicket();
   }, [id, location.search]);
-  
-  
+
   const [numTickets, setNumTickets] = useState(0);
   const [selectedSeats, setSelectedSeats] = useState([]);
 
@@ -55,26 +51,21 @@ const Tickets = () => {
   const [adultTicketCount, setAdultTicketCount] = useState(0);
   const [seniorTicketCount, setSeniorTicketCount] = useState(0);
 
-  console.log("hi");
-  console.log(movie);
-  console.log(ticketInfo);
-
   const childTicketPrice = ticketInfo.child;
   const adultTicketPrice = ticketInfo.adult;
   const seniorTicketPrice = ticketInfo.senior;
   const fees = ticketInfo.fees;
   const taxes = ticketInfo.taxes;
-  
 
   const handleIncrement = (type) => {
     switch (type) {
-      case "child":
+      case 'child':
         setChildTicketCount(childTicketCount + 1);
         break;
-      case "adult":
+      case 'adult':
         setAdultTicketCount(adultTicketCount + 1);
         break;
-      case "senior":
+      case 'senior':
         setSeniorTicketCount(seniorTicketCount + 1);
         break;
       default:
@@ -85,14 +76,16 @@ const Tickets = () => {
 
   const handleDecrement = (type) => {
     switch (type) {
-      case "child":
+      case 'child':
         setChildTicketCount(childTicketCount > 0 ? childTicketCount - 1 : 0);
         break;
-      case "adult":
+      case 'adult':
         setAdultTicketCount(adultTicketCount > 0 ? adultTicketCount - 1 : 0);
         break;
-      case "senior":
-        setSeniorTicketCount(seniorTicketCount > 0 ? seniorTicketCount - 1 : 0);
+      case 'senior':
+        setSeniorTicketCount(
+          seniorTicketCount > 0 ? seniorTicketCount - 1 : 0
+        );
         break;
       default:
         break;
@@ -103,10 +96,10 @@ const Tickets = () => {
   const handleSeatSelection = (seatId) => {
     setSelectedSeats((prevSelectedSeats) => {
       if (prevSelectedSeats.includes(seatId)) {
-        setNumTickets(numTickets - 1); // Decrement numTickets when seat is deselected
+        setNumTickets(numTickets - 1);
         return prevSelectedSeats.filter((seat) => seat !== seatId);
       } else {
-        setNumTickets(numTickets + 1); // Increment numTickets when seat is selected
+        setNumTickets(numTickets + 1);
         return [...prevSelectedSeats, seatId];
       }
     });
@@ -116,6 +109,16 @@ const Tickets = () => {
     childTicketCount * childTicketPrice +
     adultTicketCount * adultTicketPrice +
     seniorTicketCount * seniorTicketPrice;
+
+  // Promo code state
+  const [promoCode, setPromoCode] = useState('');
+  const [promoApplied, setPromoApplied] = useState(false);
+
+  // Function to handle applying promo code
+  const applyPromoCode = () => {
+    // Implement logic to apply promo code here
+    setPromoApplied(true); // Set promoApplied to true once promo code is applied
+  };
 
   return (
     <div>
@@ -145,33 +148,88 @@ const Tickets = () => {
               <h2 className="font-bold text-white">Showtime:</h2>
               <p className="text-white">{selectedShowtime}</p>
             </div>
-            {/* Ticket quantity */}
             <div className="mb-4">
-              <h2 className="font-bold mb-2 text-white">Child (${childTicketPrice})</h2>
-              <button onClick={() => handleDecrement("child")} className="bg-white text-red-500 px-4 py-2 rounded-md mr-2">-</button>
+              <h2 className="font-bold mb-2 text-white">
+                Child (${childTicketPrice})
+              </h2>
+              <button
+                onClick={() => handleDecrement('child')}
+                className="bg-white text-red-500 px-4 py-2 rounded-md mr-2"
+              >
+                -
+              </button>
               <span className="px-4 text-white">{childTicketCount}</span>
-              <button onClick={() => handleIncrement("child")} className="bg-white text-red-500 px-4 py-2 rounded-md ml-2">+</button>
+              <button
+                onClick={() => handleIncrement('child')}
+                className="bg-white text-red-500 px-4 py-2 rounded-md ml-2"
+              >
+                +
+              </button>
             </div>
             <div className="mb-4">
-              <h2 className="font-bold mb-2 text-white">Adult (${adultTicketPrice})</h2>
-              <button onClick={() => handleDecrement("adult")} className="bg-white text-red-500 px-4 py-2 rounded-md mr-2">-</button>
+              <h2 className="font-bold mb-2 text-white">
+                Adult (${adultTicketPrice})
+              </h2>
+              <button
+                onClick={() => handleDecrement('adult')}
+                className="bg-white text-red-500 px-4 py-2 rounded-md mr-2"
+              >
+                -
+              </button>
               <span className="px-4 text-white">{adultTicketCount}</span>
-              <button onClick={() => handleIncrement("adult")} className="bg-white text-red-500 px-4 py-2 rounded-md ml-2">+</button>
+              <button
+                onClick={() => handleIncrement('adult')}
+                className="bg-white text-red-500 px-4 py-2 rounded-md ml-2"
+              >
+                +
+              </button>
             </div>
             <div className="mb-4">
-              <h2 className="font-bold mb-2 text-white">Senior (${seniorTicketPrice})</h2>
-              <button onClick={() => handleDecrement("senior")} className="bg-white text-red-500 px-4 py-2 rounded-md mr-2">-</button>
+              <h2 className="font-bold mb-2 text-white">
+                Senior (${seniorTicketPrice})
+              </h2>
+              <button
+                onClick={() => handleDecrement('senior')}
+                className="bg-white text-red-500 px-4 py-2 rounded-md mr-2"
+              >
+                -
+              </button>
               <span className="px-4 text-white">{seniorTicketCount}</span>
-              <button onClick={() => handleIncrement("senior")} className="bg-white text-red-500 px-4 py-2 rounded-md ml-2">+</button>
+              <button
+                onClick={() => handleIncrement('senior')}
+                className="bg-white text-red-500 px-4 py-2 rounded-md ml-2"
+              >
+                +
+              </button>
             </div>
-            {/* fees */}
             <p className="text-white mb-2">Fees: ${fees}</p>
-            {/* taxes */}
-            <p className="text-white mb-2">Taxes: ${taxes*totalPrice}</p>
-            {/* Total price */}
-            <p className="font-bold text-white mb-2">Total: ${totalPrice + fees + taxes*totalPrice}</p>
-            {/* <p className="text-white">Selected Seats: {selectedSeats.length}</p> */}
-            <Link to={`/ticketConfirmation?totalPrice=${totalPrice}`} className="bg-red-400 text-white px-6 py-2 rounded-lg hover:bg-red-600 mt-16">Purchase Tickets</Link>
+            <p className="text-white mb-2">
+              Taxes: ${(taxes * totalPrice).toFixed(2)}
+            </p>
+            <p className="font-bold text-white mb-2">
+              Total: ${totalPrice + fees + taxes * totalPrice}
+            </p>
+            <div className="mb-4">
+              <h2 className="font-bold text-white">Promo Code:</h2>
+              <input
+                type="text"
+                value={promoCode}
+                onChange={(e) => setPromoCode(e.target.value)}
+                className="bg-white text-black px-4 py-2 rounded-md"
+              />
+              <button
+                onClick={applyPromoCode}
+                className="bg-red-400 text-white px-4 py-2 rounded-md ml-2 hover:bg-red-600"
+              >
+                Apply
+              </button>
+            </div>
+            <Link
+              to={`/ticketConfirmation?totalPrice=${totalPrice}`}
+              className="bg-red-400 text-white px-6 py-2 rounded-lg hover:bg-red-600 mt-16"
+            >
+              Purchase Tickets
+            </Link>
           </div>
         </div>
         <div className="w-px bg-gray-400"></div>
