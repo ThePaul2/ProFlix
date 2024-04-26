@@ -78,8 +78,8 @@ const Info = () => {
             {/* <Link to={`/tickets/${id}`} className="bg-red-400 text-white px-6 py-2 rounded-lg hover:bg-red-600 mt-4">Buy Tickets</Link> */}
           </div>
         </div>
-        <div className="lg:w-1/2 relative">
-          <div className="p-6 bg-black text-white flex text-center items-center justify-center">
+        <div className="lg:w-1/2 relative" >
+          <div className="p-6 text-white flex text-center items-center justify-end" >
             <div className="text-center ">
               <h2 className="text-3xl font-bold mb-4">Showtimes</h2>
               <ul className="text-left">
