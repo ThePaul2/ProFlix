@@ -64,8 +64,6 @@ const AdminPromo = () => {
                 {promos.map((promo, index) => (
                   <li key={promo._id} className={myStyles.container}>
                     <div className="flex-1">
-                      <span>{`${promo._id}`}</span>
-                      <br />
                       <span>Name: {promo.name}</span>
                       <br />
                       <span>Description: {promo.description}</span>

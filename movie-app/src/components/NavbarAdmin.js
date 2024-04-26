@@ -7,6 +7,7 @@ const Navbar = () => {
         { name: "Manage Movies", link: "/adminMovies" },
         { name: "Manage Users", link: "/adminUsers" },
         { name: "Manage Promotions", link: "/adminPromo" },
+        { name: "Manage Prices", link: "/adminPrices" },
     ];
     const [open, setOpen] = useState(false);
 

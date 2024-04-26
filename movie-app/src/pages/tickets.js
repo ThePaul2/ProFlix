@@ -169,7 +169,7 @@ const Tickets = () => {
             {/* taxes */}
             <p className="text-white mb-2">Taxes: ${taxes*totalPrice}</p>
             {/* Total price */}
-            <p className="font-bold text-white mb-2">Total: ${totalPrice + taxes*totalPrice}</p>
+            <p className="font-bold text-white mb-2">Total: ${totalPrice + fees + taxes*totalPrice}</p>
             {/* <p className="text-white">Selected Seats: {selectedSeats.length}</p> */}
             <Link to={`/ticketConfirmation?totalPrice=${totalPrice}`} className="bg-red-400 text-white px-6 py-2 rounded-lg hover:bg-red-600 mt-16">Purchase Tickets</Link>
           </div>

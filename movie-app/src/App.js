@@ -2,10 +2,12 @@ import ActivateUser from "./pages/activateUser";
 import Admin from "./pages/adminHome";
 import AdminEditMovie from "./pages/adminEditMovie";
 import AdminEditPromo from "./pages/adminEditPromo";
+import AdminEditPrice from "./pages/adminEditPrices";
 import AdminMovies from "./pages/adminMovies";
 import EditShowtime from "./pages/adminShowtime";
 import EditSchedule from "./pages/adminSchedule";
 import AdminPromo from "./pages/adminPromo";
+import AdminPrices from "./pages/adminPrices";
 import AdminUsers from "./pages/adminUsers";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import CardInfoPage from "./pages/cardInfoPage";
@@ -39,6 +41,7 @@ function App() {
         <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
         <Route path="/adminMovies" element={<ProtectedRoute><AdminMovies /></ProtectedRoute>} />
         <Route path="/adminUsers" element={<ProtectedRoute><AdminUsers /></ProtectedRoute>} />
+        <Route path="/adminPrices" element={<ProtectedRoute><AdminPrices /></ProtectedRoute>} />
         <Route path="/adminPromo" element={<AdminPromo />} />
         <Route path="/edit-movie/:id" element={<EditMovie />} />
         <Route path="/add-showtime/:movieTitle" element={<EditSchedule />} />
@@ -53,6 +56,7 @@ function App() {
         <Route path="/confirmation" element={<Confirmation />} />
         <Route path="/edit-movie/:id" element={<AdminEditMovie />} />
         <Route path="/edit-promo/:id" element={<AdminEditPromo />} />
+        <Route path="/edit-price/" element={<AdminEditPrice />} />
         <Route path="/edit-profile/:email" element={<EditProfile />} />
         <Route path="/edit-payments/:email" element={<EditPayments />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />

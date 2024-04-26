@@ -50,8 +50,6 @@ const AdminMovies = () => {
               {movies.map((movie, index) => (
                 <li key={movie._id} className={myStyles.container}>
                   <div className="flex-1">
-                    <span>{`${movie._id}`}</span>
-                    <br />
                     <span>Title: {movie.movieTitle}</span>
                     <br />
                     <span>Producer: {movie.producer}</span>
