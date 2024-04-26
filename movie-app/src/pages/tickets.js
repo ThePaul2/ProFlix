@@ -11,6 +11,9 @@ const Tickets = () => {
   const [movie, setMovie] = useState([]);
   const [selectedShowtime, setSelectedShowtime] = useState('');
   const [ticketInfo, setTicketInfo] = useState([]);
+  const [promoCode, setPromoCode] = useState('');
+  const [promoDiscount, setPromoDiscount] = useState(0);
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -66,7 +69,9 @@ const Tickets = () => {
         setAdultTicketCount(adultTicketCount + 1);
         break;
       case 'senior':
-        setSeniorTicketCount(seniorTicketCount + 1);
+        setSeniorTicketCount(
+          seniorTicketCount + 1
+        );
         break;
       default:
         break;
@@ -110,14 +115,32 @@ const Tickets = () => {
     adultTicketCount * adultTicketPrice +
     seniorTicketCount * seniorTicketPrice;
 
-  // Promo code state
-  const [promoCode, setPromoCode] = useState('');
-  const [promoApplied, setPromoApplied] = useState(false);
+    const checkPromoCode = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/promo`);
+        const promoCodes = response.data;
+        console.log("Promo codes from server:", promoCodes); // Debugging statement
+        console.log("Entered promo code:", promoCode); // Debugging statement
+        const promo = promoCodes.find((promo) => promo.code === promoCode); // Compare with 'code' property
+        console.log("Found promo code:", promo); // Debugging statement
+        if (promo) {
+          // Set promoDiscount to the discount value from the promo code object
+          setPromoDiscount(promo.discount);
+          console.log('Promo code applied! Discount:', promo.discount);
+          setMessage('Promo code applied!');
+        } else {
+          setMessage('Invalid promo code');
+        }
+      } catch (error) {
+        console.error('Error checking promo code:', error);
+      }
+    };
+    
+    
 
   // Function to handle applying promo code
   const applyPromoCode = () => {
-    // Implement logic to apply promo code here
-    setPromoApplied(true); // Set promoApplied to true once promo code is applied
+    checkPromoCode();
   };
 
   return (
@@ -206,8 +229,17 @@ const Tickets = () => {
             <p className="text-white mb-2">
               Taxes: ${(taxes * totalPrice).toFixed(2)}
             </p>
+            <p className="text-white mb-2">
+              {promoDiscount % 1 === 0
+                ? `Discount: $${(promoDiscount)}`
+                : `Discount: $${(promoDiscount * totalPrice).toFixed(2)}`}
+            </p>
+
             <p className="font-bold text-white mb-2">
-              Total: ${totalPrice + fees + taxes * totalPrice}
+          
+              {promoDiscount % 1 === 0
+                ? `Total: $${(totalPrice + fees + (taxes * totalPrice) - promoDiscount).toFixed(2)}`
+                : `Total: $${(totalPrice + fees + (promoDiscount * totalPrice)).toFixed(2)}`}
             </p>
             <div className="mb-4">
               <h2 className="font-bold text-white">Promo Code:</h2>
@@ -217,15 +249,20 @@ const Tickets = () => {
                 onChange={(e) => setPromoCode(e.target.value)}
                 className="bg-white text-black px-4 py-2 rounded-md"
               />
+              
               <button
                 onClick={applyPromoCode}
                 className="bg-red-400 text-white px-4 py-2 rounded-md ml-2 hover:bg-red-600"
               >
                 Apply
               </button>
+              <p className="mt-2 text-sm text-slate-500 text-center md:text-left ">{message}</p>
             </div>
+            
             <Link
-              to={`/ticketConfirmation?totalPrice=${totalPrice}`}
+              to={`/ticketConfirmation?totalPrice=${promoDiscount % 1 === 0
+                ? (totalPrice + fees + (taxes * totalPrice) - promoDiscount).toFixed(2)
+                : (totalPrice + fees + (promoDiscount * totalPrice)).toFixed(2)}`}
               className="bg-red-400 text-white px-6 py-2 rounded-lg hover:bg-red-600 mt-16"
             >
               Purchase Tickets
@@ -245,3 +282,4 @@ const Tickets = () => {
 };
 
 export default Tickets;
+
