@@ -10,6 +10,7 @@ import AdminUsers from "./pages/adminUsers";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import CardInfoPage from "./pages/cardInfoPage";
 import Confirmation from "./pages/confirmation";
+import EditMovie from "./pages/adminEditMovie";
 import EditPayments from "./pages/editPayments";
 import EditProfile from "./pages/editProfile";
 import ForgotPassword from "./pages/forgotPassword";
@@ -42,7 +43,7 @@ function App() {
         <Route path="/edit-movie/:id" element={<EditMovie />} />
         <Route path="/add-showtime/:movieTitle" element={<EditSchedule />} />
         <Route path="/showtime-movie/:movieTitle" element={<EditShowtime />} />
-        <Route path="/edit-promo/:id" element={<EditPromo />} />
+        <Route path="/edit-promo/:id" element={<AdminPromo />} />
         <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
         <Route path="/promos" element={<Promos />} />
         <Route path="/rewards" element={<Rewards />} />

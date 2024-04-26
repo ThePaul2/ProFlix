@@ -12,8 +12,7 @@ const Movies = () => {
   let [movies, setMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState(data.movies);
   const [searchTerm, setSearchTerm] = useState('');
-
-  let [genres, setGenres] = useState(["None"]);
+  const [genres, setGenres] = useState(["None"]);
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -26,54 +25,38 @@ const Movies = () => {
 
   useEffect(() => {
     const fetchMovies = async () => {
-        try {
-            const response = await axios.get('http://localhost:8080/movie');
-            setMovies(response.data);
-            movies = response.data;
-        } catch (error) {
-            console.error('Error fetching movies:', error);
-        }
+      try {
+        const response = await axios.get('http://localhost:8080/movie');
+        setMovies(response.data);
+      } catch (error) {
+        console.error('Error fetching movies:', error);
+      }
     };
 
-    fetchMovies().then(() => {
-      handleSearch(searchTerm);
-      for (let i = 0; i < movies.length; i++) {
-        let genre = movies[i].genre;
-        let subg = genre.split(", ");
-        for (let j = 0; j < subg.length; j++) {
-          if (!genres.includes(subg[j])) {
-            genres.push(subg[j]);
-          }
+    fetchMovies();
+  }, []);
+
+  useEffect(() => {
+    let updatedGenres = ["None"]; // Initialize with "None" option
+    movies.forEach(movie => {
+      movie.genre.split(", ").forEach(genre => {
+        if (!updatedGenres.includes(genre)) {
+          updatedGenres.push(genre);
         }
-      }
+      });
     });
-}, []);
+    setGenres(updatedGenres);
+  }, [movies]);
 
   const handleSearch = (searchTerm) => {
     let genreFilter = document.getElementById("genre-filter").value;
-
-    console.log(movies)
-    let filtered = [];
-    for (let i = 0; i < movies.length; i++) {
-      let movie = movies[i];
-      let name = movie.name;
-      if (name == null) {
-        name = movie.title;
-      }
-      if (name == null) {
-        name = movie.movieTitle;
-      }
-      if (name.toLowerCase().includes(searchTerm.toLowerCase())) {
-        let movieGenres = movies[i].genre.split(", ");
-        if (movieGenres.includes(genreFilter) || genreFilter == "None") {
-          filtered.push(movie);
-        }
-      }
-    }
+    let filtered = movies.filter(movie => {
+      let name = movie.name || movie.title || movie.movieTitle || '';
+      return name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        (genreFilter === "None" || movie.genre.includes(genreFilter));
+    });
     setFilteredMovies(filtered);
   };
-
-  // console.log('onSearch function:', handleSearch); // Log the onSearch function
 
   return (
     <div className="bg-gray-800 min-h-screen">
@@ -82,12 +65,16 @@ const Movies = () => {
         <div className="flex gap-4">
           <SearchBar onSearch={handleSearch} initialSearchTerm={searchTerm} />
           <select id="genre-filter" className="bg-gray-200 border border-gray-300 rounded-md py-4 pl-4 pr-16 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
-            {genres.map((genre) => (
-              <option value={genre}>{genre}</option>
+            {genres.map((genre, index) => (
+              <option key={index} value={genre}>{genre}</option>
             ))}
           </select>
         </div>
-        <p className="text-white mt-4">Number of Movies: {movies.length}</p>
+        {filteredMovies.length > 0 ? (
+          <p className="text-white mt-4">Number of Movies: {filteredMovies.length}</p>
+        ) : (
+          <p className="text-white mt-4 text-xl">Sorry, no movies found. Please try again.</p>
+        )}
         <div className="mt-8 w-full">
           <MovieGallery movies={filteredMovies} />
         </div>

@@ -39,8 +39,8 @@ const Home = () => {
         <SearchBar /> {/* Render SearchBar component */}
         <div className="max-w-8xl w-full px-4">
           {/* Render MovieSlider components for now playing and coming soon movies */}
-          <MovieSlider header="Now Playing" movies={nowPlayingMovies} />
-          <MovieSlider header="Coming Soon" movies={comingSoonMovies} />
+          <MovieSlider header="Now Playing" movies={nowPlayingMovies} marginWidth={180}/>
+          <MovieSlider header="Coming Soon" movies={comingSoonMovies} marginWidth={10}/>
         </div>
       </div> 
       <Footer /> {/* Render Footer component */}
