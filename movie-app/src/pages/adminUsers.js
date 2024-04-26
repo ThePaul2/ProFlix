@@ -24,7 +24,7 @@ const AdminDashboard = () => {
 
   const handleDeleteUser = async (userId) => {
     try {
-        await axios.delete(`http://localhost:8080/users/${userId}`);
+        await axios.delete(`http://localhost:8080/users/status/${userId}`);
         console.log(`User with ID ${userId} deleted successfully.`);
         // After successful deletion, fetch updated user data
         fetchUserData();
@@ -32,6 +32,45 @@ const AdminDashboard = () => {
         console.error(`Error deleting user with ID ${userId}:`, error);
     }
   };
+
+  const suspendUser = async (userId) => {
+    try {
+      // Create an updated user object with the new status (1 for suspended)
+      const updatedUser = { status: 1 };
+      
+      // Make a PUT request with the updated user object in the request body
+      await axios.put(`http://localhost:8080/users/status/${userId}`, updatedUser);
+      
+      console.log(`User with ID ${userId} suspended.`);
+      
+      // After successful update, fetch updated user data
+      fetchUserData();
+    } catch (error) {
+      console.error(`Error suspending user with ID ${userId}:`, error);
+    }
+  };
+  
+
+  const adminUser = async (userId) => {
+    try {
+      // Create an updated user object with the new status (1 for suspended)
+      const updatedUser = { status: 2 };
+      
+      // Make a PUT request with the updated user object in the request body
+      await axios.put(`http://localhost:8080/users/status/${userId}`, updatedUser);
+      
+      console.log(`User with ID ${userId} made to admin.`);
+      
+      // After successful update, fetch updated user data
+      fetchUserData();
+    } catch (error) {
+      console.error(`Error user with ID ${userId}:`, error);
+    }
+  };
+  
+
+
+  
 
   return (
     <div className="bg-black min-h-screen">
@@ -53,7 +92,11 @@ const AdminDashboard = () => {
                   <span>User ID: {user._id}</span>
                 </div>
                 {shouldShowDeleteButton(user.status) && (
-                  <button onClick={() => handleDeleteUser(user._id)} className={myStyles.redButton}>Delete User</button>
+                  <>
+                    <button onClick={() => handleDeleteUser(user._id)} className={myStyles.redButton}>Delete User</button>
+                    <button onClick={() => suspendUser(user._id)} className={myStyles.redButton}>Suspend</button>
+                    <button onClick={() => adminUser(user._id)} className={myStyles.greenButton}>Make Admin</button>
+                  </>
                 )}
               </li>
             ))}

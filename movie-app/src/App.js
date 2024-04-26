@@ -3,6 +3,8 @@ import Admin from "./pages/adminHome";
 import AdminEditMovie from "./pages/adminEditMovie";
 import AdminEditPromo from "./pages/adminEditPromo";
 import AdminMovies from "./pages/adminMovies";
+import EditShowtime from "./pages/adminShowtime";
+import EditSchedule from "./pages/adminSchedule";
 import AdminPromo from "./pages/adminPromo";
 import AdminUsers from "./pages/adminUsers";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -37,6 +39,16 @@ function App() {
         <Route path="/adminMovies" element={<ProtectedRoute><AdminMovies /></ProtectedRoute>} />
         <Route path="/adminUsers" element={<ProtectedRoute><AdminUsers /></ProtectedRoute>} />
         <Route path="/adminPromo" element={<AdminPromo />} />
+        <Route path="/edit-movie/:id" element={<EditMovie />} />
+        <Route path="/add-showtime/:movieTitle" element={<EditSchedule />} />
+        <Route path="/showtime-movie/:movieTitle" element={<EditShowtime />} />
+        <Route path="/edit-promo/:id" element={<EditPromo />} />
+        <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
+        <Route path="/promos" element={<Promos />} />
+        <Route path="/rewards" element={<Rewards />} />
+        <Route path="/tickets/:id" element={<Tickets />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/card-info" element={<CardInfoPage />} />
         <Route path="/confirmation" element={<Confirmation />} />
         <Route path="/edit-movie/:id" element={<AdminEditMovie />} />

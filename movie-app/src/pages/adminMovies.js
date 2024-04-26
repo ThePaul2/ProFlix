@@ -40,22 +40,29 @@ const AdminMovies = () => {
         <div className="bg-black p-4 rounded-lg shadow-md font-sans max-w-4xl mx-auto">
           <h1 className="text-3xl font-bold mb-4 text-gray-800">Welcome to Admin Dashboard</h1>
           <div>
-            <h1 className="text-3xl font-bold mb-2 text-gray-100">Movies</h1>
+            <div className="flex flex-row w-full">
+              <h1 className="text-3xl font-bold mb-2 text-gray-100">Movies</h1>
+              <div className="ml-auto">
+                <Link to={`/edit-movie/new-movie`} className={myStyles.greenButton}>Add Movie</Link>
+              </div>
+            </div>
             <ul className="list-none ">
               {movies.map((movie, index) => (
                 <li key={movie._id} className={myStyles.container}>
                   <div className="flex-1">
                     <span>{`${movie._id}`}</span>
                     <br />
-                    <span>Title: {movie.title}</span>
+                    <span>Title: {movie.movieTitle}</span>
                     <br />
                     <span>Producer: {movie.producer}</span>
                     <br />
                     <span>Director: {movie.director}</span>
                   </div>
                   <div>
-                    <Link to={`/edit-movie/${encodeURIComponent(movie.id)}`} className={myStyles.greenButton}>Edit</Link>
-                    <button onClick={() => handleDeleteMovie(movie._id)} className={myStyles.redButton}>Delete Movie</button>
+                    <Link to={`/edit-movie/${encodeURIComponent(movie._id)}`} className={myStyles.greenButton}>Edit</Link>
+                    <Link to={`/add-showtime/${encodeURIComponent(movie.movieTitle)}`} className={myStyles.greenButton}>Schedule</Link>
+                    <Link to={`/showtime-movie/${encodeURIComponent(movie.movieTitle)}`} className={myStyles.yellowButton}>Showtime</Link>
+                    <button onClick={() => handleDeleteMovie(movie._id)} className={myStyles.redButton}>Delete</button>
                   </div>
               
                 </li>
@@ -76,6 +83,7 @@ const AdminMovies = () => {
 const myStyles = {
   greenButton: "px-4 py-2 bg-green-500 rounded-md text-white hover:bg-green-600 transition duration-300 ease-in-out ml-3",
   redButton: "px-4 py-2 bg-red-500 rounded-md text-white hover:bg-red-600 transition duration-300 ease-in-out ml-3",
+  yellowButton: "px-4 py-2 bg-yellow-500 rounded-md text-white hover:bg-yellow-600 transition duration-300 ease-in-out ml-3",
   container: "mb-2 p-4 bg-white rounded-md shadow-md flex justify-between items-center hover:bg-red-300",
 }
 

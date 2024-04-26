@@ -20,7 +20,8 @@ const EditProfile = () => {
         CVN: '',
         cardFirst: '',
         cardLast: '',
-        password: ''
+        password: '',
+        promo: ''
     });
 
     useEffect(() => {
@@ -47,9 +48,9 @@ const EditProfile = () => {
 	const fetchUserData = async () => {
         try {
             const response = await axios.get(`http://localhost:8080/users/${userId}`);
-            const { firstName, lastName, email, country, street1, street2, city, state, cardNumber, exp, CVN, cardFirst, cardLast } = response.data;
+            const { firstName, lastName, email, country, street1, street2, city, state, cardNumber, exp, CVN, cardFirst, cardLast, promo } = response.data;
             console.log('User Data:', response.data); // Add this line to log user data
-            setUserData({ firstName, lastName, email, country, street1, street2, city, state, cardNumber, exp, CVN, cardFirst, cardLast });
+            setUserData({ firstName, lastName, email, country, street1, street2, city, state, cardNumber, exp, CVN, cardFirst, cardLast, promo });
         } catch (error) {
             console.error('Error fetching user data:', error);
         }
@@ -145,6 +146,7 @@ const EditProfile = () => {
                                 onChange={handleChange}
                                 style={{ color: 'black' }}
                                 className="border-2 border-neutral-200 rounded-xl px-4 py-2 w-full"
+                                disabled
                             />
                         </label>
                         <button type="button" onClick={handlePasswordChange} className="text-center rounded-xl border-neutral-200 my-6 border-2 px-4 py-4 w-full bg-red-400 text-xl font-semibold">Change Password</button>
@@ -196,7 +198,16 @@ const EditProfile = () => {
                                 className="border-2 border-neutral-200 rounded-xl px-4 py-2 w-full"
                             />
                         </label>
-
+                        <label>
+                            <input
+                                className='mr-1'
+                                type="checkbox"
+                                name="promo"
+                                value={userData.promo}
+                                onChange={handleChange}
+                            />
+                            <span>Register for Promotion</span>
+                        </label>
                         <br />
                         <br />
                         <button type="submit" className="text-center rounded-xl border-neutral-200 border-2 px-4 py-4 w-full bg-red-400 text-xl font-semibold">Submit Changes</button>

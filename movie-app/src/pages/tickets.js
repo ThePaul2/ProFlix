@@ -8,7 +8,8 @@ import axios from "axios";
 const Tickets = ({ location }) => {
   let { id } = useParams();
   const [movie, setMovie] = useState([]);
-  const [bookings, setBookings] = useState([]);
+  const [showTime, setshowTime] = useState([]);
+  const [movieTitle, setmovieTitle] = useState([]);
   const [selectedShowtime, setSelectedShowtime] = useState("");
 
   useEffect(() => {
@@ -16,6 +17,7 @@ const Tickets = ({ location }) => {
       try {
         const response = await axios.get(`http://localhost:8080/movie/${id}`);
         setMovie(response.data);
+        setmovieTitle(response.data.movieTitle);
       } catch (error) {
         console.log(error);
       }
@@ -25,22 +27,22 @@ const Tickets = ({ location }) => {
   }, [id]);
    
   useEffect(() => {
-    const fetchBookings = async () => {
+    const fetchshowTime = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/booking/${id}`);
-        setBookings(response.data);
+        const response = await axios.get(`http://localhost:8080/showtime/${movieTitle}`);
+        setshowTime(response.data);
       } catch (error) {
-        console.error('Error fetching bookings:', error);
+        console.error('Error fetching showtime:', error);
       }
     };
 
-    fetchBookings();
+    fetchshowTime();
 
     // Cleanup function to abort the fetch request if the component unmounts
     return () => {
       // Abort fetch or any cleanup needed
     };
-  }, [id]); // Dependency array, will trigger effect on movieID change
+  }, [movieTitle]); // Dependency array, will trigger effect on movieID change
   
 
   
@@ -142,10 +144,8 @@ const Tickets = ({ location }) => {
               >
                 <option value="">Select Showtime</option>
                 {/* Map through bookings to display showtimes */}
-                {bookings.map((booking) => (
-                  booking.showTimes.map((time, index) => (
-                    <option key={index} value={time}>{time}</option>
-                  ))
+                {showTime.map((showTime, index) => (
+                  <option key={index} value={showTime.time}>{showTime.time} - {showTime.date} - {showTime.roomName} - {showTime.theaterName}</option>
                 ))}
               </select>
             </div>

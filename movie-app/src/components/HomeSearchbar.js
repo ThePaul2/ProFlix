@@ -28,7 +28,7 @@ const HomeSearchBar = ({ onSearch }) => {
           value={searchTerm}
           onChange={handleSearchChange}
           onKeyDown={handleKeyPress}
-          className="bg-gray-200 border border-gray-300 rounded-md py-4 px-16 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+          className="bg-gray-200 border border-gray-300 rounded-md py-4 pl-4 pr-16 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
         />
         <Link
           to={`/movies?search=${encodeURIComponent(searchTerm)}`}

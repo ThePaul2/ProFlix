@@ -13,6 +13,8 @@ const Movies = () => {
   const [filteredMovies, setFilteredMovies] = useState(data.movies);
   const [searchTerm, setSearchTerm] = useState('');
 
+  let [genres, setGenres] = useState(["None"]);
+
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const term = searchParams.get('search');
@@ -35,10 +37,21 @@ const Movies = () => {
 
     fetchMovies().then(() => {
       handleSearch(searchTerm);
+      for (let i = 0; i < movies.length; i++) {
+        let genre = movies[i].genre;
+        let subg = genre.split(", ");
+        for (let j = 0; j < subg.length; j++) {
+          if (!genres.includes(subg[j])) {
+            genres.push(subg[j]);
+          }
+        }
+      }
     });
 }, []);
 
   const handleSearch = (searchTerm) => {
+    let genreFilter = document.getElementById("genre-filter").value;
+
     console.log(movies)
     let filtered = [];
     for (let i = 0; i < movies.length; i++) {
@@ -51,7 +64,10 @@ const Movies = () => {
         name = movie.movieTitle;
       }
       if (name.toLowerCase().includes(searchTerm.toLowerCase())) {
-        filtered.push(movie);
+        let movieGenres = movies[i].genre.split(", ");
+        if (movieGenres.includes(genreFilter) || genreFilter == "None") {
+          filtered.push(movie);
+        }
       }
     }
     setFilteredMovies(filtered);
@@ -63,9 +79,16 @@ const Movies = () => {
     <div className="bg-gray-800 min-h-screen">
       <Navbar />
       <div className="mt-16 flex flex-col justify-center items-center pt-16">
-        <SearchBar onSearch={handleSearch} initialSearchTerm={searchTerm} />
+        <div className="flex gap-4">
+          <SearchBar onSearch={handleSearch} initialSearchTerm={searchTerm} />
+          <select id="genre-filter" className="bg-gray-200 border border-gray-300 rounded-md py-4 pl-4 pr-16 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+            {genres.map((genre) => (
+              <option value={genre}>{genre}</option>
+            ))}
+          </select>
+        </div>
         <p className="text-white mt-4">Number of Movies: {movies.length}</p>
-        <div className="mt-8">
+        <div className="mt-8 w-full">
           <MovieGallery movies={filteredMovies} />
         </div>
       </div>
