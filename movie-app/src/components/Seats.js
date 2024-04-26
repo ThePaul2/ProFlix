@@ -1,26 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SeatImage from '../assets/chair.png';
 
-const Seats = () => {
+const Seats = ({ totalSelectedSeats }) => {
     const [selectedSeats, setSelectedSeats] = useState([]);
-    const [totalSelectedSeats, setTotalSelectedSeats] = useState(0);
 
     const handleSeatSelection = (seatId) => {
         setSelectedSeats((prevSelectedSeats) => {
             if (prevSelectedSeats.includes(seatId)) {
-                setTotalSelectedSeats(totalSelectedSeats - 1); // Decrement counter if seat is deselected
                 return prevSelectedSeats.filter((seat) => seat !== seatId);
             } else {
-                setTotalSelectedSeats(totalSelectedSeats + 1); // Increment counter if seat is selected
                 return [...prevSelectedSeats, seatId];
             }
         });
     };
 
     // Log total selected seats whenever selectedSeats changes
-    React.useEffect(() => {
-        console.log("total:", totalSelectedSeats);
-    }, [selectedSeats, totalSelectedSeats]);
+    useEffect(() => {
+        console.log('total:', selectedSeats.length);
+    }, [selectedSeats]);
 
     const generateSeats = () => {
         const seats = [];
@@ -64,6 +61,7 @@ const Seats = () => {
             <div className="seat-container grid grid-cols-6 gap-2">
                 {generateSeats()}
             </div>
+            <p className="text-white mt-4">Selected Seats: {selectedSeats.length}</p>
         </div>
     );
 };

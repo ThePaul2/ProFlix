@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import Seats from "../components/Seats.js";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-const Tickets = ({ location }) => {
+const Tickets = () => {
   let { id } = useParams();
+  const location = useLocation(); // Use useLocation hook to access location object
   const [movie, setMovie] = useState([]);
-  const [showTime, setshowTime] = useState([]);
-  const [movieTitle, setmovieTitle] = useState([]);
   const [selectedShowtime, setSelectedShowtime] = useState("");
 
   useEffect(() => {
@@ -17,36 +16,19 @@ const Tickets = ({ location }) => {
       try {
         const response = await axios.get(`http://localhost:8080/movie/${id}`);
         setMovie(response.data);
-        setmovieTitle(response.data.movieTitle);
+        
+        // Extract the showtime from the URL query parameter if available
+        const searchParams = new URLSearchParams(location.search);
+        const showtimeId = searchParams.get('showtimeId');
+        setSelectedShowtime(searchParams.get('selectedShowtime') || ""); // Set selected showtime
       } catch (error) {
         console.log(error);
       }
     };
 
     fetchMovie();
-  }, [id]);
-   
-  useEffect(() => {
-    const fetchshowTime = async () => {
-      try {
-        const response = await axios.get(`http://localhost:8080/showtime/${movieTitle}`);
-        setshowTime(response.data);
-      } catch (error) {
-        console.error('Error fetching showtime:', error);
-      }
-    };
-
-    fetchshowTime();
-
-    // Cleanup function to abort the fetch request if the component unmounts
-    return () => {
-      // Abort fetch or any cleanup needed
-    };
-  }, [movieTitle]); // Dependency array, will trigger effect on movieID change
+  }, [id, location.search]);
   
-
-  
-
   const [numTickets, setNumTickets] = useState(0);
   const [selectedSeats, setSelectedSeats] = useState([]);
 
@@ -133,72 +115,32 @@ const Tickets = ({ location }) => {
           </div>
           <div>
             <h1 className="font-bold text-4xl mb-4 text-white">Tickets</h1>
-            {/* Showtime dropdown */}
             <div className="mb-4">
-              <label htmlFor="showtime" className="font-bold text-white block mb-2">Select Showtime:</label>
-              <select
-                id="showtime"
-                className="bg-white text-black px-4 py-2 rounded-md"
-                value={selectedShowtime}
-                onChange={(e) => setSelectedShowtime(e.target.value)}
-              >
-                <option value="">Select Showtime</option>
-                {/* Map through bookings to display showtimes */}
-                {showTime.map((showTime, index) => (
-                  <option key={index} value={showTime.time}>{showTime.time} - {showTime.date} - {showTime.roomName} - {showTime.theaterName}</option>
-                ))}
-              </select>
+              <h2 className="font-bold text-white">Showtime:</h2>
+              <p className="text-white">{selectedShowtime}</p>
             </div>
+            {/* Ticket quantity */}
             <div className="mb-4">
-              <h2 className="font-bold mb-2 text-white">Child</h2>
-              {/* Increment and decrement buttons */}
-              <button
-                onClick={() => handleDecrement("child")}
-                className="bg-white text-red-500 px-4 py-2 rounded-md mr-2"
-              >
-                -
-              </button>
+              <h2 className="font-bold mb-2 text-white">Child (${childTicketPrice})</h2>
+              <button onClick={() => handleDecrement("child")} className="bg-white text-red-500 px-4 py-2 rounded-md mr-2">-</button>
               <span className="px-4 text-white">{childTicketCount}</span>
-              <button
-                onClick={() => handleIncrement("child")}
-                className="bg-white text-red-500 px-4 py-2 rounded-md ml-2"
-              >
-                +
-              </button>
+              <button onClick={() => handleIncrement("child")} className="bg-white text-red-500 px-4 py-2 rounded-md ml-2">+</button>
             </div>
             <div className="mb-4">
-              <h2 className="font-bold mb-2 text-white">Adult</h2>
-              <button
-                onClick={() => handleDecrement("adult")}
-                className="bg-white text-red-500 px-4 py-2 rounded-md mr-2"
-              >
-                -
-              </button>
+              <h2 className="font-bold mb-2 text-white">Adult (${adultTicketPrice})</h2>
+              <button onClick={() => handleDecrement("adult")} className="bg-white text-red-500 px-4 py-2 rounded-md mr-2">-</button>
               <span className="px-4 text-white">{adultTicketCount}</span>
-              <button
-                onClick={() => handleIncrement("adult")}
-                className="bg-white text-red-500 px-4 py-2 rounded-md ml-2"
-              >
-                +
-              </button>
+              <button onClick={() => handleIncrement("adult")} className="bg-white text-red-500 px-4 py-2 rounded-md ml-2">+</button>
             </div>
             <div className="mb-4">
-              <h2 className="font-bold mb-2 text-white">Senior</h2>
-              <button
-                onClick={() => handleDecrement("senior")}
-                className="bg-white text-red-500 px-4 py-2 rounded-md mr-2"
-              >
-                -
-              </button>
+              <h2 className="font-bold mb-2 text-white">Senior (${seniorTicketPrice})</h2>
+              <button onClick={() => handleDecrement("senior")} className="bg-white text-red-500 px-4 py-2 rounded-md mr-2">-</button>
               <span className="px-4 text-white">{seniorTicketCount}</span>
-              <button
-                onClick={() => handleIncrement("senior")}
-                className="bg-white text-red-500 px-4 py-2 rounded-md ml-2"
-              >
-                +
-              </button>
+              <button onClick={() => handleIncrement("senior")} className="bg-white text-red-500 px-4 py-2 rounded-md ml-2">+</button>
             </div>
-            <p className="font-bold text-white mb-8">Total: ${totalPrice}</p>
+            {/* Total price */}
+            <p className="font-bold text-white mb-2">Total: ${totalPrice}</p>
+            {/* <p className="text-white">Selected Seats: {selectedSeats.length}</p> */}
             <Link to={`/ticketConfirmation?totalPrice=${totalPrice}`} className="bg-red-400 text-white px-6 py-2 rounded-lg hover:bg-red-600 mt-16">Purchase Tickets</Link>
           </div>
         </div>

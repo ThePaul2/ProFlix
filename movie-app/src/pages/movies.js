@@ -3,14 +3,13 @@ import { useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import MovieGallery from '../components/MovieGallery';
 import SearchBar from '../components/SearchBar';
-import data from "../assets/sampleData.json";
 import axios from 'axios';
 import Footer from '../components/Footer';
 
 const Movies = () => {
   const location = useLocation();
-  let [movies, setMovies] = useState([]);
-  const [filteredMovies, setFilteredMovies] = useState(data.movies);
+  const [movies, setMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [genres, setGenres] = useState(["None"]);
 
@@ -20,8 +19,11 @@ const Movies = () => {
     if (term) {
       setSearchTerm(term);
       handleSearch(term);
+    } else {
+      // No search term, show all movies
+      setFilteredMovies(movies);
     }
-  }, [location.search]);
+  }, [location.search, movies]);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -37,7 +39,7 @@ const Movies = () => {
   }, []);
 
   useEffect(() => {
-    let updatedGenres = ["None"]; // Initialize with "None" option
+    let updatedGenres = ["None"];
     movies.forEach(movie => {
       movie.genre.split(", ").forEach(genre => {
         if (!updatedGenres.includes(genre)) {
@@ -50,12 +52,16 @@ const Movies = () => {
 
   const handleSearch = (searchTerm) => {
     let genreFilter = document.getElementById("genre-filter").value;
-    let filtered = movies.filter(movie => {
-      let name = movie.name || movie.title || movie.movieTitle || '';
-      return name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-        (genreFilter === "None" || movie.genre.includes(genreFilter));
-    });
-    setFilteredMovies(filtered);
+    if (!searchTerm && genreFilter === "None") {
+      setFilteredMovies(movies); // Show all movies
+    } else {
+      let filtered = movies.filter(movie => {
+        let name = movie.name || movie.title || movie.movieTitle || '';
+        return name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+          (genreFilter === "None" || movie.genre.includes(genreFilter));
+      });
+      setFilteredMovies(filtered);
+    }
   };
 
   return (

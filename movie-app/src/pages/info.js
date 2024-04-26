@@ -75,24 +75,29 @@ const Info = () => {
               </ul>
             </div>
             {/* Button to link to Tickets page */}
-            <Link to={`/tickets/${id}`} className="bg-red-400 text-white px-6 py-2 rounded-lg hover:bg-red-600 mt-4">Buy Tickets</Link>
+            {/* <Link to={`/tickets/${id}`} className="bg-red-400 text-white px-6 py-2 rounded-lg hover:bg-red-600 mt-4">Buy Tickets</Link> */}
           </div>
         </div>
         <div className="lg:w-1/2 relative">
           <div className="p-6 bg-black text-white flex text-center items-center justify-center">
             <div className="text-center ">
-            <h2 className="text-3xl font-bold mb-4">Showtimes</h2>
-            <ul>
-              {showTime.map((showTime, index) => (
-                <li key={index}>
-                  <div>
-                    <ul>
-                      <li>{showTime.time} - {showTime.date} - {showTime.theaterName}</li>
-                    </ul>
-                  </div>
-                </li>
-              ))}
-            </ul>
+              <h2 className="text-3xl font-bold mb-4">Showtimes</h2>
+              <ul className="text-left">
+                {/* Showtime list */}
+                {showTime.map((showTime, index) => (
+                  <li key={index} className="mb-4">
+                    <button
+                      className="bg-red-400 text-white px-6 py-2 rounded-lg hover:bg-red-600"
+                      onClick={() => {
+                        // Redirect to Tickets page with showtime data
+                        window.location.href = `/tickets/${id}?showtimeId=${showTime.id}&selectedShowtime=${showTime.time}-${showTime.date}-${showTime.theaterName}`;
+                      }}
+                    >
+                      {showTime.time} - {showTime.date} - {showTime.theaterName}
+                    </button>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
