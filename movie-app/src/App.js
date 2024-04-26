@@ -43,7 +43,6 @@ function App() {
         <Route path="/edit-movie/:id" element={<EditMovie />} />
         <Route path="/add-showtime/:movieTitle" element={<EditSchedule />} />
         <Route path="/showtime-movie/:movieTitle" element={<EditShowtime />} />
-        <Route path="/edit-promo/:id" element={<AdminPromo />} />
         <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
         <Route path="/promos" element={<Promos />} />
         <Route path="/rewards" element={<Rewards />} />
