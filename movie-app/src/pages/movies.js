@@ -5,6 +5,7 @@ import MovieGallery from '../components/MovieGallery';
 import SearchBar from '../components/SearchBar';
 import data from "../assets/sampleData.json";
 import axios from 'axios';
+import Footer from '../components/Footer';
 
 const Movies = () => {
   const location = useLocation();
@@ -68,6 +69,7 @@ const Movies = () => {
           <MovieGallery movies={filteredMovies} />
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

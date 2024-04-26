@@ -1,14 +1,20 @@
-import React from 'react';
+// Importing React library and Navigate component from react-router-dom
 import { Navigate } from 'react-router-dom';
+import React from 'react';
 
-const ProtectedRoute = ({ children }) => {
+const TheGuardian = ({ children }) => {
+  // Retrieving user role from local storage
   const userRole = localStorage.getItem('userRole');
 
+  // Checking if user is not an admin
   if (userRole !== 'admin') {
+    // Redirecting to home page if not admin
     return <Navigate to="/" />;
   }
 
+  // Rendering children components if user is admin
   return children;
 };
 
-export default ProtectedRoute;
+// Exporting TheGuardian component as default export
+export default TheGuardian;
