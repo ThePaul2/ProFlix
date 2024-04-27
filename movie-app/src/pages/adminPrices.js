@@ -49,7 +49,7 @@ const AdminPrices = () => {
                   <br />
                   <span>Fees: ${price.fees}</span>
                   <br />
-                  <span>Taxes: {price.taxes} (in decimal so 8% is .08)</span>
+                  <span>Taxes: {price.taxes} (in decimal so 5% is .05)</span>
                   
                 </div>
 

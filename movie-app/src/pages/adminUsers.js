@@ -67,6 +67,23 @@ const AdminDashboard = () => {
       console.error(`Error user with ID ${userId}:`, error);
     }
   };
+
+  const activateUser = async (userId) => {
+    try {
+      // Create an updated user object with the new status (1 for suspended)
+      const updatedUser = { status: 0 };
+      
+      // Make a PUT request with the updated user object in the request body
+      await axios.put(`http://localhost:8080/users/status/${userId}`, updatedUser);
+      
+      console.log(`User with ID ${userId} made to admin.`);
+      
+      // After successful update, fetch updated user data
+      fetchUserData();
+    } catch (error) {
+      console.error(`Error user with ID ${userId}:`, error);
+    }
+  };
   
 
 
@@ -88,16 +105,17 @@ const AdminDashboard = () => {
                   <span>Email: {user.email}</span>
                   <br />
                   <span>Status: {getStatusLabel(user.status)}</span>
-                  <br />
-                  <span>User ID: {user._id}</span>
+                            
                 </div>
                 {shouldShowDeleteButton(user.status) && (
                   <>
                     <button onClick={() => handleDeleteUser(user._id)} className={myStyles.redButton}>Delete User</button>
                     <button onClick={() => suspendUser(user._id)} className={myStyles.redButton}>Suspend</button>
                     <button onClick={() => adminUser(user._id)} className={myStyles.greenButton}>Make Admin</button>
+                    <button onClick={() => activateUser(user._id)} className={myStyles.greenButton}>Activate</button>
                   </>
                 )}
+                
               </li>
             ))}
           </ul>

@@ -74,7 +74,7 @@ const User = () => {
           </div>
           <div>
             <h3 className="text-xl font-bold text-white mb-2">Total Movies</h3>
-            <p className="text-lg text-white">{movies.length}</p>
+            <p className="text-lg text-white">{4}</p>
           </div>
         </div>
       </div>

@@ -128,6 +128,9 @@ const EditTicket = () => {
                             <div>
                                 <label className="font-semibold">Taxes</label>
                                 <br />
+                                <label className="font-semibold">(in decimal so 5% is .05) (Whole Number if dollar amount off)</label>
+
+                                <br />
                             </div>
                             <div className="w-full leading-loose">
                                 <input

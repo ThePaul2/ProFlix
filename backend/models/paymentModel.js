@@ -9,7 +9,7 @@ const paymentSchema = mongoose.Schema({
         minlength: 16,
     },
     exp: {
-        type: Number,
+        type: String,
         required: true,
         trim: true,
     },
