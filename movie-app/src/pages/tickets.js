@@ -123,13 +123,13 @@ const Tickets = () => {
         console.log("Entered promo code:", promoCode); // Debugging statement
         const promo = promoCodes.find((promo) => promo.code === promoCode); // Compare with 'code' property
         console.log("Found promo code:", promo); // Debugging statement
-        if (promo && promoDiscount == 0) {
+        if (promo && promoDiscount === 0) {
           // Set promoDiscount to the discount value from the promo code object
           setPromoDiscount(promo.discount);
           console.log('Promo code applied! Discount:', promo.discount);
           setMessage('Promo code applied!');
         } else {
-          if (promoDiscount !=  0) {
+          if (promoDiscount !==  0) {
             setMessage('Promo Code already applied');
           } else {
             setMessage('Invalid promo code');
@@ -146,6 +146,19 @@ const Tickets = () => {
   const applyPromoCode = () => {
     checkPromoCode();
   };
+  let finalPriceCalc;
+  if (promoDiscount % 1 === 0) {
+    finalPriceCalc = totalTicketPrice + fees + (taxes * totalTicketPrice) - promoDiscount;
+  } else {
+   finalPriceCalc = totalTicketPrice + fees + (taxes * totalTicketPrice) + (promoDiscount * totalTicketPrice);
+  }
+
+  let discountAmount;
+  if (promoDiscount % 1 === 0) {
+    discountAmount = promoDiscount;
+  } else {
+    discountAmount = promoDiscount * (totalTicketPrice + fees + (taxes * totalTicketPrice));
+  }
 
   return (
     <div>
@@ -228,26 +241,10 @@ const Tickets = () => {
               >
                 +
               </button>
-            </div>
-            <p className="text-white mb-2">Total Ticket Cost: ${totalTicketPrice}</p>
-            <p className="text-white mb-2">Fees: ${fees}</p>
-            <p className="text-white mb-2">
-              Taxes: ${(taxes * totalTicketPrice).toFixed(2)}
-            </p>
-            <p className="text-white mb-8">
-              {promoDiscount % 1 === 0
-                ? `Discount: -$${(promoDiscount)}`
-                : `Discount: -$${(promoDiscount * (totalTicketPrice + fees + (taxes * totalTicketPrice))).toFixed(2)}`}
-            </p>
-            
+            </div>            
             <p className="font-bold text-white mb-5">
-          
-              {promoDiscount % 1 === 0
-                ? `Total: $${(totalTicketPrice + fees + (taxes * totalTicketPrice) - promoDiscount).toFixed(2)}`
-                : `Total: $${(totalTicketPrice + fees + (taxes * totalTicketPrice) + (promoDiscount * totalTicketPrice)).toFixed(2)}`}
             </p>
             <div className="mb-4">
-              <h2 className="font-bold text-white">Promo Code:</h2>
               <input
                 type="text"
                 value={promoCode}
@@ -265,13 +262,13 @@ const Tickets = () => {
             </div>
             
             <Link
-              to={`/ticketConfirmation?totalTicketPrice=${promoDiscount % 1 === 0
-                ? (totalTicketPrice + fees + (taxes * totalTicketPrice) - promoDiscount).toFixed(2)
-                : (totalTicketPrice + fees + (promoDiscount * totalTicketPrice)).toFixed(2)}`}
-              className="bg-red-400 text-white px-6 py-2 rounded-lg hover:bg-red-600 mt-16"
-            >
-              Purchase Tickets
-            </Link>
+            to={`/ticketConfirmation?adultTickets=${adultTicketCount}&childTickets=${childTicketCount}&seniorTickets=${seniorTicketCount}&showtimeId=${selectedShowtime}&totalPrice=${totalTicketPrice}&bookingNumber=${fees}&taxes=${(taxes*totalTicketPrice) + fees}&discount=${discountAmount}&seatPrice=${totalTicketPrice}&numTickets=${numTickets}&finalPrice=${finalPriceCalc}`}
+            className={`bg-red-400 text-white px-6 py-2 rounded-lg hover:bg-red-600 mt-16 ${
+              selectedSeats.length === numTickets ? '' : 'opacity-50 pointer-events-none'}`}
+              >
+            Purchase Tickets
+          </Link>
+
           </div>
         </div>
         <div className="w-px bg-gray-400"></div>
