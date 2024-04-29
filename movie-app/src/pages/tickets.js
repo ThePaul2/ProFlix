@@ -262,10 +262,10 @@ const Tickets = () => {
             </div>
             
             <Link
-            to={`/ticketConfirmation?adultTickets=${adultTicketCount}&childTickets=${childTicketCount}&seniorTickets=${seniorTicketCount}&showtimeId=${selectedShowtime}&totalPrice=${totalTicketPrice}&bookingNumber=${fees}&taxes=${(taxes*totalTicketPrice) + fees}&discount=${discountAmount}&seatPrice=${totalTicketPrice}&numTickets=${numTickets}&finalPrice=${finalPriceCalc}`}
-            className={`bg-red-400 text-white px-6 py-2 rounded-lg hover:bg-red-600 mt-16 ${
-              selectedSeats.length === numTickets ? '' : 'opacity-50 pointer-events-none'}`}
-              >
+            to={`/ticketConfirmation?adultTickets=${adultTicketCount}&childTickets=${childTicketCount}&seniorTickets=${seniorTicketCount}&showtimeId=${selectedShowtime}&totalPrice=${promoDiscount % 1 === 0
+              ? (totalTicketPrice + fees + (taxes * totalTicketPrice) - promoDiscount).toFixed(2)
+              : (totalTicketPrice + fees + (promoDiscount * totalTicketPrice)).toFixed(2)}`}
+            className="bg-red-400 text-white px-6 py-2 rounded-lg hover:bg-red-600 mt-16">
             Purchase Tickets
           </Link>
 

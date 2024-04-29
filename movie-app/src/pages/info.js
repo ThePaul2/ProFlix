@@ -70,9 +70,7 @@ const Info = () => {
               <p>Cast: {movie.cast}</p>
               <p>Director: {movie.director}</p>
               <p>Producer: {movie.producer}</p>
-              <ul className="mb-4">
-                <li>Reviews: {movie.reviews}</li>
-              </ul>
+             
             </div>
             {/* Button to link to Tickets page */}
             {/* <Link to={`/tickets/${id}`} className="bg-red-400 text-white px-6 py-2 rounded-lg hover:bg-red-600 mt-4">Buy Tickets</Link> */}
