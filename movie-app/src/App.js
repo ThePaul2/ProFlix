@@ -31,6 +31,7 @@ import SignUp from "./pages/signup";
 import TicketConfirmation from "./pages/ticketConfirmation";
 import Tickets from "./pages/tickets";
 import User from "./pages/user";
+import UserProtectedRoute from ".components/UserProtectedRoute";
 
 function App() {
   return (
@@ -42,36 +43,36 @@ function App() {
         <Route path="/adminMovies" element={<ProtectedRoute><AdminMovies /></ProtectedRoute>} />
         <Route path="/adminUsers" element={<ProtectedRoute><AdminUsers /></ProtectedRoute>} />
         <Route path="/adminPrices" element={<ProtectedRoute><AdminPrices /></ProtectedRoute>} />
-        <Route path="/adminPromo" element={<AdminPromo />} />
-        <Route path="/edit-movie/:id" element={<EditMovie />} />
-        <Route path="/add-showtime/:movieTitle" element={<EditSchedule />} />
-        <Route path="/showtime-movie/:movieTitle" element={<EditShowtime />} />
+        <Route path="/adminPromo" element={<ProtectedRoute><AdminPromo /></ProtectedRoute>} />
+        <Route path="/edit-movie/:id" element={<ProtectedRoute><EditMovie /></ProtectedRoute>} />
+        <Route path="/add-showtime/:movieTitle" element={<ProtectedRoute><EditSchedule /></ProtectedRoute>} />
+        <Route path="/showtime-movie/:movieTitle" element={<ProtectedRoute><EditShowtime /></ProtectedRoute>} />
         <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
         <Route path="/promos" element={<Promos />} />
         <Route path="/rewards" element={<Rewards />} />
-        <Route path="/tickets/:id" element={<Tickets />} />
+        <Route path="/tickets/:id" element={<UserProtectedRoute><Tickets /></UserProtectedRoute>} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/card-info" element={<CardInfoPage />} />
         <Route path="/confirmation" element={<Confirmation />} />
-        <Route path="/edit-movie/:id" element={<AdminEditMovie />} />
-        <Route path="/edit-promo/:id" element={<AdminEditPromo />} />
-        <Route path="/edit-price/" element={<AdminEditPrice />} />
-        <Route path="/edit-profile/:email" element={<EditProfile />} />
-        <Route path="/edit-payments/:email" element={<EditPayments />} />
+        <Route path="/edit-movie/:id" element={<ProtectedRoute><AdminEditMovie /></ProtectedRoute>} />
+        <Route path="/edit-promo/:id" element={<ProtectedRoute><AdminEditPromo /></ProtectedRoute>} />
+        <Route path="/edit-price/" element={<ProtectedRoute><AdminEditPrice /></ProtectedRoute>} />
+        <Route path="/edit-profile/:email" element={<UserProtectedRoute><EditProfile /></UserProtectedRoute>} />
+        <Route path="/edit-payments/:email" element={<UserProtectedRoute><EditPayments /></UserProtectedRoute>} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/info/:id" element={<Info />} />
         <Route path="/login" element={<Login />} />
         <Route path="/movies" element={<Movies />} />
         <Route path="/promos" element={<Promos />} />
-        <Route path="/purchased" element={<Purchased />} />
+        <Route path="/purchased" element={<UserProtectedRoute><Purchased /></UserProtectedRoute>} />
         <Route path="/reset-password/:email" element={<ResetPassword />} />
         <Route path="/rewards" element={<Rewards />} />
         <Route path="/showtimes" element={<Showtimes />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/ticketconfirmation" element={<TicketConfirmation />} />
-        <Route path="/tickets/:id" element={<Tickets />} />
-        <Route path="/users/:email" element={<User />} />
+        <Route path="/tickets/:id" element={<UserProtectedRoute><Tickets /></UserProtectedRoute>} />
+        <Route path="/users/:email" element={<UserProtectedRoute><User /></UserProtectedRoute>} />
       </Routes>
     </Router>
   );
