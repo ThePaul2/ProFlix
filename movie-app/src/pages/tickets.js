@@ -147,10 +147,24 @@ const Tickets = () => {
     checkPromoCode();
   };
 
+  let finalPriceCalc;
+  if (promoDiscount % 1 === 0) {
+    finalPriceCalc = totalTicketPrice + fees + (taxes * totalTicketPrice) - promoDiscount;
+  } else {
+   finalPriceCalc = totalTicketPrice + fees + (taxes * totalTicketPrice) + (promoDiscount * totalTicketPrice);
+  }
+
+  let discountAmount;
+  if (promoDiscount % 1 === 0) {
+    discountAmount = promoDiscount;
+  } else {
+    discountAmount = promoDiscount * (totalTicketPrice + fees + (taxes * totalTicketPrice));
+  }
+
   return (
     <div>
       <Navbar />
-      <div className="flex bg-black pb-16">
+      <div className="flex bg-black pb-16 overflow-hidden">
         {/* Left Side */}
         <div className="w-1/2 flex flex-col p-6">
           <div className="mb-8 flex items-center justify-start">
@@ -170,10 +184,8 @@ const Tickets = () => {
             </div>
           </div>
           <div>
-            <h1 className="font-bold text-4xl mb-4 text-white">Tickets</h1>
             <div className="mb-4">
-              <h2 className="font-bold text-white">Showtime:</h2>
-              <p className="text-white">{selectedShowtime}</p>
+              <h2 className="font-bold text-white">Showtime: {selectedShowtime}</h2>
             </div>
             <div className="mb-4">
               <h2 className="font-bold mb-2 text-white">
@@ -229,27 +241,15 @@ const Tickets = () => {
                 +
               </button>
             </div>
-            <p className="text-white mb-2">Total Ticket Cost: ${totalTicketPrice}</p>
-            <p className="text-white mb-2">Fees: ${fees}</p>
-            <p className="text-white mb-2">
-              Taxes: ${(taxes * totalTicketPrice).toFixed(2)}
-            </p>
-            <p className="text-white mb-8">
-              {promoDiscount % 1 === 0
-                ? `Discount: -$${(promoDiscount)}`
-                : `Discount: -$${(promoDiscount * (totalTicketPrice + fees + (taxes * totalTicketPrice))).toFixed(2)}`}
-            </p>
             
             <p className="font-bold text-white mb-5">
-          
-              {promoDiscount % 1 === 0
-                ? `Total: $${(totalTicketPrice + fees + (taxes * totalTicketPrice) - promoDiscount).toFixed(2)}`
-                : `Total: $${(totalTicketPrice + fees + (taxes * totalTicketPrice) + (promoDiscount * totalTicketPrice)).toFixed(2)}`}
-            </p>
+               Total: ${finalPriceCalc.toFixed(2)}
+            </p>  
             <div className="mb-4">
-              <h2 className="font-bold text-white">Promo Code:</h2>
+              <h2 className="font-bold text-white">Have a promotion?</h2>
               <input
                 type="text"
+                placeholder='Ex: 15OFF'
                 value={promoCode}
                 onChange={(e) => setPromoCode(e.target.value)}
                 className="bg-white text-black px-4 py-2 rounded-md"
@@ -265,10 +265,10 @@ const Tickets = () => {
             </div>
             
             <Link
-              to={`/ticketConfirmation?totalTicketPrice=${promoDiscount % 1 === 0
-                ? (totalTicketPrice + fees + (taxes * totalTicketPrice) - promoDiscount).toFixed(2)
-                : (totalTicketPrice + fees + (promoDiscount * totalTicketPrice)).toFixed(2)}`}
-              className="bg-red-400 text-white px-6 py-2 rounded-lg hover:bg-red-600 mt-16"
+              to={`/ticketConfirmation?totalPrice=${totalTicketPrice}&bookingNumber=${fees}&taxes=${(taxes*totalTicketPrice) + fees}&discount=${discountAmount}&seatPrice=${totalTicketPrice}&numTickets=${numTickets}&finalPrice=${finalPriceCalc}`}
+              className={`bg-red-400 text-white px-6 py-2 rounded-lg hover:bg-red-600 mt-16 ${
+                selectedSeats.length === numTickets ? '' : 'opacity-50 pointer-events-none'
+              }`}
             >
               Purchase Tickets
             </Link>
