@@ -31,7 +31,7 @@ import SignUp from "./pages/signup";
 import TicketConfirmation from "./pages/ticketConfirmation";
 import Tickets from "./pages/tickets";
 import User from "./pages/user";
-import UserProtectedRoute from ".components/UserProtectedRoute";
+import UserProtectedRoute from "./components/UserProtectedRoute";
 
 function App() {
   return (
