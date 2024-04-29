@@ -57,12 +57,27 @@ const EditProfile = () => {
     };
 
     const handleChange = (e) => {
+        const { name, value, type, checked } = e.target;
+    
+        // If the input type is checkbox, update the value based on whether it's checked or not
+        const newValue = type === 'checkbox' ? checked : value;
+    
+        setUserData(prevUserData => ({
+            ...prevUserData,
+            [name]: newValue
+        }));
+    };
+    
+    
+    /*
+    const handleChange = (e) => {
         const { name, value } = e.target;
         setUserData(prevData => ({
             ...prevData,
             [name]: value,
         }));
     };
+    */
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -158,7 +173,7 @@ const EditProfile = () => {
                             Street:
                             <input
                                 type="text"
-                                name="street"
+                                name="street1" 
                                 value={userData.street1}
                                 onChange={handleChange}
                                 style={{ color: 'black' }}
@@ -203,11 +218,13 @@ const EditProfile = () => {
                                 className='mr-1'
                                 type="checkbox"
                                 name="promo"
-                                value={userData.promo}
+                                checked={userData.promo} // Set the checked attribute based on userData.promo
                                 onChange={handleChange}
                             />
                             <span>Register for Promotion</span>
                         </label>
+
+
                         <br />
                         <br />
                         <button type="submit" className="text-center rounded-xl border-neutral-200 border-2 px-4 py-4 w-full bg-red-400 text-xl font-semibold">Submit Changes</button>

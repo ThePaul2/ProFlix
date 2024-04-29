@@ -156,27 +156,29 @@ router.get('/:id', async (request, response) => {
 });
 
 // Route for updating a user
-router.put('/:id', async (request, response) => {
+router.put('/:id', async (req, res) => {
+  const { id } = req.params;
+
   try {
-    const { firstName, lastName, email } = request.body;
-    if (!firstName || !lastName || !email) {
-      return response.status(400).json({
-        message: 'Please provide all required fields: firstName, lastName, email',
-      });
+    const user = await User.findById(id);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
     }
 
-    const updatedUser = await User.findByIdAndUpdate(
-      request.params.id,
-      { firstName, lastName, email },
-      { new: true } // Return the updated document
-    );
-    if (!updatedUser) {
-      return response.status(404).json({ message: 'User not found' });
+    // Update user fields
+    for (const key in req.body) {
+      if (req.body.hasOwnProperty(key)) {
+        user[key] = req.body[key];
+      }
     }
-    return response.status(200).json(updatedUser);
+
+    // Save updated user
+    await user.save();
+
+    return res.status(200).json(user);
   } catch (error) {
-    console.error(error);
-    return response.status(500).json({ message: 'Internal server error' });
+    return res.status(500).json({ message: error.message });
   }
 });
 
