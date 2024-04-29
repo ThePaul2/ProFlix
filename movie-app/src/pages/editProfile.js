@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from "../components/NavbarUser";
 import axios from "axios";
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 
 const EditProfile = () => {
     let { email } = useParams();
+    const navigate = useNavigate();
     const [userId, setUserId] = useState(null);
     const [userData, setUserData] = useState({
         firstName: '',
@@ -83,7 +84,7 @@ const EditProfile = () => {
         e.preventDefault();
         try {
             await axios.put(`http://localhost:8080/users/${userId}`, userData);
-            alert('User data updated successfully!');
+            navigate(`/users/${email}`);
         } catch (error) {
             console.error('Error updating user data:', error);
             alert('Failed to update user data');
