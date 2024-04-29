@@ -1,27 +1,26 @@
 import mongoose from 'mongoose';
 
 const bookingSchema = mongoose.Schema({
-    movieID: {
+    userID: {
         type: String,
         required: true,
     },
-    bookingNumber: {
+    showtimeID: {
         type: String,
-        required: true, 
+        required: true,
     },
-    totalSeats: {
+    bookingDate: {
+        type: String,
+        required: true,
+    },
+    numTickets: {
         type: Number,
         required: true,
     },
-    showTimes:{
-        type: [String],
+    price: {
+        type: Number,
         required: true,
-    },
-    showTimeDate: {
-        type: [String],
-        required: true,
-    }    
+    } 
 });
 
 export const Booking = mongoose.model('Booking', bookingSchema);
-

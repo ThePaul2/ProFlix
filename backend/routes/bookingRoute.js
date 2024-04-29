@@ -6,8 +6,8 @@ const router = express.Router();
 // Route for creating a new booking
 router.post('/', async (req, res) => {
     try {
-        const { bookingNumber, totalSeats, showTimes, showTimeDate, movieID } = req.body;
-        const newBooking = await Booking.create({ bookingNumber, totalSeats, showTimes, showTimeDate, movieID });
+        const { userID, showtimeID, bookingDate, numTickets, price } = req.body;
+        const newBooking = await Booking.create({ userID, showtimeID, bookingDate, numTickets, price });
         res.status(201).json(newBooking);
     } catch (error) {
         console.error(error);

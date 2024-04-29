@@ -90,16 +90,9 @@ router.get('/:userId/payments', async (req, res) => {
     const payments = await Payment.find({ userEmail: user.email });
 
     // Construct an array of payment objects with IDs included
-    const formattedPayments = payments.map(payment => ({
-      _id: payment._id,
-      cardNumber: payment.cardNumber,
-      exp: payment.exp,
-      CVN: payment.CVN,
-      cardFirst: payment.cardFirst,
-      cardLast: payment.cardLast
-    }));
-    console.log(formattedPayments);
-    return res.status(200).json({ payments: formattedPayments });
+    
+    console.log(payments);
+    return res.status(200).json({ payments: payments });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: 'Internal server error' });
