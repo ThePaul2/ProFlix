@@ -51,13 +51,13 @@ const Info = () => {
       <div className="container mx-auto flex flex-col lg:flex-row py-16">
         <div className="lg:w-1/2 relative">
           <div className="p-6 text-white">
-            <h1 className="font-bold text-4xl mb-4">{movie.title}</h1>
+            <h1 className="font-bold text-4xl mb-4">{movie.movieTitle}</h1>
             <div className="flex flex-wrap mb-4">
               <p className="mr-4 hover:bg-red-500">Genre: {movie.genre}</p>
               <p className="mr-4">MPAA-US film rating: {movie.rating}</p>
               <p className="mr-4">Release Date: {movie.releaseDate}</p>
             </div>
-            <p className="mb-4">{movie.description}</p>
+            <p className="mb-4">{movie.synopsis}</p>
             <h2 className="font-bold text-2xl mb-4">Trailer</h2>
             <iframe
               width={700}

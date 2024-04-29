@@ -55,6 +55,8 @@ const AdminMovies = () => {
                     <span>Producer: {movie.producer}</span>
                     <br />
                     <span>Director: {movie.director}</span>
+                    <br />
+                    <span>Genre: {movie.genre}</span>
                   </div>
                   <div>
                     <Link to={`/edit-movie/${encodeURIComponent(movie._id)}`} className={myStyles.greenButton}>Edit</Link>
