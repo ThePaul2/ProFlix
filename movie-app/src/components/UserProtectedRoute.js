@@ -7,10 +7,10 @@ const TheGuardian = ({ children }) => {
   const userRole = localStorage.getItem('userRole');
 
   // Checking if user is not an admin
-  if (userRole !== 'user') {
-    // Redirecting to home page if not admin
-    return <Navigate to="/login" />;
-  }
+  // if (userRole !== 'user') {
+  //   // Redirecting to home page if not admin
+  //   return <Navigate to="/login" />;
+  // }
 
   // Rendering children components if user is admin
   return children;

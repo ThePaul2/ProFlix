@@ -23,6 +23,7 @@ export default function TicketConfirmation(props) {
     const [userId, setUserId] = useState('66293243587298b67b6f7755');
     const [selectedPaymentId, setSelectedPaymentId] = useState('');
     const updatedSeats = queryParams.get('updatedSeats');
+    const [bookingNumber, setBookingNumber] = useState(null);
     const [formData, setFormData] = useState({
         cardNumber: '',
         exp: '',
@@ -98,9 +99,10 @@ export default function TicketConfirmation(props) {
     const handleBooking = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:8080/booking', bookingData);
-            alert('Booked Successfully!');
-            navigate('/purchased');
+            const response = await axios.post('http://localhost:8080/booking', bookingData);
+            console.log('Booking API Response:', response.data);
+            const { _id: bookingId } = response.data;
+            navigate(`/purchased?id=${bookingId}`);
         } catch (error) {
             console.error(error);
         }
