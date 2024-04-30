@@ -16,6 +16,7 @@ import EditMovie from "./pages/adminEditMovie";
 import EditPayments from "./pages/editPayments";
 import EditProfile from "./pages/editProfile";
 import ForgotPassword from "./pages/forgotPassword";
+import Four from "./pages/fourOfour";
 import Home from "./pages/home";
 import Info from "./pages/info";
 import Login from "./pages/login";
@@ -62,6 +63,7 @@ function App() {
         <Route path="/edit-profile/:email" element={<UserProtectedRoute><EditProfile /></UserProtectedRoute>} />
         <Route path="/edit-payments/:email" element={<UserProtectedRoute><EditPayments /></UserProtectedRoute>} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/fourOfour" element={<Four />} />
         <Route path="/info/:id" element={<Info />} />
         <Route path="/login" element={<Login />} />
         <Route path="/movies" element={<Movies />} />

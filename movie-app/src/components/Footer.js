@@ -10,9 +10,9 @@ const Footer = () => {
                 <div className="mx-4">
                     <h3 className="text-xl font-bold mb-4">About Us</h3>
                     <ul className="list-none">
-                        <li><button className="text-white font-semibold hover:text-red-500 transition duration-500 cursor-pointer">Who are we?</button></li>
-                        <li><button className="text-white font-semibold hover:text-red-500 transition duration-500 cursor-pointer">Partners</button></li>
-                        <li><button className="text-white font-semibold hover:text-red-500 transition duration-500 cursor-pointer">Privacy Policy</button></li>
+                        <li><Link to="/fourOfour" className="text-white font-semibold hover:text-red-500 transition duration-500">Who are we?</Link></li>
+                        <li><Link to="/fourOfour" className="text-white font-semibold hover:text-red-500 transition duration-500">Partners</Link></li>
+                        <li><Link to="/fourOfour" className="text-white font-semibold hover:text-red-500 transition duration-500">Privacy Policy</Link></li>
                     </ul>
                 </div>
 
@@ -20,9 +20,9 @@ const Footer = () => {
                 <div className="mx-4">
                     <h3 className="text-xl font-bold mb-4">Contact</h3>
                     <ul className="list-none">
-                        <li><button className="text-white font-semibold hover:text-red-500 transition duration-500 cursor-pointer">Get in touch</button></li>
-                        <li><button className="text-white font-semibold hover:text-red-500 transition duration-500 cursor-pointer">Help</button></li>
-                        <li><button className="text-white font-semibold hover:text-red-500 transition duration-500 cursor-pointer">Community Services</button></li>
+                        <li><Link to="/fourOfour" className="text-white font-semibold hover:text-red-500 transition duration-500">Get in touch</Link></li>
+                        <li><Link to="/fourOfour" className="text-white font-semibold hover:text-red-500 transition duration-500">Help</Link></li>
+                        <li><Link to="/fourOfour" className="text-white font-semibold hover:text-red-500 transition duration-500">Community Services</Link></li>
                     </ul>
                 </div>
 
@@ -30,8 +30,8 @@ const Footer = () => {
                 <div className="mx-4">
                     <h3 className="text-xl font-bold mb-4">Services</h3>
                     <ul className="list-none">
-                        <li><button className="text-white font-semibold hover:text-red-500 transition duration-500 cursor-pointer">Download the App</button></li>
-                        <li><button className="text-white font-semibold hover:text-red-500 transition duration-500 cursor-pointer">Become a Pro</button></li>
+                        <li><Link to="/fourOfour" className="text-white font-semibold hover:text-red-500 transition duration-500">Download the App</Link></li>
+                        <li><Link to="/fourOfour" className="text-white font-semibold hover:text-red-500 transition duration-500">Become a Pro</Link></li>
                     </ul>
                 </div>
 
@@ -39,10 +39,7 @@ const Footer = () => {
                 <div className="mx-4">
                     <h3 className="text-xl font-bold mb-4">More</h3>
                     <ul className="list-none">
-                        <li><button className="text-white font-semibold hover:text-red-500 transition duration-500 cursor-pointer">Food and Drinks</button></li>
-                        <li className='md:ml-8 md:my-0 my-7 font-semibold'>
-                        
-                    </li>
+                        <li><Link to="/fourOfour" className="text-white font-semibold hover:text-red-500 transition duration-500">Food and Drinks</Link></li>
                     </ul>
                 </div>
             </div>
