@@ -164,7 +164,7 @@ if (promoDiscount % 1 === 0) {
     <div>
       <Navbar />
       <div className="flex bg-black pb-16">
-        {/* Left Side */}
+
         <div className="w-1/2 flex flex-col p-6">
           <div className="mb-8 flex items-center justify-start">
             <img
@@ -240,13 +240,29 @@ if (promoDiscount % 1 === 0) {
               >
                 +
               </button>
-            </div>            
+            </div>
+            <p className="text-white mb-2">Total Ticket Cost: ${totalTicketPrice}</p>
+            <p className="text-white mb-2">Fees: ${fees}</p>
+            <p className="text-white mb-2">
+              Taxes: ${(taxes * totalTicketPrice).toFixed(2)}
+            </p>
+            <p className="text-white mb-8">
+              {promoDiscount % 1 === 0
+                ? `Discount: -$${(promoDiscount)}`
+                : `Discount: -$${(promoDiscount * (totalTicketPrice + fees + (taxes * totalTicketPrice))).toFixed(2)}`}
+            </p>
+            
             <p className="font-bold text-white mb-5">
+          
+              {promoDiscount % 1 === 0
+                ? `Total: $${(totalTicketPrice + fees + (taxes * totalTicketPrice) - promoDiscount).toFixed(2)}`
+                : `Total: $${(totalTicketPrice + fees + (taxes * totalTicketPrice) + (promoDiscount * totalTicketPrice)).toFixed(2)}`}
             </p>
             <div className='text-white my-6'>
               Total Price: ${finalPriceCalc}
             </div>
             <div className="mb-4">
+              <h2 className="font-bold text-white">Promo Code:</h2>
               <input
                 type="text"
                 value={promoCode}
