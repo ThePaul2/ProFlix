@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import NavbarAdmin from '../components/NavbarAdmin';
+import Navbar from '../components/Navbar';
 import axios from "axios";
 import { Link, useParams } from 'react-router-dom';
 
@@ -11,12 +11,12 @@ const AdminDashboard = () => {
     const fetchUserId = async () => {
       const email = localStorage.getItem('email');
       try {
-        const response = await axios.get(`http://localhost:8080/users`);
-        const user = response.data.data.find(user => user.email === email);
-        if (user) {
-          setUserId(user._id);
-          console.log(user._id);
-          fetchBookingData(user._id);
+        const response = await axios.get(`http://localhost:8080/users/get-userid/${email}`);
+        const { userId } = response.data;
+        if (userId) {
+          setUserId(userId);
+          console.log(userId);
+          fetchBookingData(userId);
         } else {
           console.log('User not found.');
         }
@@ -24,6 +24,7 @@ const AdminDashboard = () => {
         console.error('Error fetching user data:', error);
       }
     };
+    
     fetchUserId();
   }, []);
 
@@ -41,16 +42,26 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div>
-      <NavbarAdmin />
-      <h2>Admin Dashboard</h2>
-      <ul>
-        {bookings.map(booking => (
-          <li key={booking._id}>
-            Showtime ID: {booking.showtimeID}, Num Tickets: {booking.numTickets}, Price: {booking.price}
-          </li>
-        ))}
-      </ul>
+    <div style={{ backgroundColor: 'black', color: 'white', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+      <Navbar />
+      <h2 style={{ marginBottom: '20px', fontSize: '36px', fontWeight: 'bold' }}>Current Bookings</h2>
+
+      {bookings.length > 0 ? (
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+          {bookings.map(booking => (
+            <div key={booking._id} style={{ backgroundColor: 'white', color: 'black', borderRadius: '10px', padding: '20px', margin: '10px' }}>
+              <p><strong>Showtime and Theatre:</strong> {booking.showtimeID}</p>
+              <p><strong>Date:</strong> {booking.bookingDate}</p>
+              <p><strong>Num Tickets:</strong> {booking.numTickets}</p>
+              <p><strong>Total Price:</strong> {booking.price}</p>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div style={{ fontSize: '24px' }}>
+          <p>No Booking found</p>
+        </div>
+      )}
     </div>
   );
 };
