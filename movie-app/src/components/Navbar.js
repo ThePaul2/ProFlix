@@ -38,12 +38,15 @@ const Navbar = ({ setUserRole, setUserId }) => {
         <div className='shadow-md w-full fixed top-0 left-0 z-10'>
             <div className='md:flex items-center justify-between bg-black py-4 md:px-10 px-7'>
                 {/* logo section */}
-                <Link to='/'>
-                    <div className='font-bold text-2xl text-red-600 cursor-pointer flex items-center gap-1'>
-                        <FilmIcon className='w-7 h-7 text-red-600'/>
-                        <span>ProFlix</span>
-                    </div>
-                </Link> 
+                <div className='flex items-center gap-1'>
+                    <Link to='/'>
+                        <div className='font-bold text-2xl text-red-600 cursor-pointer flex items-center gap-1'>
+                            <FilmIcon className='w-7 h-7 text-red-600'/>
+                            <span>ProFlix</span>
+                        </div>
+                    </Link>
+                
+                </div>
                 {/* Menu icon */}
                 <div onClick={() => setOpen(!open)} className='absolute right-8 top-6 cursor-pointer md:hidden w-7 h-7'>
                     {
@@ -65,6 +68,11 @@ const Navbar = ({ setUserRole, setUserId }) => {
                             </li>
                         ))
                     )}
+                    {userRole === "user" && (
+                        <li className='md:ml-8 md:my-0 my-7 font-semibold'>
+                            <Link to={`/users/${localStorage.getItem('email')}`} className='text-white hover:text-red-400 duration-500'>User Home</Link>
+                        </li>
+                    )}
                     <li className='md:ml-8 md:my-0 my-7 font-semibold'>
                         <Link to={userRole === "user" ? "/" : "/login"} onClick={handleLogout} className='btn bg-red-600 text-white font-semibold px-3 py-1 rounded hover:text-black-400 duration-500'>
                             {userRole === "user" ? "Logout" : "Login"}
@@ -78,3 +86,4 @@ const Navbar = ({ setUserRole, setUserId }) => {
 };
 
 export default Navbar;
+
