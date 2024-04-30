@@ -7,6 +7,7 @@ export default function TicketConfirmation(props) {
     const navigate = useNavigate();
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
+    const movie = queryParams.get('movie');
     const adultTickets = queryParams.get('adultTickets');
     const childTickets = queryParams.get('childTickets');
     const seniorTickets = queryParams.get('seniorTickets');
@@ -37,7 +38,8 @@ export default function TicketConfirmation(props) {
         showtimeID: '',
         bookingDate: '',
         numTickets: '',
-        price: ''
+        price: '',
+        movie: ''
     });
     useEffect(() => {
         setBookingData({

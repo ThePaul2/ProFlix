@@ -20,7 +20,11 @@ const bookingSchema = mongoose.Schema({
     price: {
         type: Number,
         required: true,
-    } 
+    },
+    movie: {
+        type: String,
+    },
+
 });
 
 export const Booking = mongoose.model('Booking', bookingSchema);
