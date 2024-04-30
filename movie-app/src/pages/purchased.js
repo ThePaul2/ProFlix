@@ -39,7 +39,7 @@ export default function Purchased() {
                 </div>
                 {bookingData && (
                     <div className="text-white">
-                        <p>Showtime: {bookingData.movie}</p>
+                     
                         <p>Showtime: {bookingData.showtimeID}</p>
                         <p>Booking Date: {bookingData.bookingDate}</p>
                         <p>Number of Tickets: {bookingData.numTickets}</p>
