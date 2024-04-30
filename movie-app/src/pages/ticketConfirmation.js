@@ -7,7 +7,7 @@ export default function TicketConfirmation(props) {
     const navigate = useNavigate();
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
-    const movie = queryParams.get('movie');
+    const movieT = queryParams.get('movie');
     const adultTickets = queryParams.get('adultTickets');
     const childTickets = queryParams.get('childTickets');
     const seniorTickets = queryParams.get('seniorTickets');
@@ -47,9 +47,11 @@ export default function TicketConfirmation(props) {
             showtimeID: showtimeId,
             bookingDate: formattedDate,
             numTickets: totalTicketCount,
+            movie: movieT,
             price: totalPrice,
+            
         });
-    }, [userId, showtimeId, formattedDate, totalTicketCount, totalPrice]);
+    }, [userId, showtimeId, formattedDate, totalTicketCount, totalPrice, movieT]);
     // Gets the user's payment info
     useEffect(() => {
         const fetchPayments = async () => {
@@ -101,6 +103,7 @@ export default function TicketConfirmation(props) {
     const handleBooking = async (e) => {
         e.preventDefault();
         try {
+            console.log(bookingData);
             const response = await axios.post('http://localhost:8080/booking', bookingData);
             console.log('Booking API Response:', response.data);
             const { _id: bookingId } = response.data;
@@ -121,6 +124,7 @@ export default function TicketConfirmation(props) {
             <div className="md:w-1/3 max-w-sm">
                 <div className="text-center">
                     <h1 className="text-3xl font-bold text-white mb-6">Order Summary</h1>
+                    <p className="text-white">Movie: {movieT}</p>
                     <p className="text-white">Showtime: {showtimeId}</p>
                     {/* <p className="text-white">Selected Seats: {updatedSeats}</p> */}
                     <p className="text-white">Adult Tickets: {adultTickets}</p>

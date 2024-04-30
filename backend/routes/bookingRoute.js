@@ -25,7 +25,7 @@ router.get('/', async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
-
+/*
 // Route for getting bookings by movieID
 router.get('/:movieID', async (req, res) => {
     try {
@@ -40,6 +40,7 @@ router.get('/:movieID', async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
+*/
 
 // Route for getting a single booking by ID
 router.get('/:id', async (req, res) => {

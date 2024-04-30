@@ -23,7 +23,7 @@ const bookingSchema = mongoose.Schema({
     },
     movie: {
         type: String,
-    },
+    }
 
 });
 

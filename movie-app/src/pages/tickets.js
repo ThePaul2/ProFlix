@@ -276,7 +276,7 @@ if (promoDiscount % 1 === 0) {
             </div>
             {selectedSeats.length > 0 && (
             <Link
-                to={`/ticketConfirmation?adultTickets=${adultTicketCount}&childTickets=${childTicketCount}&seniorTickets=${seniorTicketCount}&showtimeId=${selectedShowtime}&fees=${taxes + fees}&discount=${discountAmount}
+                to={`/ticketConfirmation?movie=${movie.movieTitle}&adultTickets=${adultTicketCount}&childTickets=${childTicketCount}&seniorTickets=${seniorTicketCount}&showtimeId=${selectedShowtime}&fees=${taxes + fees}&discount=${discountAmount}
                 &updatedSeats=${updatedSeats}&totalPrice=${promoDiscount % 1 === 0
                   ? (totalTicketPrice + fees + (taxes * totalTicketPrice) - discountAmount).toFixed(2)
                   : (totalTicketPrice + fees + (discountAmount * totalTicketPrice)).toFixed(2)}&selectedSeats=${encodeURIComponent(JSON.stringify(updatedSeats))}`}
