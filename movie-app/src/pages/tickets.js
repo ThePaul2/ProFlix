@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from '../components/Navbar';
 import { useParams, useLocation } from 'react-router-dom';
-import Seats from '../components/Seats';
+import Navbar from '../components/Navbar';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import SeatImage from '../assets/chair.png';
 
 const Tickets = () => {
   let { id } = useParams();
@@ -14,13 +14,24 @@ const Tickets = () => {
   const [promoCode, setPromoCode] = useState('');
   const [promoDiscount, setPromoDiscount] = useState(0);
   const [message, setMessage] = useState('');
+  const [numTickets, setNumTickets] = useState(0);
+  const [selectedSeats, setSelectedSeats] = useState([]);
+  const [childTicketCount, setChildTicketCount] = useState(0);
+  const [adultTicketCount, setAdultTicketCount] = useState(0);
+  const [seniorTicketCount, setSeniorTicketCount] = useState(0);
+  const [totalTicketCount, setTotalTicketCount] = useState(0);
+  const fees = ticketInfo.fees;
+  const taxes = ticketInfo.taxes;
+  const childTicketPrice = ticketInfo.child;
+  const adultTicketPrice = ticketInfo.adult;
+  const seniorTicketPrice = ticketInfo.senior;
+  const updatedSeats = [];
 
   useEffect(() => {
     const fetchMovie = async () => {
       try {
         const response = await axios.get(`http://localhost:8080/movie/${id}`);
         setMovie(response.data);
-
         const searchParams = new URLSearchParams(location.search);
         const showtimeId = searchParams.get('showtimeId');
         setSelectedShowtime(searchParams.get('selectedShowtime') || '');
@@ -35,9 +46,7 @@ const Tickets = () => {
   useEffect(() => {
     const fetchTicket = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:8080/ticket/662bf2adca314a9cd524be8e`
-        );
+        const response = await axios.get(`http://localhost:8080/ticket/662bf2adca314a9cd524be8e`);
         setTicketInfo(response.data);
       } catch (error) {
         console.log(error);
@@ -47,31 +56,19 @@ const Tickets = () => {
     fetchTicket();
   }, [id, location.search]);
 
-  const [numTickets, setNumTickets] = useState(0);
-  const [selectedSeats, setSelectedSeats] = useState([]);
-
-  const [childTicketCount, setChildTicketCount] = useState(0);
-  const [adultTicketCount, setAdultTicketCount] = useState(0);
-  const [seniorTicketCount, setSeniorTicketCount] = useState(0);
-
-  const childTicketPrice = ticketInfo.child;
-  const adultTicketPrice = ticketInfo.adult;
-  const seniorTicketPrice = ticketInfo.senior;
-  const fees = ticketInfo.fees;
-  const taxes = ticketInfo.taxes;
-
   const handleIncrement = (type) => {
     switch (type) {
       case 'child':
         setChildTicketCount(childTicketCount + 1);
+        setTotalTicketCount(totalTicketCount + 1);
         break;
       case 'adult':
         setAdultTicketCount(adultTicketCount + 1);
+        setTotalTicketCount(totalTicketCount + 1);
         break;
       case 'senior':
-        setSeniorTicketCount(
-          seniorTicketCount + 1
-        );
+        setSeniorTicketCount(seniorTicketCount + 1);
+        setTotalTicketCount(totalTicketCount + 1);
         break;
       default:
         break;
@@ -83,14 +80,15 @@ const Tickets = () => {
     switch (type) {
       case 'child':
         setChildTicketCount(childTicketCount > 0 ? childTicketCount - 1 : 0);
+        setTotalTicketCount(totalTicketCount > 0 ? totalTicketCount - 1 : 0);
         break;
       case 'adult':
         setAdultTicketCount(adultTicketCount > 0 ? adultTicketCount - 1 : 0);
+        setTotalTicketCount(totalTicketCount > 0 ? totalTicketCount - 1 : 0);
         break;
       case 'senior':
-        setSeniorTicketCount(
-          seniorTicketCount > 0 ? seniorTicketCount - 1 : 0
-        );
+        setSeniorTicketCount(seniorTicketCount > 0 ? seniorTicketCount - 1 : 0);
+        setTotalTicketCount(totalTicketCount > 0 ? totalTicketCount - 1 : 0);
         break;
       default:
         break;
@@ -101,65 +99,67 @@ const Tickets = () => {
   const handleSeatSelection = (seatId) => {
     setSelectedSeats((prevSelectedSeats) => {
       if (prevSelectedSeats.includes(seatId)) {
-        setNumTickets(numTickets - 1);
+        setNumTickets((prevNumTickets) => prevNumTickets - 1);
         return prevSelectedSeats.filter((seat) => seat !== seatId);
       } else {
-        setNumTickets(numTickets + 1);
-        return [...prevSelectedSeats, seatId];
+        setNumTickets((prevNumTickets) => prevNumTickets + 1);
+        const updatedSeats = [...prevSelectedSeats, seatId]; // Add the seatId to the array
+        console.log('Updated seats:', updatedSeats); // For debugging
+        return updatedSeats;
       }
     });
   };
+  
 
   const totalTicketPrice =
-    childTicketCount * childTicketPrice +
-    adultTicketCount * adultTicketPrice +
-    seniorTicketCount * seniorTicketPrice;
+  childTicketCount * childTicketPrice +
+  adultTicketCount * adultTicketPrice +
+  seniorTicketCount * seniorTicketPrice;
 
-    const checkPromoCode = async () => {
-      try {
-        const response = await axios.get(`http://localhost:8080/promo`);
-        const promoCodes = response.data;
-        console.log("Promo codes from server:", promoCodes); // Debugging statement
-        console.log("Entered promo code:", promoCode); // Debugging statement
-        const promo = promoCodes.find((promo) => promo.code === promoCode); // Compare with 'code' property
-        console.log("Found promo code:", promo); // Debugging statement
-        if (promo && promoDiscount === 0) {
-          // Set promoDiscount to the discount value from the promo code object
-          setPromoDiscount(promo.discount);
-          console.log('Promo code applied! Discount:', promo.discount);
-          setMessage('Promo code applied!');
+  const checkPromoCode = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/promo`);
+      const promoCodes = response.data;
+      console.log("Promo codes from server:", promoCodes); // Debugging statement
+      console.log("Entered promo code:", promoCode); // Debugging statement
+      const promo = promoCodes.find((promo) => promo.code === promoCode); // Compare with 'code' property
+      console.log("Found promo code:", promo); // Debugging statement
+      if (promo && promoDiscount === 0) {
+        // Set promoDiscount to the discount value from the promo code object
+        setPromoDiscount(promo.discount);
+        console.log('Promo code applied! Discount:', promo.discount);
+        setMessage('Promo code applied!');
+      } else {
+        if (promoDiscount !==  0) {
+          setMessage('Promo Code already applied');
         } else {
-          if (promoDiscount !==  0) {
-            setMessage('Promo Code already applied');
-          } else {
-            setMessage('Invalid promo code');
-          }
+          setMessage('Invalid promo code');
         }
-      } catch (error) {
-        console.error('Error checking promo code:', error);
       }
-    };
-    
-    
-
-  // Function to handle applying promo code
-  const applyPromoCode = () => {
-    checkPromoCode();
+    } catch (error) {
+      console.error('Error checking promo code:', error);
+    }
   };
-  let finalPriceCalc;
-  if (promoDiscount % 1 === 0) {
-    finalPriceCalc = totalTicketPrice + fees + (taxes * totalTicketPrice) - promoDiscount;
-  } else {
-   finalPriceCalc = totalTicketPrice + fees + (taxes * totalTicketPrice) + (promoDiscount * totalTicketPrice);
-  }
+  
+  
 
-  let discountAmount;
-  if (promoDiscount % 1 === 0) {
-    discountAmount = promoDiscount;
-  } else {
-    discountAmount = promoDiscount * (totalTicketPrice + fees + (taxes * totalTicketPrice));
-  }
+// Function to handle applying promo code
+const applyPromoCode = () => {
+  checkPromoCode();
+};
+let finalPriceCalc;
+if (promoDiscount % 1 === 0) {
+  finalPriceCalc = totalTicketPrice + fees + (taxes * totalTicketPrice) - promoDiscount;
+} else {
+ finalPriceCalc = totalTicketPrice + fees + (taxes * totalTicketPrice) + (promoDiscount * totalTicketPrice);
+}
 
+let discountAmount;
+if (promoDiscount % 1 === 0) {
+  discountAmount = promoDiscount;
+} else {
+  discountAmount = promoDiscount * (totalTicketPrice + fees + (taxes * totalTicketPrice));
+}
   return (
     <div>
       <Navbar />
@@ -183,7 +183,6 @@ const Tickets = () => {
             </div>
           </div>
           <div>
-            <h1 className="font-bold text-4xl mb-4 text-white">Tickets</h1>
             <div className="mb-4">
               <h2 className="font-bold text-white">Showtime:</h2>
               <p className="text-white">{selectedShowtime}</p>
@@ -244,6 +243,9 @@ const Tickets = () => {
             </div>            
             <p className="font-bold text-white mb-5">
             </p>
+            <div className='text-white my-6'>
+              Total Price: ${finalPriceCalc}
+            </div>
             <div className="mb-4">
               <input
                 type="text"
@@ -251,7 +253,6 @@ const Tickets = () => {
                 onChange={(e) => setPromoCode(e.target.value)}
                 className="bg-white text-black px-4 py-2 rounded-md"
               />
-              
               <button
                 onClick={applyPromoCode}
                 className="bg-red-400 text-white px-4 py-2 rounded-md ml-2 hover:bg-red-600"
@@ -260,28 +261,71 @@ const Tickets = () => {
               </button>
               <p className="mt-2 text-sm text-slate-500 text-center md:text-left ">{message}</p>
             </div>
-            
+            {selectedSeats.length > 0 && (
             <Link
-            to={`/ticketConfirmation?adultTickets=${adultTicketCount}&childTickets=${childTicketCount}&seniorTickets=${seniorTicketCount}&showtimeId=${selectedShowtime}&totalPrice=${promoDiscount % 1 === 0
-              ? (totalTicketPrice + fees + (taxes * totalTicketPrice) - promoDiscount).toFixed(2)
-              : (totalTicketPrice + fees + (promoDiscount * totalTicketPrice)).toFixed(2)}`}
-            className="bg-red-400 text-white px-6 py-2 rounded-lg hover:bg-red-600 mt-16">
-            Purchase Tickets
-          </Link>
-
+                to={`/ticketConfirmation?adultTickets=${adultTicketCount}&childTickets=${childTicketCount}&seniorTickets=${seniorTicketCount}&showtimeId=${selectedShowtime}&fees=${taxes + fees}&discount=${discountAmount}
+                &updatedSeats=${updatedSeats}&totalPrice=${promoDiscount % 1 === 0
+                  ? (totalTicketPrice + fees + (taxes * totalTicketPrice) - discountAmount).toFixed(2)
+                  : (totalTicketPrice + fees + (discountAmount * totalTicketPrice)).toFixed(2)}&selectedSeats=${encodeURIComponent(JSON.stringify(updatedSeats))}`}
+                className={`bg-red-400 text-white px-6 py-2 rounded-lg hover:bg-red-600 mt-16 ${
+                  selectedSeats.length === totalTicketCount ? '' : 'opacity-50 pointer-events-none'
+                }`}>
+                Purchase Tickets
+            </Link>
+            )}
           </div>
         </div>
         <div className="w-px bg-gray-400"></div>
+        {/* Right Side - Movie Screen and Seat Selection */}
         <div className="w-1/2">
-          <Seats
-            selectedSeats={selectedSeats}
-            handleSeatSelection={handleSeatSelection}
-          />
+          <div className="container mx-auto mt-8">
+            <div className="flex justify-center mb-4">
+              <div className="w-96 bg-white p-4 mt-16 text-black text-center">
+                Movie Screen
+              </div>
+            </div>
+            <div className="seat-container grid grid-cols-6 gap-2">
+              {/* Call the generateSeats function to render seats */}
+              {generateSeats()}
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
+  
+  
+  function generateSeats() {
+    const seats = [];
+
+    for (let row = 1; row <= 8; row++) {
+      for (let col = 1; col <= 6; col++) {
+        const seatId = `${row}-${col}`;
+        seats.push(
+          <div
+            key={seatId}
+            className="seat relative flex items-center justify-center"
+            onClick={() => handleSeatSelection(seatId)}
+          >
+            <img
+              src={SeatImage}
+              alt={`Seat ${seatId}`}
+              className={`w-20 h-20 ${
+                selectedSeats.includes(seatId)
+                  ? 'bg-red-600'
+                  : 'bg-black hover:bg-gray-100 cursor-pointer'
+              }`}
+            />
+            <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-xs">
+              {seatId}
+            </span>
+          </div>
+        );
+      }
+    }
+
+    return seats;
+  }
 };
 
 export default Tickets;
-

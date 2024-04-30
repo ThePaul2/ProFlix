@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SeatImage from '../assets/chair.png';
 
-const Seats = ({ totalSelectedSeats }) => {
+const Seats = ({ updateSelectedSeatsCount }) => {
     const [selectedSeats, setSelectedSeats] = useState([]);
 
     const handleSeatSelection = (seatId) => {
@@ -14,10 +14,10 @@ const Seats = ({ totalSelectedSeats }) => {
         });
     };
 
-    // Log total selected seats whenever selectedSeats changes
+    // Update parent component with selected seats count
     useEffect(() => {
-        console.log('total:', selectedSeats.length);
-    }, [selectedSeats]);
+        updateSelectedSeatsCount(selectedSeats.length);
+    }, [selectedSeats, updateSelectedSeatsCount]);
 
     const generateSeats = () => {
         const seats = [];

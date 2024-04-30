@@ -12,6 +12,8 @@ export default function TicketConfirmation(props) {
     const seniorTickets = queryParams.get('seniorTickets');
     const totalTicketCount = adultTickets+childTickets+seniorTickets;
     const showtimeId = queryParams.get('showtimeId');
+    const fees = queryParams.get('fees');
+    const discount = queryParams.get('discount');
     const totalPrice = queryParams.get('totalPrice');
     const today = new Date();
     const month = (today.getMonth() + 1).toString().padStart(2, '0');
@@ -20,6 +22,7 @@ export default function TicketConfirmation(props) {
     const [payments, setPayments] = useState([]);
     const [userId, setUserId] = useState('66293243587298b67b6f7755');
     const [selectedPaymentId, setSelectedPaymentId] = useState('');
+    const updatedSeats = queryParams.get('updatedSeats');
     const [formData, setFormData] = useState({
         cardNumber: '',
         exp: '',
@@ -102,6 +105,8 @@ export default function TicketConfirmation(props) {
             console.error(error);
         }
     };
+
+    console.log('Updated Seats:', updatedSeats);
     return (
         <section className="bg-black h-screen flex flex-col md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center my-2 mx-5 md:mx-0 md:my-0">
             <div className="md:w-1/3 max-w-sm">
@@ -113,9 +118,12 @@ export default function TicketConfirmation(props) {
                 <div className="text-center">
                     <h1 className="text-3xl font-bold text-white mb-6">Order Summary</h1>
                     <p className="text-white">Showtime: {showtimeId}</p>
+                    {/* <p className="text-white">Selected Seats: {updatedSeats}</p> */}
                     <p className="text-white">Adult Tickets: {adultTickets}</p>
                     <p className="text-white">Child Tickets: {childTickets}</p>
                     <p className="text-white">Senior Tickets: {seniorTickets}</p>
+                    <p className="text-white">Fees + Taxes: ${fees}</p>
+                    <p className="text-white">Discount: -${discount}</p>
                     <p className="text-white">Total Price: ${totalPrice}</p>
                     <br />
                     <p className="text-white">Choose Your Payment Method:</p>
