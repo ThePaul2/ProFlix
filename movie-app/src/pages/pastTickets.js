@@ -52,7 +52,7 @@ const AdminDashboard = () => {
             <div key={booking._id} style={{ backgroundColor: 'white', color: 'black', borderRadius: '10px', padding: '20px', margin: '10px' }}>
               <p><strong>Showtime and Theatre:</strong> {booking.showtimeID}</p>
               <p><strong>Date:</strong> {booking.bookingDate}</p>
-              <p><strong>Num Tickets:</strong> {booking.numTickets}</p>
+              <p><strong>Number of  Tickets:</strong> {booking.numTickets}</p>
               <p><strong>Total Price:</strong> {booking.price}</p>
             </div>
           ))}
