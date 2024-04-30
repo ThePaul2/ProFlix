@@ -380,6 +380,26 @@ router.put('/status/:id', async (req, res) => {
   }
 });
 
+// Route for getting user ID by email
+router.get('/get-userid/:email', async (request, response) => {
+  try {
+    const { email } = request.params;
+
+    // Find the user by email
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return response.status(404).json({ message: 'User not found' });
+    }
+
+    // Return the user ID
+    return response.status(200).json({ userId: user._id });
+  } catch (error) {
+    console.error(error);
+    return response.status(500).json({ message: 'Internal server error' });
+  }
+});
+
 
 
 

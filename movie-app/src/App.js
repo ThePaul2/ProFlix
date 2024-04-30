@@ -20,6 +20,7 @@ import Home from "./pages/home";
 import Info from "./pages/info";
 import Login from "./pages/login";
 import Movies from "./pages/movies";
+import PastTickets from "./pages/pastTickets";
 import Promos from "./pages/promos";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Purchased from "./pages/purchased";
@@ -64,6 +65,7 @@ function App() {
         <Route path="/info/:id" element={<Info />} />
         <Route path="/login" element={<Login />} />
         <Route path="/movies" element={<Movies />} />
+        <Route path="/past-tickets" element={<UserProtectedRoute><PastTickets /></UserProtectedRoute>} />
         <Route path="/promos" element={<Promos />} />
         <Route path="/purchased" element={<UserProtectedRoute><Purchased /></UserProtectedRoute>} />
         <Route path="/reset-password/:email" element={<ResetPassword />} />
