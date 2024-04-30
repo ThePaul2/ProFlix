@@ -7,8 +7,8 @@ const router = express.Router();
 // Route for creating a new booking
 router.post('/', async (req, res) => {
     try {
-        const { userID, showtimeID, bookingDate, numTickets, price } = req.body;
-        const newBooking = await Booking.create({ userID, showtimeID, bookingDate, numTickets, price });
+        const { userID, showtimeID, bookingDate, numTickets, price, selectedSeats } = req.body;
+        const newBooking = await Booking.create({ userID, showtimeID, bookingDate, numTickets, price, selectedSeats });
         res.status(201).json(newBooking);
     } catch (error) {
         console.error(error);
@@ -20,6 +20,20 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
     try {
         const bookings = await Booking.find({});
+        res.status(200).json(bookings);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+router.get('/showtime/:showtimeID', async (req, res) => {
+    try {
+        const { showtimeID } = req.params;
+        const bookings = await Booking.find({ showtimeID });
+        if (bookings.length === 0) {
+            return res.status(404).json({ message: 'Bookings for this showtime not found' });
+        }
         res.status(200).json(bookings);
     } catch (error) {
         console.error(error);

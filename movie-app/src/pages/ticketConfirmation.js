@@ -8,9 +8,10 @@ export default function TicketConfirmation(props) {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const movieT = queryParams.get('movie');
-    const adultTickets = queryParams.get('adultTickets');
-    const childTickets = queryParams.get('childTickets');
-    const seniorTickets = queryParams.get('seniorTickets');
+    const adultTickets = parseInt(queryParams.get('adultTickets'), 10);
+    const childTickets = parseInt(queryParams.get('childTickets'), 10);
+    const seniorTickets = parseInt(queryParams.get('seniorTickets'), 10);
+    const showTimeInfo = queryParams.get('showTimeInfo');
     const totalTicketCount = adultTickets + childTickets + seniorTickets;
     const showtimeId = queryParams.get('showtimeId');
     const fees = queryParams.get('fees');
@@ -24,7 +25,7 @@ export default function TicketConfirmation(props) {
     const [userEmail, setUserEmail] = useState('');
     const [userId, setUserId] = useState('');
     const [selectedPaymentId, setSelectedPaymentId] = useState('');
-    const updatedSeats = queryParams.get('updatedSeats');
+    const updatedSeats = queryParams.get('selectedSeats');
     const [bookingNumber, setBookingNumber] = useState(null);
     const [formData, setFormData] = useState({
         cardNumber: '',
@@ -40,8 +41,10 @@ export default function TicketConfirmation(props) {
         bookingDate: '',
         numTickets: '',
         price: '',
-        movie: ''
+        movie: '',
+        selectedSeats: '',
     });
+    console.log(showTimeInfo,'hello');
 
     useEffect(() => {
         // Check if userEmail is already stored in localStorage
@@ -69,8 +72,8 @@ export default function TicketConfirmation(props) {
         };
       }, [userEmail]); // Add userEmail to the dependency array
         
-      console.log(userId);
-
+      
+      
     useEffect(() => {
         setBookingData({
             userID: userId,
@@ -79,6 +82,7 @@ export default function TicketConfirmation(props) {
             numTickets: totalTicketCount,
             movie: movieT,
             price: totalPrice,
+            selectedSeats: updatedSeats,
         });
     }, [userId, showtimeId, formattedDate, totalTicketCount, totalPrice, movieT]);
 
@@ -145,7 +149,7 @@ export default function TicketConfirmation(props) {
                 email,
                 orderID: bookingId,
                 date: formattedDate,
-                showtime: showtimeId
+                showtime:  showTimeInfo
             });
 
             navigate(`/purchased?id=${bookingId}`);

@@ -23,6 +23,9 @@ const bookingSchema = mongoose.Schema({
     },
     movie: {
         type: String,
+    },
+    selectedSeats: {
+        type: String,
     }
 
 });

@@ -8,7 +8,10 @@ import SeatImage from '../assets/chair.png';
 const Tickets = () => {
   let { id } = useParams();
   const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
   const [movie, setMovie] = useState([]);
+  const showtimeID = queryParams.get('showtimeId');
+  const showTimeInfo = queryParams.get('selectedShowtime');
   const [selectedShowtime, setSelectedShowtime] = useState('');
   const [ticketInfo, setTicketInfo] = useState([]);
   const [promoCode, setPromoCode] = useState('');
@@ -16,6 +19,7 @@ const Tickets = () => {
   const [message, setMessage] = useState('');
   const [numTickets, setNumTickets] = useState(0);
   const [selectedSeats, setSelectedSeats] = useState([]);
+  const [bookedSeats, setBookedSeats] = useState([]);
   const [childTicketCount, setChildTicketCount] = useState(0);
   const [adultTicketCount, setAdultTicketCount] = useState(0);
   const [seniorTicketCount, setSeniorTicketCount] = useState(0);
@@ -33,7 +37,6 @@ const Tickets = () => {
         const response = await axios.get(`http://localhost:8080/movie/${id}`);
         setMovie(response.data);
         const searchParams = new URLSearchParams(location.search);
-        const showtimeId = searchParams.get('showtimeId');
         setSelectedShowtime(searchParams.get('selectedShowtime') || '');
       } catch (error) {
         console.log(error);
@@ -42,7 +45,7 @@ const Tickets = () => {
 
     fetchMovie();
   }, [id, location.search]);
-
+  
   useEffect(() => {
     const fetchTicket = async () => {
       try {
@@ -95,6 +98,23 @@ const Tickets = () => {
     }
     setNumTickets(numTickets > 0 ? numTickets - 1 : 0);
   };
+
+  useEffect(() => {
+    // Fetch all bookings when the component mounts
+    const fetchBookings = async () => {
+        try {
+            const response = await axios.get(`http://localhost:8080/booking/showtime/${showtimeID}`);
+            const bookings = response.data;
+            const allBookedSeats = bookings.map(booking => booking.selectedSeats.split(',')).flat();
+            setBookedSeats(allBookedSeats);
+        } catch (error) {
+            console.log('No bookings for this showtime');
+        }
+    };
+    
+    fetchBookings();
+}, []);
+
 
   const handleSeatSelection = (seatId) => {
     setSelectedSeats((prevSelectedSeats) => {
@@ -160,6 +180,7 @@ if (promoDiscount % 1 === 0) {
 } else {
   discountAmount = promoDiscount * (totalTicketPrice + fees + (taxes * totalTicketPrice));
 }
+
   return (
     <div>
       <Navbar />
@@ -276,10 +297,10 @@ if (promoDiscount % 1 === 0) {
             </div>
             {selectedSeats.length > 0 && (
             <Link
-                to={`/ticketConfirmation?movie=${movie.movieTitle}&adultTickets=${adultTicketCount}&childTickets=${childTicketCount}&seniorTickets=${seniorTicketCount}&showtimeId=${selectedShowtime}&fees=${taxes + fees}&discount=${discountAmount}
+                to={`/ticketConfirmation?movie=${movie.movieTitle}&adultTickets=${adultTicketCount}&childTickets=${childTicketCount}&seniorTickets=${seniorTicketCount}&showtimeId=${showtimeID}&fees=${taxes + fees}&discount=${discountAmount}
                 &updatedSeats=${updatedSeats}&totalPrice=${promoDiscount % 1 === 0
                   ? (totalTicketPrice + fees + (taxes * totalTicketPrice) - discountAmount).toFixed(2)
-                  : (totalTicketPrice + fees + (discountAmount * totalTicketPrice)).toFixed(2)}&selectedSeats=${encodeURIComponent(JSON.stringify(updatedSeats))}`}
+                  : (totalTicketPrice + fees + (discountAmount * totalTicketPrice)).toFixed(2)}&selectedSeats=${selectedSeats}&showTimeInfo=${showTimeInfo}`}
                 className={`bg-red-400 text-white px-6 py-2 rounded-lg hover:bg-red-600 mt-16 ${
                   selectedSeats.length === totalTicketCount ? '' : 'opacity-50 pointer-events-none'
                 }`}>
@@ -312,33 +333,46 @@ if (promoDiscount % 1 === 0) {
     const seats = [];
 
     for (let row = 1; row <= 8; row++) {
-      for (let col = 1; col <= 6; col++) {
-        const seatId = `${row}-${col}`;
-        seats.push(
-          <div
-            key={seatId}
-            className="seat relative flex items-center justify-center"
-            onClick={() => handleSeatSelection(seatId)}
-          >
-            <img
-              src={SeatImage}
-              alt={`Seat ${seatId}`}
-              className={`w-20 h-20 ${
-                selectedSeats.includes(seatId)
-                  ? 'bg-red-600'
-                  : 'bg-black hover:bg-gray-100 cursor-pointer'
-              }`}
-            />
-            <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-xs">
-              {seatId}
-            </span>
-          </div>
-        );
-      }
+        for (let col = 1; col <= 6; col++) {
+            const seatId = `${row}-${col}`;
+            const isSeatTaken = bookedSeats.includes(seatId); // Check if the seat is taken
+            seats.push(
+                <div
+                    key={seatId}
+                    className="seat relative flex items-center justify-center"
+                    onClick={() => {
+                        // Only allow seat selection if the seat is not taken
+                        if (!isSeatTaken) {
+                            handleSeatSelection(seatId);
+                        }
+                    }}
+                >
+                    <img
+                        src={SeatImage}
+                        alt={`Seat ${seatId}`}
+                        className={`w-20 h-20 ${
+                            isSeatTaken
+                                ? 'bg-gray-400' // Change the background color if seat is taken
+                                : selectedSeats.includes(seatId)
+                                    ? 'bg-red-600'
+                                    : 'bg-black hover:bg-gray-100 cursor-pointer'
+                        }`}
+                    />
+                    <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-xs">
+                        {seatId}
+                    </span>
+                </div>
+            );
+        }
     }
 
     return seats;
-  }
+}
+
+
+  
 };
+
+
 
 export default Tickets;

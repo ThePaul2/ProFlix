@@ -44,7 +44,6 @@ const Info = () => {
   if (!movie) {
     return <div>No showtimes found for "{movie.title}"</div>;
   }
-  
   return (
     <div className="bg-black min-h-screen">
       <Navbar />
@@ -88,7 +87,7 @@ const Info = () => {
                       className="bg-red-400 text-white px-6 py-2 rounded-lg hover:bg-red-600"
                       onClick={() => {
                         // Redirect to Tickets page with showtime data
-                        window.location.href = `/tickets/${id}?showtimeId=${showTime.id}&selectedShowtime=${showTime.time}-${showTime.date}-${showTime.theaterName}`;
+                        window.location.href = `/tickets/${id}?showtimeId=${showTime._id}&selectedShowtime=${showTime.time}-${showTime.date}-${showTime.theaterName}`;
                       }}
                     >
                       {showTime.time} - {showTime.date} - {showTime.theaterName}
