@@ -1,5 +1,6 @@
 import express from 'express';
 import { Booking } from '../models/bookingModel.js';
+import { orderConfirmation } from '../utils/emailService.js';
 
 const router = express.Router();
 
@@ -83,6 +84,22 @@ router.delete('/:id', async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
+
+
+router.post('/email', async (req, res) => {
+    try {
+      const { email, orderID, date, showtime } = req.body;
+
+      
+      await orderConfirmation(email, orderID, date, showtime);
+    
+      res.json({ message: 'Emails sent' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Server error' });
+    }
+  });
+  
 
 
 

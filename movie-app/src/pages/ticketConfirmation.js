@@ -11,7 +11,7 @@ export default function TicketConfirmation(props) {
     const adultTickets = queryParams.get('adultTickets');
     const childTickets = queryParams.get('childTickets');
     const seniorTickets = queryParams.get('seniorTickets');
-    const totalTicketCount = adultTickets+childTickets+seniorTickets;
+    const totalTicketCount = adultTickets + childTickets + seniorTickets;
     const showtimeId = queryParams.get('showtimeId');
     const fees = queryParams.get('fees');
     const discount = queryParams.get('discount');
@@ -41,6 +41,7 @@ export default function TicketConfirmation(props) {
         price: '',
         movie: ''
     });
+
     useEffect(() => {
         setBookingData({
             userID: userId,
@@ -49,9 +50,9 @@ export default function TicketConfirmation(props) {
             numTickets: totalTicketCount,
             movie: movieT,
             price: totalPrice,
-            
         });
     }, [userId, showtimeId, formattedDate, totalTicketCount, totalPrice, movieT]);
+
     // Gets the user's payment info
     useEffect(() => {
         const fetchPayments = async () => {
@@ -93,9 +94,8 @@ export default function TicketConfirmation(props) {
         } catch (error) {
           console.error('Error updating payment:', error);
         }
-      };
-    
-    
+    };
+
     const togglePopup = () => {
         setIsPopupOpen(prevState => !prevState);
     };
@@ -107,6 +107,18 @@ export default function TicketConfirmation(props) {
             const response = await axios.post('http://localhost:8080/booking', bookingData);
             console.log('Booking API Response:', response.data);
             const { _id: bookingId } = response.data;
+
+            // Get the user's email from localStorage
+            const email = localStorage.getItem('email');
+
+            // Send email to the user
+            await axios.post('http://localhost:8080/booking/email', {
+                email,
+                orderID: bookingId,
+                date: formattedDate,
+                showtime: showtimeId
+            });
+
             navigate(`/purchased?id=${bookingId}`);
         } catch (error) {
             console.error(error);
@@ -220,3 +232,4 @@ export default function TicketConfirmation(props) {
         </section>
     )
 }
+

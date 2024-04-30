@@ -71,9 +71,30 @@ async function sendResetPasswordEmail(email, resetToken) {
       throw new Error('Failed to send promotion announcement email');
     }
   }
+
+
+  async function orderConfirmation(email, orderID, date, showtime) {
+    try {
+      const mailOptions = {
+        from: 'E-Cinema Support <postmaster@sandbox215c79a7b4aa460caa7047dde7f63b4c.mailgun.org>',
+        to: email,
+        subject: 'Booking Confirmation',
+        html: `<p>Thank you for booking with PROFlix! Your order number is ${orderID}</p><p>Your Reservation is on ${date} at ${showtime}</p><p>We hope you enjoy!</p>`
+      };
+  
+      // Send email using Mailgun
+      const info = await mg.messages().send(mailOptions);
+      console.log('Email sent:', info);
+    } catch (error) {
+      console.error('Error sending email:', error);
+      throw new Error('Failed to send registration confirmation email');
+    }
+  }
+
+  
   
 
 
   
   
-  export { sendResetPasswordEmail, sendRegistrationConfirmationEmail, promoMail };
+  export { orderConfirmation, sendResetPasswordEmail, sendRegistrationConfirmationEmail, promoMail };
