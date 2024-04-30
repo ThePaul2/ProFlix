@@ -21,7 +21,8 @@ export default function TicketConfirmation(props) {
     const day = today.getDate().toString().padStart(2, '0');
     const formattedDate = `${month}/${day}`;
     const [payments, setPayments] = useState([]);
-    const [userId, setUserId] = useState('66293243587298b67b6f7755');
+    const [userEmail, setUserEmail] = useState('');
+    const [userId, setUserId] = useState('');
     const [selectedPaymentId, setSelectedPaymentId] = useState('');
     const updatedSeats = queryParams.get('updatedSeats');
     const [bookingNumber, setBookingNumber] = useState(null);
@@ -41,6 +42,34 @@ export default function TicketConfirmation(props) {
         price: '',
         movie: ''
     });
+
+    useEffect(() => {
+        // Check if userEmail is already stored in localStorage
+        const storedUserEmail = localStorage.getItem('email');
+        if (storedUserEmail) {
+          setUserEmail(storedUserEmail);
+        }
+      }, []);
+      
+      useEffect(() => {
+        const fetchUserID = async () => {
+          try {
+            if (userEmail) { // Ensure userEmail is not empty before making the request
+              const response = await axios.get(`http://localhost:8080/users/get-userid/${userEmail}`);
+              setUserId(response.data.userId);
+            }
+          } catch (error) {
+            console.error('Error fetching userID:', error);
+          }
+        };
+      
+        fetchUserID();
+      
+        return () => {
+        };
+      }, [userEmail]); // Add userEmail to the dependency array
+        
+      console.log(userId);
 
     useEffect(() => {
         setBookingData({
