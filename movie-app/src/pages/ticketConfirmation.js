@@ -44,7 +44,6 @@ export default function TicketConfirmation(props) {
         movie: '',
         selectedSeats: '',
     });
-    console.log(showTimeInfo,'hello');
 
     useEffect(() => {
         // Check if userEmail is already stored in localStorage
