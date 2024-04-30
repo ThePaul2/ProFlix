@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../assets/logo.png';
+import Navbar from '../components/Navbar';
 import bcrypt from 'bcryptjs'; // Import bcrypt for password hashing
 
 export default function Login({ setUser, setAuthState }) {
@@ -26,6 +27,7 @@ export default function Login({ setUser, setAuthState }) {
       if (passwordMatch && status === 0) {
         // Password matches and account is active, navigate to /users/login/:email
         localStorage.setItem('userRole', 'user');
+        localStorage.setItem('email', email);
         navigate(`/users/${email}`);
       } else if (status === 1) {
         // Account is inactive, show pop-up message
@@ -47,6 +49,7 @@ export default function Login({ setUser, setAuthState }) {
 
   return (
     <section className="bg-black h-screen flex flex-col md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center my-2 mx-5 md:mx-0 md:my-0">
+      <Navbar />
       <div className="md:w-1/3 max-w-sm">
         <Link to="/"> 
           <img src={logo} alt="Logo" />

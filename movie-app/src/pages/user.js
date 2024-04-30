@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from '../components/NavbarUser';
+import Navbar from '../components/Navbar';
 import MovieSlider from '../components/MovieSlider';
 import { Link, useParams } from 'react-router-dom';
 import defaultIcon from '../assets/userPhoto.jpg';
