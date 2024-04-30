@@ -169,7 +169,7 @@ export default function TicketConfirmation(props) {
                 <div className="text-center">
                     <h1 className="text-3xl font-bold text-white mb-6">Order Summary</h1>
                     <p className="text-white">Movie: {movieT}</p>
-                    <p className="text-white">Showtime: {showtimeId}</p>
+                    <p className="text-white">Showtime: {showTimeInfo}</p>
                     {/* <p className="text-white">Selected Seats: {updatedSeats}</p> */}
                     <p className="text-white">Adult Tickets: {adultTickets}</p>
                     <p className="text-white">Child Tickets: {childTickets}</p>

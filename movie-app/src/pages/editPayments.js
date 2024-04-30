@@ -104,6 +104,8 @@ function EditPayment() {
     }
   };
 
+  
+  
   return (
     <div>
       <Navbar />
@@ -124,7 +126,8 @@ function EditPayment() {
                       {`**** **** **** ${payment.cardNumber.slice(-4)}`} - {payment.cardFirst} {payment.cardLast}
                     </option>
                   ))}
-  {payments.length < 3 && <option value="new">Add New Payment</option>}                </select>
+                  {payments.length < 3 && <option value="new">Add New Payment</option>}                
+                  </select>
               </label>
               <label>
                 Card Number:
